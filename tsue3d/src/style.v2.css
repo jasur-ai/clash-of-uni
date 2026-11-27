@@ -223,3 +223,43 @@ h1 { font-size: 0; margin: 0; }
 .ctrl-row b { font-weight: 700; }
 .ctrl-row .c-lvl { color: #6ee7ff; font-weight: 800; font-size: 11px; }
 .ctrl-row .c-btn { width: auto; padding: 6px 10px; font-size: 10.5px; }
+
+/* ---------------------------------------------------------------- SVG ikonlar */
+.ic { display: inline-block; vertical-align: -0.16em; flex: none; }
+.chip .ic { width: 13px; height: 13px; stroke-width: 2.1; }
+.chip i { display: inline-flex; align-items: center; }
+.pill .ic { width: 14px; height: 14px; }
+.nav button .n-ic { display: flex; }
+.nav button .n-ic .ic { width: 20px; height: 20px; stroke-width: 1.9; }
+.q-ic { display: inline-flex; color: #6ee7ff; }
+.q-ic .ic { width: 16px; height: 16px; }
+.o-title { display: inline-flex; align-items: center; gap: 8px; }
+.o-title .ic { width: 18px; height: 18px; }
+.o-h2.o-title .ic { width: 22px; height: 22px; color: #ffd479; }
+.campus-card em svg.ic { width: 26px; height: 26px; color: #8ee6ff; }
+.hp-ic { display: inline-flex; }
+.hp-ic .ic { width: 19px; height: 19px; }
+.hp-ic.me { color: #6ee7ff; }
+.hp-ic.foe { color: #ffb3a0; }
+.cost-ic { display: inline-flex; margin-right: 5px; vertical-align: -0.2em; color: #9fb4d8; }
+.cost-ic .ic { width: 15px; height: 15px; }
+.btn-ic, .p-row .btn.ghost { display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
+.btn-ic-in { display: inline-flex; vertical-align: -0.18em; margin-right: 2px; }
+.btn-ic-in .ic { width: 15px; height: 15px; }
+.pts { display: inline-flex; align-items: center; gap: 5px; }
+.pts .ic { width: 14px; height: 14px; }
+.p-icon { display: grid; place-items: center; }
+.p-icon .ic { width: 22px; height: 22px; color: #8ee6ff; }
+
+/* kampus overlay — landmark tugmalari */
+.campus-sect { font-size: 11px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: #66779c; margin: 14px 2px 8px; }
+.lm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.lm-card {
+  text-align: left; padding: 12px 12px; border-radius: 15px;
+  background: linear-gradient(160deg, rgba(255,209,102,.12), rgba(255,255,255,.04));
+  border: 1px solid rgba(255,209,102,.28); transition: .15s;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.lm-card b { font-size: 13px; color: #ffe9b0; }
+.lm-card span { font-size: 10.5px; color: #a8b4cf; line-height: 1.35; }
+.lm-card:active { transform: scale(.97); background: linear-gradient(160deg, rgba(255,209,102,.2), rgba(255,255,255,.06)); }

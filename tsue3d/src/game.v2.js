@@ -23,14 +23,36 @@ if (TG) {
 }
 window.TG_USER = TG_USER;
 
+
+/* ---------------------------------------------------------------- SVG ikonlar (emoji o'rniga) */
+const ICON_PATHS = {
+  banknote: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M5.6 9.6h.01M18.4 14.4h.01"/>',
+  book: '<path d="M2 5.4A2.4 2.4 0 0 1 4.4 3H11v15.2H4.4A2.4 2.4 0 0 0 2 20.6z"/><path d="M22 5.4A2.4 2.4 0 0 0 19.6 3H13v15.2h6.6A2.4 2.4 0 0 1 22 20.6z"/>',
+  star: '<path d="M12 3l2.7 5.5 6 .9-4.35 4.2 1.05 6L12 16.9 6.6 19.6l1.05-6L3.3 9.4l6-.9z"/>',
+  zap: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
+  landmark: '<path d="M3 9.5L12 4l9 5.5"/><path d="M4 10h16"/><path d="M6 10v8M10.2 10v8M13.8 10v8M18 10v8"/><path d="M3 21h18"/>',
+  pin: '<path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  tool: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  map: '<path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4L1 6z"/><path d="M8 2v16M16 6v16"/>',
+  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  trophy: '<path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6.2H4.6a1.4 1.4 0 0 0 1.4 4.3H7M17 6.2h2.4a1.4 1.4 0 0 1-1.4 4.3H17"/>',
+  cap: '<path d="M2.5 9.5L12 5l9.5 4.5L12 14 2.5 9.5z"/><path d="M6.6 11.3V16c0 1.4 2.4 2.6 5.4 2.6s5.4-1.2 5.4-2.6v-4.7"/><path d="M21.5 9.5V15"/>',
+  bulb: '<path d="M9.5 18h5M10.5 21h3"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.9.7 1.6 1.5 1.6 2.7h4c0-1.2.7-2 1.6-2.7A6 6 0 0 0 12 3z"/>',
+  flag: '<path d="M5 21V4"/><path d="M5 5h13l-2.5 4L18 13H5"/>',
+  check: '<path d="M20 6L9 17l-5-5"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a13.6 13.6 0 0 1 3.5 9A13.6 13.6 0 0 1 12 21a13.6 13.6 0 0 1-3.5-9A13.6 13.6 0 0 1 12 3z"/>',
+};
+const ic = (n, s) => `<svg class="ic" viewBox="0 0 24 24" width="${s || 18}" height="${s || 18}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON_PATHS[n] || ''}</svg>`;
+
 /* ---------------------------------------------------------------- rollar */
 const ROLE_DEF = {
-  hq:         { icon: '🏛', res: null,        base: 0,    name: 'Rektorat' },
-  edu:        { icon: '📘', res: 'bilim',     base: 1.4,  name: "O'quv korpusi",       desc: "Ma'ruza zallari — Bilim ishlab chiqaradi." },
-  money:      { icon: '💰', res: 'mablag',    base: 2.6,  name: "Tijorat korpusi",     desc: "Kontrakt va tijorat — Mablag' ishlab chiqaradi." },
-  flow:       { icon: '🎓', res: 'bilim',     base: 0.9,  name: "Akademik litsey",     desc: "Abituriyentlar oqimi — Bilim + Nufuz." },
-  energy:     { icon: '⚡', res: 'energiya',  base: 0.05, name: "Gimnaziya",           desc: "Energiya (sinov urinishlari) tiklaydi." },
-  innovation: { icon: '🚀', res: 'mablag',    base: 1.6,  name: "Innovatsiya markazi", desc: "Startap laboratoriyalar — Mablag' + Bilim." },
+  hq:         { icon: 'landmark', res: null,        base: 0,    name: 'Rektorat' },
+  edu:        { icon: 'book', res: 'bilim',     base: 1.4,  name: "O'quv korpusi",       desc: "Ma'ruza zallari — Bilim ishlab chiqaradi." },
+  money:      { icon: 'banknote', res: 'mablag',    base: 2.6,  name: "Tijorat korpusi",     desc: "Kontrakt va tijorat — Mablag' ishlab chiqaradi." },
+  flow:       { icon: 'cap', res: 'bilim',     base: 0.9,  name: "Akademik litsey",     desc: "Abituriyentlar oqimi — Bilim + Nufuz." },
+  energy:     { icon: 'zap', res: 'energiya',  base: 0.05, name: "Gimnaziya",           desc: "Energiya (sinov urinishlari) tiklaydi." },
+  innovation: { icon: 'bulb', res: 'mablag',    base: 1.6,  name: "Innovatsiya markazi", desc: "Startap laboratoriyalar — Mablag' + Bilim." },
 };
 /* kampus bo'yicha chiroyli nomlar */
 const ROLE_NAME = {
@@ -108,21 +130,21 @@ const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerH
   const cv = document.createElement('canvas'); cv.width = 4; cv.height = 256;
   const cx = cv.getContext('2d');
   const g = cx.createLinearGradient(0, 0, 0, 256);
-  g.addColorStop(0, '#08131f'); g.addColorStop(0.45, '#16304a'); g.addColorStop(0.75, '#3a5f7d'); g.addColorStop(1, '#6d8ea6');
+  g.addColorStop(0, '#1c4e7e'); g.addColorStop(0.42, '#3f74a3'); g.addColorStop(0.78, '#8fb3cd'); g.addColorStop(1, '#d9e6ee');
   cx.fillStyle = g; cx.fillRect(0, 0, 4, 256);
   const tex = new THREE.CanvasTexture(cv);
   tex.colorSpace = THREE.SRGBColorSpace;
   scene.background = tex;
 })();
 
-scene.fog = new THREE.Fog(0x54718a, 900, 9000);
+scene.fog = new THREE.Fog(0xa9bfcd, 900, 9000);
 
-const hemi = new THREE.HemisphereLight(0xdfefff, 0x40566f, 1.5);
+const hemi = new THREE.HemisphereLight(0xeaf4ff, 0x596b58, 1.35);
 scene.add(hemi);
-const sun = new THREE.DirectionalLight(0xfff2d8, 2.0);
+const sun = new THREE.DirectionalLight(0xfff3da, 2.15);
 sun.position.set(-260, 420, 220);
 scene.add(sun);
-const fill = new THREE.DirectionalLight(0x9cc0ff, 0.5);
+const fill = new THREE.DirectionalLight(0xbdd8ee, 0.55);
 fill.position.set(300, 160, -300);
 scene.add(fill);
 
@@ -240,6 +262,7 @@ function extrudeInto(sb, rb, pts, h, base, color, style) {
   for (const p of pts) { cx += p[0]; cz += p[1]; }
   cx /= n; cz /= n;
   const col = [color.r, color.g, color.b];
+  const rcol = [color.r * 0.72 + 0.13, color.g * 0.72 + 0.13, color.b * 0.72 + 0.13];
 
   let run = 0;
   for (let i = 0; i < n; i++) {
@@ -285,7 +308,7 @@ function extrudeInto(sb, rb, pts, h, base, color, style) {
     ];
     const flip = cru[1] < 0;
     const ord = flip ? [0, 2, 1] : [0, 1, 2];
-    const ids = ord.map(i => rb.vert(P[i], up, P[i][0] / 6, P[i][2] / 6, col));
+    const ids = ord.map(i => rb.vert(P[i], up, P[i][0] / 6, P[i][2] / 6, rcol));
     rb.tri(ids[0], ids[1], ids[2]);
   }
 }
@@ -327,7 +350,7 @@ const cityRoofMat = new THREE.MeshLambertMaterial({ vertexColors: true });
 /* ---------------------------------------------------------------- yer */
 const groundGeo = new THREE.PlaneGeometry(26000, 26000, 1, 1);
 groundGeo.rotateX(-Math.PI / 2);
-const ground = new THREE.Mesh(groundGeo, new THREE.MeshLambertMaterial({ map: TEX.grass, color: 0x93a08c }));
+const ground = new THREE.Mesh(groundGeo, new THREE.MeshLambertMaterial({ map: TEX.grass, color: 0x9aa687 }));
 ground.position.y = -0.8;
 scene.add(ground);
 
@@ -576,6 +599,24 @@ function builderToGeometry(d) {
 /* shahar to'ldiruvchisi olib tashlandi — v0.3 da haqiqiy OSM binolari */
 
 
+/* tuman bo'yicha binolar palitrasi (haqiqiy shaharga yaqin) */
+const DIST_STYLE = {
+  chilonzor:     { h: 0.075, s: 0.13, l: 0.66 },   // bej panel
+  yunusobod:     { h: 0.083, s: 0.11, l: 0.70 },   // och bej
+  olmazor:       { h: 0.575, s: 0.055, l: 0.62 },  // kulrang-ko'k panel
+  uchtepa:       { h: 0.095, s: 0.15, l: 0.66 },   // qaymoq
+  mirzo_ulugbek: { h: 0.110, s: 0.10, l: 0.72 },   // oq
+  mirobod:       { h: 0.048, s: 0.28, l: 0.52 },   // g'isht-qizil
+  shayxontohur:  { h: 0.070, s: 0.30, l: 0.58 },   // loy-toza eski shahar
+  sergeli:       { h: 0.090, s: 0.07, l: 0.71 },   // och kulrang panel
+  bektemir:      { h: 0.555, s: 0.045, l: 0.48 },  // sanoat kulrangi
+  yashnobod:     { h: 0.080, s: 0.12, l: 0.63 },   // issiq bej
+  yakkasaroy:    { h: 0.540, s: 0.11, l: 0.66 },   // ko'k-kulrang, zamonaviy
+  yangihayot:    { h: 0.100, s: 0.08, l: 0.74 },   // yangi oq binolar
+  _default:      { h: 0.085, s: 0.09, l: 0.66 },
+};
+const fract = x => x - Math.floor(x);
+
 /* ---------------------------------------------------------------- TUMANLAR (Chilonzor + Yunusobod)
    Haqiqiy OSM binolari: base64 -> Int16 delta -> uchastkalar (chunk) bo'yicha merge. */
 const DISTRICTS = [];       // {name, count, buildings:[{pts,h,cx,cz}]}
@@ -624,7 +665,7 @@ function buildDistricts() {
       for (let i = 1; i < d.ring.length; i++) shp.lineTo(d.ring[i][0], -d.ring[i][1]);
       const gGeom = new THREE.ShapeGeometry(shp);
       gGeom.rotateX(-Math.PI / 2);
-      const gm = new THREE.Mesh(gGeom, new THREE.MeshLambertMaterial({ color: 0x5b646d }));
+      const gm = new THREE.Mesh(gGeom, new THREE.MeshLambertMaterial({ color: 0x67706e }));
       gm.position.y = -0.25;
       world.add(gm);
       // chegara chizig'i
@@ -668,8 +709,14 @@ function buildDistricts() {
       const k = Math.floor(b.cx / CHUNK) + ':' + Math.floor(b.cz / CHUNK);
       let c = cells.get(k);
       if (!c) { c = { sb: new Builder(), rb: new Builder() }; cells.set(k, c); }
-      const t = ((b.h - 3) / 40);
-      const col = new THREE.Color().setHSL(0.085 - 0.02 * Math.min(1, t), 0.06 + 0.07 * Math.min(1, t), 0.64 + 0.07 * (1 - Math.min(1, t)));
+      const DS = DIST_STYLE[key] || DIST_STYLE._default;
+      const hsh = fract(Math.sin(b.cx * 12.9898 + b.cz * 78.233) * 43758.5453);
+      const t = Math.min(1, Math.max(0, (b.h - 3) / 46));
+      const col = new THREE.Color().setHSL(
+        DS.h + (hsh - 0.5) * 0.035,
+        DS.s + (hsh - 0.5) * 0.05,
+        Math.min(0.82, Math.max(0.34, DS.l + (hsh - 0.5) * 0.075 - t * 0.05))
+      );
       extrudeInto(c.sb, c.rb, b.pts, b.h, 0, col, 'panel');
       if (b.h >= 14) {
         if (!window.__farTall) window.__farTall = new Builder();
@@ -769,6 +816,226 @@ function buildDistrictRoads() {
 }
 buildDistrictRoads();
 
+/* ---------------------------------------------------------------- Shahar ekstralari: bog'lar, daraxtlar, landmarklar */
+const EXTRA = (window.DISTRICTS && window.DISTRICTS.landmarks) ? window.DISTRICTS : null;
+
+/* bog'lar — yashil ellipsisli maydon */
+if (EXTRA && Array.isArray(EXTRA.parks)) {
+  for (const p of EXTRA.parks) {
+    const g = new THREE.CircleGeometry(1, 40);
+    g.rotateX(-Math.PI / 2);
+    const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: 0x55855a }));
+    m.scale.set(p.rx, 1, p.rz);
+    m.rotation.y = p.rot || 0;
+    m.position.set(p.x, 0.055, p.z);
+    world.add(m);
+  }
+}
+
+/* protsedural tumanlardagi daraxtlar (instanced) */
+if (EXTRA && Array.isArray(EXTRA.trees) && EXTRA.trees.length) {
+  const T = EXTRA.trees;
+  const trunk = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.34, 0.52, 3.6, 5), new THREE.MeshLambertMaterial({ color: 0x4a3826 }), T.length);
+  const crown = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(2.9, 0), new THREE.MeshLambertMaterial({ color: 0x3e7443 }), T.length);
+  const crown2 = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(2.0, 0), new THREE.MeshLambertMaterial({ color: 0x527f3f }), T.length);
+  const d = new THREE.Object3D();
+  for (let i = 0; i < T.length; i++) {
+    const [x, z, s] = T[i];
+    d.rotation.set(0, (i * 2.399) % 6.283, 0);
+    d.scale.setScalar(s);
+    d.position.set(x, 1.8 * s, z); d.updateMatrix(); trunk.setMatrixAt(i, d.matrix);
+    d.position.set(x, 4.3 * s, z); d.updateMatrix(); crown.setMatrixAt(i, d.matrix);
+    d.position.set(x + 0.8 * s, 5.6 * s, z + 0.4 * s); d.updateMatrix(); crown2.setMatrixAt(i, d.matrix);
+  }
+  trunk.instanceMatrix.needsUpdate = crown.instanceMatrix.needsUpdate = crown2.instanceMatrix.needsUpdate = true;
+  world.add(trunk, crown, crown2);
+}
+
+/* landmark modellari */
+const landmarkAnims = [];
+function makeLandmarkLabel(text, sub) {
+  const cv = document.createElement('canvas'); cv.width = 640; cv.height = 176;
+  const c = cv.getContext('2d');
+  c.fillStyle = 'rgba(7,13,23,0.82)';
+  c.beginPath();
+  if (c.roundRect) c.roundRect(6, 6, 628, 164, 30); else c.rect(6, 6, 628, 164);
+  c.fill();
+  c.strokeStyle = 'rgba(255,214,130,0.9)'; c.lineWidth = 5;
+  c.beginPath();
+  if (c.roundRect) c.roundRect(6, 6, 628, 164, 30); else c.rect(6, 6, 628, 164);
+  c.stroke();
+  c.textAlign = 'center';
+  c.fillStyle = '#ffe9b0';
+  c.font = '800 52px system-ui, sans-serif';
+  c.fillText(text.toUpperCase(), 320, 74);
+  c.fillStyle = '#cfe3f2';
+  c.font = '600 30px system-ui, sans-serif';
+  c.fillText(sub || '', 320, 126);
+  const t = new THREE.CanvasTexture(cv);
+  t.colorSpace = THREE.SRGBColorSpace;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthTest: false, depthWrite: false }));
+  sp.renderOrder = 12;
+  return sp;
+}
+const lamGroup = new THREE.Group();
+world.add(lamGroup);
+if (EXTRA && Array.isArray(EXTRA.landmarks)) {
+  for (const lm of EXTRA.landmarks) {
+    const g = new THREE.Group();
+    g.position.set(lm.x, 0, lm.z);
+    if (lm.id === 'tashkent_city') buildTashkentCity(g);
+    else if (lm.id === 'humo_arena') buildHumoArena(g);
+    else if (lm.id === 'magic_city') buildMagicCity(g);
+    else if (lm.id === 'ice_city') buildIceCity(g);
+    lamGroup.add(g);
+    const sp = makeLandmarkLabel(lm.name, lm.sub);
+    const ly = lm.id === 'tashkent_city' ? lm.h * 0.62 + 30 : lm.h + 24;
+    sp.position.set(0, ly, 0);
+    sp.userData.world = { x: lm.x, y: ly, z: lm.z };
+    g.add(sp);
+    labels.push({ b: null, sp, landmark: true });
+  }
+}
+function glassMat(color, emissive) {
+  return new THREE.MeshPhongMaterial({ color, emissive: emissive || 0x11303e, specular: 0xbfe8ff, shininess: 64 });
+}
+function buildTashkentCity(g) {
+  // Nest One — 266 m, pog'onali art-deco minora
+  const glass = glassMat(0x89b4c9, 0x16303c);
+  const podium = new THREE.Mesh(new THREE.BoxGeometry(96, 13, 78), new THREE.MeshLambertMaterial({ color: 0xc9cfd6 }));
+  podium.position.y = 6.5; g.add(podium);
+  const podiumGlass = new THREE.Mesh(new THREE.BoxGeometry(97, 4.5, 79), glassMat(0x5d8398, 0x0e222c));
+  podiumGlass.position.y = 9.2; g.add(podiumGlass);
+  const t1 = new THREE.Mesh(new THREE.BoxGeometry(46, 132, 34), glass);
+  t1.position.y = 13 + 66; g.add(t1);
+  const t2 = new THREE.Mesh(new THREE.BoxGeometry(34, 74, 27), glass);
+  t2.position.y = 13 + 132 + 37; g.add(t2);
+  const t3 = new THREE.Mesh(new THREE.BoxGeometry(23, 26, 19), glass);
+  t3.position.y = 13 + 132 + 74 + 13; g.add(t3);
+  const crown = new THREE.Mesh(new THREE.CylinderGeometry(5, 11, 14, 4), new THREE.MeshPhongMaterial({ color: 0xd8c98a, emissive: 0x6b5a1e, shininess: 90 }));
+  crown.rotation.y = Math.PI / 4;
+  crown.position.y = 13 + 132 + 74 + 26 + 6; g.add(crown);
+  const spire = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 26, 6), new THREE.MeshLambertMaterial({ color: 0xe8edf2 }));
+  spire.position.y = crown.position.y + 18; g.add(spire);
+  // atrofdagi ikki minora (Tashkent City kompleksi)
+  const side1 = new THREE.Mesh(new THREE.BoxGeometry(30, 96, 24), glassMat(0xa8c4d4, 0x142a34));
+  side1.position.set(64, 48 + 6, -34); g.add(side1);
+  const side2 = new THREE.Mesh(new THREE.BoxGeometry(26, 74, 22), glassMat(0x9db8c8, 0x122630));
+  side2.position.set(-58, 37 + 6, 42); g.add(side2);
+}
+function buildHumoArena(g) {
+  // Muz saroyi: elliptik gumbazli ovoz, oq marmar + ko'k halqa
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(58, 62, 9, 40), new THREE.MeshLambertMaterial({ color: 0xdfe3e8 }));
+  base.scale.set(1.18, 1, 0.88); base.position.y = 4.5; g.add(base);
+  const dome = new THREE.Mesh(new THREE.SphereGeometry(54, 40, 22, 0, Math.PI * 2, 0, Math.PI / 2),
+    new THREE.MeshPhongMaterial({ color: 0xf2f6fa, specular: 0xffffff, shininess: 38 }));
+  dome.scale.set(1.18, 0.62, 0.88); dome.position.y = 8.6; g.add(dome);
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(54.5, 1.5, 8, 60),
+    new THREE.MeshBasicMaterial({ color: 0x37b6ff }));
+  ring.rotation.x = Math.PI / 2; ring.scale.set(1.18, 0.88, 1); ring.position.y = 12.2; g.add(ring);
+  const roof = new THREE.Mesh(new THREE.CircleGeometry(30, 30), new THREE.MeshPhongMaterial({ color: 0xe8edf4, shininess: 60 }));
+  roof.rotation.x = -Math.PI / 2; roof.scale.set(1.18, 1, 0.88); roof.position.y = 8.6 + 54 * 0.62 - 0.4; g.add(roof);
+  // HUMO yozuvi (kanvas) ikki tomonlama
+  const cv = document.createElement('canvas'); cv.width = 512; cv.height = 128;
+  const c = cv.getContext('2d');
+  c.fillStyle = 'rgba(10,20,34,0.0)'; c.fillRect(0, 0, 512, 128);
+  c.font = '900 84px system-ui, sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+  c.fillStyle = '#0d5f8f'; c.fillText('HUMO', 256, 66);
+  const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace;
+  for (const rot of [0, Math.PI]) {
+    const sign = new THREE.Mesh(new THREE.PlaneGeometry(52, 13),
+      new THREE.MeshBasicMaterial({ map: t, transparent: true, side: THREE.DoubleSide }));
+    sign.position.set(Math.sin(rot) * 61, 7.4, Math.cos(rot) * 46.5);
+    sign.rotation.y = rot;
+    g.add(sign);
+  }
+  // kirish soyaboni
+  const canopy = new THREE.Mesh(new THREE.BoxGeometry(34, 2.2, 14), new THREE.MeshLambertMaterial({ color: 0x164a6e }));
+  canopy.position.set(0, 7.2, 60); g.add(canopy);
+}
+function buildMagicCity(g) {
+  // Ertak qasri + charxpalak — ko'ngilochar majmua
+  const castle = new THREE.Group();
+  const wall = new THREE.Mesh(new THREE.CylinderGeometry(19, 21, 15, 10), new THREE.MeshLambertMaterial({ color: 0xf3d9e2 }));
+  wall.position.y = 7.5; castle.add(wall);
+  const gate = new THREE.Mesh(new THREE.BoxGeometry(9, 9.5, 4), new THREE.MeshLambertMaterial({ color: 0xb04a6a }));
+  gate.position.set(0, 4.75, 19.5); castle.add(gate);
+  const towerOffsets = [[0, 0, 14, 26], [15.5, 7, 6.4, 20], [-15.5, 7, 6.4, 20], [9, -12, 6.4, 17], [-9, -12, 6.4, 17]];
+  for (const [tx, tz, r, h] of towerOffsets) {
+    const tw = new THREE.Mesh(new THREE.CylinderGeometry(r, r * 1.12, h, 9), new THREE.MeshLambertMaterial({ color: 0xf6e3ea }));
+    tw.position.set(tx, h / 2 + 6, tz); castle.add(tw);
+    const cone = new THREE.Mesh(new THREE.ConeGeometry(r * 1.22, r * 2.6, 9), new THREE.MeshLambertMaterial({ color: 0xc65b82 }));
+    cone.position.set(tx, h + 6 + r * 1.3, tz); castle.add(cone);
+    const flag = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 5.4, 5), new THREE.MeshLambertMaterial({ color: 0x8a6d3b }));
+    flag.position.set(tx, h + 6 + r * 2.6 + 2.4, tz); castle.add(flag);
+  }
+  castle.position.set(-30, 0, -8);
+  g.add(castle);
+  // Charxpalak
+  const wheel = new THREE.Group();
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(23, 1.7, 10, 44), new THREE.MeshPhongMaterial({ color: 0xffffff, emissive: 0x442044, shininess: 40 }));
+  wheel.add(rim);
+  const rim2 = new THREE.Mesh(new THREE.TorusGeometry(15, 1.2, 8, 40), new THREE.MeshLambertMaterial({ color: 0xffd166 }));
+  wheel.add(rim2);
+  for (let i = 0; i < 12; i++) {
+    const a = (i / 12) * Math.PI * 2;
+    const spoke = new THREE.Mesh(new THREE.BoxGeometry(0.9, 46, 0.9), new THREE.MeshLambertMaterial({ color: 0xfff3f7 }));
+    spoke.rotation.z = a;
+    wheel.add(spoke);
+    const cab = new THREE.Mesh(new THREE.BoxGeometry(3.4, 2.6, 2.6),
+      new THREE.MeshLambertMaterial({ color: [0xff8fa3, 0xffd166, 0x8ee6a8, 0x7fd7ff, 0xc3a6ff][i % 5] }));
+    cab.position.set(Math.sin(a) * 23, Math.cos(a) * 23, 0);
+    wheel.add(cab);
+  }
+  wheel.position.set(30, 25.5, 6);
+  g.add(wheel);
+  landmarkAnims.push({ obj: wheel, axis: 'z', speed: 0.16 });
+  for (const s of [-1, 1]) {
+    const leg = new THREE.Mesh(new THREE.BoxGeometry(2.6, 27, 2.6), new THREE.MeshLambertMaterial({ color: 0xe8e4da }));
+    leg.position.set(30 + s * 10.5, 13.5, 6);
+    leg.rotation.z = -s * 0.42;
+    g.add(leg);
+  }
+  const hub = new THREE.Mesh(new THREE.CylinderGeometry(2.4, 2.4, 4, 12), new THREE.MeshPhongMaterial({ color: 0xffd166, emissive: 0x553a00 }));
+  hub.rotation.x = Math.PI / 2; hub.position.copy(wheel.position); g.add(hub);
+  // kirish arka + pavilyonlar
+  const arch = new THREE.Mesh(new THREE.TorusGeometry(12, 2.1, 8, 24, Math.PI), new THREE.MeshLambertMaterial({ color: 0xffd166, emissive: 0x40310a }));
+  arch.position.set(-2, 12, 34); g.add(arch);
+  const pavColors = [0xff9eb5, 0x8ee6a8, 0x7fd7ff, 0xffd166];
+  for (let i = 0; i < 4; i++) {
+    const pav = new THREE.Mesh(new THREE.CylinderGeometry(4.6, 5.2, 7 + (i % 2) * 2.5, 8), new THREE.MeshLambertMaterial({ color: pavColors[i] }));
+    const px = -52 + i * 34;
+    pav.position.set(px, 4.5, 30 + (i % 2) * 12);
+    g.add(pav);
+    const roofc = new THREE.Mesh(new THREE.ConeGeometry(5.6, 4.2, 8), new THREE.MeshLambertMaterial({ color: 0xffffff }));
+    roofc.position.set(px, 9.5 + (i % 2) * 2.5, 30 + (i % 2) * 12);
+    g.add(roofc);
+  }
+}
+function buildIceCity(g) {
+  // Yopiq muz majmuasi: oq-ko'k barrel gumbaz + iCE CITY yozuvi
+  const body = new THREE.Mesh(new THREE.BoxGeometry(78, 11, 48), new THREE.MeshLambertMaterial({ color: 0xe6eef4 }));
+  body.position.y = 5.5; g.add(body);
+  const vault = new THREE.Mesh(new THREE.CylinderGeometry(24, 24, 78, 24, 1, false, 0, Math.PI),
+    new THREE.MeshPhongMaterial({ color: 0xbfe4f2, specular: 0xffffff, shininess: 72 }));
+  vault.rotation.z = Math.PI / 2;
+  vault.scale.set(0.62, 1, 1);
+  vault.position.y = 11; g.add(vault);
+  const stripe = new THREE.Mesh(new THREE.BoxGeometry(79.5, 2.6, 49.5), new THREE.MeshBasicMaterial({ color: 0x2f9fd8 }));
+  stripe.position.y = 9.6; g.add(stripe);
+  const cv = document.createElement('canvas'); cv.width = 512; cv.height = 128;
+  const c = cv.getContext('2d');
+  c.fillStyle = 'rgba(6,24,38,0.0)'; c.fillRect(0, 0, 512, 128);
+  c.font = '900 72px system-ui, sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+  c.fillStyle = '#075a83'; c.fillText('ICE CITY', 256, 66);
+  const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace;
+  const sign = new THREE.Mesh(new THREE.PlaneGeometry(46, 11.5), new THREE.MeshBasicMaterial({ map: t, transparent: true, side: THREE.DoubleSide }));
+  sign.position.set(0, 6.4, 24.4); g.add(sign);
+  const door = new THREE.Mesh(new THREE.BoxGeometry(13, 8.4, 1.8),
+    new THREE.MeshPhongMaterial({ color: 0x8fc6de, specular: 0xffffff, shininess: 80 }));
+  door.position.set(0, 4.2, 24.2); g.add(door);
+}
+
 /* daraxtlar (instanced) */
 (function trees() {
   const N = 520;
@@ -801,6 +1068,8 @@ buildDistrictRoads();
   trunk.instanceMatrix.needsUpdate = crown.instanceMatrix.needsUpdate = true;
   scene.add(trunk, crown);
 })();
+
+const _tmpV = new THREE.Vector3();
 
 /* tanlash halqasi */
 const selRing = new THREE.Mesh(
@@ -837,7 +1106,7 @@ function labelTexture(b, lvl) {
   return tex;
 }
 function refreshLabel(b) {
-  const L = labels.find(x => x.b.id === b.id);
+  const L = labels.find(x => x.b && x.b.id === b.id);
   if (!L) return;
   const old = L.sp.material.map;
   L.sp.material.map = labelTexture(b, G.lvl[b.id]);
@@ -870,7 +1139,7 @@ function flyTo(id) {
   const cp = CPS.find(c => c.id === id);
   let tx, tz, r, theta, phi;
   if (!cp) {                                  // umumiy ko'rinish
-    tx = OVERVIEW.tx; tz = OVERVIEW.tz; r = OVERVIEW.r; theta = -1.043; phi = 0.42;
+    tx = OVERVIEW.tx; tz = OVERVIEW.tz; r = OVERVIEW.r; theta = -1.043; phi = 0.40;
   } else {
     const c = CAMS[id];
     tx = cp.cx; tz = cp.cz; r = c.r; theta = c.theta; phi = c.phi;
@@ -904,12 +1173,12 @@ canvas.addEventListener('pointerup', e => {
 });
 canvas.addEventListener('wheel', e => {
   e.preventDefault();
-  cam.r = Math.min(16000, Math.max(60, cam.r * (1 + Math.sign(e.deltaY) * 0.09)));
+  cam.r = Math.min(26000, Math.max(60, cam.r * (1 + Math.sign(e.deltaY) * 0.09)));
 }, { passive: false });
 canvas.addEventListener('touchmove', e => {
   if (e.touches.length === 2) {
     const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-    if (pinch) cam.r = Math.min(16000, Math.max(60, cam.r * (pinch / d)));
+    if (pinch) cam.r = Math.min(26000, Math.max(60, cam.r * (pinch / d)));
     pinch = d;
   }
 }, { passive: true });
@@ -975,7 +1244,7 @@ function renderPanel() {
 
   $('#panel').innerHTML = `
     <div class="p-head">
-      <div class="p-icon">${r.icon}</div>
+      <div class="p-icon">${ic(r.icon, 22)}</div>
       <div>
         <div class="p-title">${r.name}</div>
         <div class="p-sub">${b.levels} qavat · ${b.area} m² · <b>${lvl}-daraja</b>${owner !== undefined ? ` · <span style="color:${FACULTIES[owner].c}">${FACULTIES[owner].n}</span>` : ''}</div>
@@ -988,21 +1257,21 @@ function renderPanel() {
       <div class="p-build">
         <div class="p-build-row"><span>Qurilish ketmoqda…</span><b id="p-timer">${fmtT((G.build.endsAt - Date.now()) / 1000)}</b></div>
         <div class="bar"><i id="p-bar" style="width:0%"></i></div>
-        <button class="btn ghost" onclick="window.__speed()">⚡ Tezlashtirish — 5 Bilim / 5s</button>
+        <button class="btn ghost btn-ic" onclick="window.__speed()">${ic('zap', 15)} Tezlashtirish — 5 Bilim / 5s</button>
       </div>` : `
       <div class="p-costs">
-        <div class="${G.res.mablag >= needM ? '' : 'lack'}">💰 ${fmt(needM)}</div>
-        <div class="${G.res.bilim >= needB ? '' : 'lack'}">📘 ${fmt(needB)}</div>
-        <div>⏱ ${fmtT(buildTime(lvl))}</div>
+        <div class="${G.res.mablag >= needM ? '' : 'lack'}"><span class="cost-ic">${ic('banknote', 15)}</span>${fmt(needM)}</div>
+        <div class="${G.res.bilim >= needB ? '' : 'lack'}"><span class="cost-ic">${ic('book', 15)}</span>${fmt(needB)}</div>
+        <div><span class="cost-ic">${ic('clock', 15)}</span>${fmtT(buildTime(lvl))}</div>
       </div>
       <button class="btn ${!gated && !hqGated && afford ? '' : 'disabled'}" onclick="window.__upgrade(${b.id})">
         ${lvl >= CAP ? 'Maksimal daraja' : gated ? 'Rektorat darajasini ko\'taring' : hqGated ? `Kamida ${hqReq} umumiy daraja kerak` : 'Yangilash'}
       </button>`}
     <div class="p-row">
       <button class="btn ghost" onclick="window.__checkin(${b.id})" ${visited ? 'disabled' : ''}>
-        📍 QR check-in ${visited ? '✓' : ''}
+        <span class="btn-ic-in">${ic('pin', 15)}</span> QR check-in ${visited ? '✓' : ''}
       </button>
-      <button class="btn ghost" onclick="window.__claim(${b.id})">🚩 Egallash</button>
+      <button class="btn ghost" onclick="window.__claim(${b.id})"><span class="btn-ic-in">${ic('flag', 15)}</span> Egallash</button>
     </div>
     <div class="p-foot">Har daraja binoni <b>vertikal o'sadi</b> · Egallangan bino +15% produksiya beradi.</div>
   `;
@@ -1035,7 +1304,7 @@ function finishBuild() {
   G.build = null;
   G.res.nufuz += 25;
   if (TG && TG.HapticFeedback) TG.HapticFeedback.notificationOccurred('success');
-  toast(`✅ ${b.roleData.name} — ${G.lvl[b.id]}-daraja!`);
+  toast(`${b.roleData.name} — ${G.lvl[b.id]}-daraja bo'ldi`);
   save(); drawHud(); refreshLabel(b); if (selected) renderPanel();
 }
 
@@ -1081,7 +1350,7 @@ $('#checkin-go').onclick = () => {
   G.visited[id] = true;
   G.res.bilim += 80; G.res.nufuz += 15; addSeasonPts(12);
   if (TG && TG.HapticFeedback) TG.HapticFeedback.notificationOccurred('success');
-  toast(`📍 Check-in: ${byId(id).roleData.name} — +80 Bilim`);
+  toast(`Check-in: ${byId(id).roleData.name} — +80 Bilim`);
   $('#checkin').classList.remove('open');
   save(); drawHud(); if (selected) renderPanel(); refreshLabel(byId(id));
 };
@@ -1098,7 +1367,7 @@ window.__claim = function (id) {
   G.owner[id] = G.faculty;
   b.ring.material.opacity = 0.55;
   b.ring.material.color = new THREE.Color(FACULTIES[G.faculty].c);
-  toast(`🚩 ${b.roleData.name} — ${FACULTIES[G.faculty].n} fakulteti nazoratida!`);
+  toast(`${b.roleData.name} — ${FACULTIES[G.faculty].n} fakulteti nazoratida`);
   save(); renderPanel(); refreshLabel(b); drawHud();
 };
 
@@ -1118,7 +1387,7 @@ function drawHud() {
     $('#q-time').textContent = fmtT((b.endsAt - Date.now()) / 1000);
     $('#q-bar').style.width = Math.min(100, ((Date.now() - b.startedAt) / (b.endsAt - b.startedAt)) * 100) + '%';
   }
-  $('#campus-name').textContent = (CPS.find(c => c.id === G.campus) || {}).name || 'Umumiy';
+  $('#campus-name').textContent = (CPS.find(c => c.id === G.campus) || {}).name || 'Butun shahar';
 }
 
 /* ---------------------------------------------------------------- resurs oqimi */
@@ -1206,7 +1475,7 @@ function endQuiz() {
   addSeasonPts(QZ.correct * 3);
   G.quizBest = Math.max(G.quizBest, QZ.correct);
   $('#quiz').classList.remove('open');
-  toast(`📘 +${QZ.gainB} · 💰 +${QZ.gainM} · ${QZ.correct}/${QZ.pool.length} to'g'ri`);
+  toast(`Bilim +${QZ.gainB} · Mablag' +${QZ.gainM} · ${QZ.correct}/${QZ.pool.length} to'g'ri javob`);
   save(); drawHud();
 }
 $('#quiz-close').onclick = () => { $('#quiz').classList.remove('open'); clearInterval(QZ && QZ.timer); };
@@ -1214,7 +1483,7 @@ $('#quiz-close').onclick = () => { $('#quiz').classList.remove('open'); clearInt
 /* ---------------------------------------------------------------- Darvoza (1v1 duel) */
 let DUEL = null;
 function startDuel() {
-  if (G.res.energiya < 1) return toast('Energiya yo\'q');
+  if (G.res.energiya < 1) return toast('Energiya yetmaydi');
   G.res.energiya -= 1;
   const opp = (G.faculty + 1 + Math.floor(Math.random() * 4)) % 5;
   DUEL = {
@@ -1247,7 +1516,7 @@ function duelQ() {
     if (ok) DUEL.hpP -= 14;
     $('#d-hp-p').style.width = Math.max(0, DUEL.hpP) + '%';
     $('#d-hp-pv').textContent = Math.max(0, Math.round(DUEL.hpP));
-    $('#d-log').textContent = ok ? '⚔️ Raqib to\'g\'ri javob berdi — 14 zarar!' : '🛡 Raqib xato qildi';
+    $('#d-log').textContent = ok ? 'Raqib to\'g\'ri javob berdi — 14 zarar!' : 'Raqib xato qildi';
     if (DUEL.hpP <= 0) { clearInterval(DUEL.timer); setTimeout(duelEnd, 500); }
   }, DUEL.botAt);
 }
@@ -1266,13 +1535,13 @@ function duelAnswer(i) {
     DUEL.hpO -= dmg;
     $('#d-hp-o').style.width = Math.max(0, DUEL.hpO) + '%';
     $('#d-hp-ov').textContent = Math.max(0, Math.round(DUEL.hpO));
-    $('#d-log').textContent = `✅ To'g'ri! −${dmg} raqibga`;
+    $('#d-log').textContent = `To'g'ri! Raqibga −${dmg} zarar`;
     if (TG && TG.HapticFeedback) TG.HapticFeedback.impactOccurred('medium');
   } else {
     DUEL.hpP -= 8;
     $('#d-hp-p').style.width = Math.max(0, DUEL.hpP) + '%';
     $('#d-hp-pv').textContent = Math.max(0, Math.round(DUEL.hpP));
-    $('#d-log').textContent = '❌ Xato — 8 zarar sizga';
+    $('#d-log').textContent = 'Xato — 8 zarar sizga';
   }
   clearTimeout(DUEL.botTimer);
   setTimeout(() => { DUEL.i++; duelQ(); }, 800);
@@ -1281,9 +1550,9 @@ function duelEnd() {
   clearTimeout(DUEL && DUEL.botTimer); clearInterval(DUEL && DUEL.timer);
   const win = DUEL.hpO <= 0 && DUEL.hpP > 0;
   const draw = DUEL.hpO > 0 && DUEL.hpP > 0;
-  if (win) { G.duelWin++; G.res.nufuz += 60; G.res.bilim += 60; addSeasonPts(25); toast('🏆 G\'alaba! +60 Nufuz, +25 mavsum ball'); }
-  else if (draw) { G.res.bilim += 25; addSeasonPts(8); toast('🤝 Durang — +25 Bilim'); }
-  else { G.duelLose++; addSeasonPts(4); toast('💀 Mag\'lubiyat — keyingi safar!'); }
+  if (win) { G.duelWin++; G.res.nufuz += 60; G.res.bilim += 60; addSeasonPts(25); toast('G\'alaba! +60 Nufuz, +25 mavsum ball'); }
+  else if (draw) { G.res.bilim += 25; addSeasonPts(8); toast('Durang — +25 Bilim'); }
+  else { G.duelLose++; addSeasonPts(4); toast('Mag\'lubiyat — keyingi safar omad!'); }
   $('#duel').classList.remove('open');
   save(); drawHud();
 }
@@ -1297,7 +1566,7 @@ function renderSeason() {
     return `<button class="season-row ${mine ? 'me' : ''}" onclick="window.__setFaculty(${i})">
       <span class="dot" style="background:${f.c}"></span>
       <b>${f.n}${mine ? ' (siz)' : ''}</b>
-      <span class="pts">⭐ ${fmt(G.season.pts[i])}</span>
+      <span class="pts">${ic('star', 14)} ${fmt(G.season.pts[i])}</span>
       <i class="bar-mini"><u style="width:${(G.season.pts[i] / max) * 100}%;background:${f.c}"></u></i>
     </button>`;
   }).join('');
@@ -1336,6 +1605,28 @@ document.querySelectorAll('.nav button').forEach(btn => {
 });
 $('#season-close').onclick = () => $('#season').classList.remove('open');
 $('#campus-close').onclick = () => $('#campus').classList.remove('open');
+/* landmark tugmalari — kamerani landmarkga uchirish */
+const LM_FLY = {
+  tashkent_city: { r: 640, theta: -0.72, phi: 0.66 },
+  humo_arena:    { r: 300, theta: -1.15, phi: 0.58 },
+  magic_city:    { r: 260, theta: 0.9,   phi: 0.55 },
+  ice_city:      { r: 170, theta: -0.8,  phi: 0.52 },
+};
+document.querySelectorAll('.lm-card').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lms = (window.DISTRICTS && window.DISTRICTS.landmarks) || [];
+    const lm = lms.find(l => l.id === btn.dataset.lm);
+    if (!lm) return;
+    const f = LM_FLY[lm.id] || { r: 380, theta: -0.8, phi: 0.55 };
+    cam.txT = cam.tx = lm.x; cam.tzT = cam.tz = lm.z;
+    cam.r = f.r; cam.theta = f.theta; cam.phi = f.phi;
+    $('#campus').classList.remove('open');
+    document.querySelectorAll('.nav button').forEach(b => b.classList.remove('on'));
+    document.querySelector('.nav button[data-v="map"]').classList.add('on');
+    toast(lm.name + ' — ' + (lm.sub || 'landmark'));
+  });
+});
+
 document.querySelectorAll('.campus-card').forEach(el => {
   el.onclick = () => {
     const id = el.dataset.id;
@@ -1344,7 +1635,7 @@ document.querySelectorAll('.campus-card').forEach(el => {
     $('#campus').classList.remove('open');
     document.querySelectorAll('.nav button').forEach(b => b.classList.remove('on'));
     document.querySelector('.nav button[data-v="map"]').classList.add('on');
-    toast('📍 ' + (id === 'all' ? 'Umumiy ko\'rinish' : CPS.find(c => c.id === id).name));
+    toast(id === 'all' ? 'Butun shahar — umumiy ko\'rinish' : CPS.find(c => c.id === id).name);
   };
 });
 
@@ -1389,8 +1680,16 @@ function loop(now) {
     sp.scale.set(w, w * 0.25, 1);
   }
 
-  const far = cam.r > 2200;
+  const far = cam.r > 3600;
   for (const L of labels) {
+    if (L.landmark) {
+      const wpos = L.sp.userData.world;
+      const d = camera.position.distanceTo(_tmpV.set(wpos.x, wpos.y, wpos.z));
+      L.sp.visible = d < 14000;
+      const w = Math.min(430, Math.max(90, d * 0.052));
+      L.sp.scale.set(w, w * 0.275, 1);
+      continue;
+    }
     L.sp.visible = !far;
     const grp = roleMeshes.get(L.b.id);
     if (!grp) continue;
@@ -1399,6 +1698,7 @@ function loop(now) {
     const w = Math.min(180, Math.max(14, d * 0.058));
     L.sp.scale.set(w, w / L.sp.userData.aspect, 1);
   }
+  for (const A of landmarkAnims) A.obj.rotation[A.axis] += A.speed * 0.016;
   /* egalik halqalari pulsatsiyasi */
   for (const b of ALL_B) {
     if (b.role && b.ring && G.owner[b.id] !== undefined) {
@@ -1406,7 +1706,7 @@ function loop(now) {
     }
   }
   /* uzoqdan: barcha chunk'lar o'rniga bitta birlashtirilgan tom to'plami (10x tez) */
-  const farMode = cam.r > 2600;
+  const farMode = cam.r > 5200;
   if (farMode !== loop._farMode) {
     loop._farMode = farMode;
     for (const m of districtMeshes) m.visible = !farMode;
@@ -1435,5 +1735,5 @@ setInterval(() => {
 drawHud();
 setTimeout(() => {
   const nm = TG_USER && TG_USER.first_name ? `${TG_USER.first_name}, x` : 'X';
-  toast(`${nm}ush kelibsiz! Binoni bosing → Yangilash · 📍 check-in · 🚩 egallash`);
+  toast(`${nm}ush kelibsiz! Binoni bosing → Yangilash · QR check-in · Egallash`);
 }, 900);
