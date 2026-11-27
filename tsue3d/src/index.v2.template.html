@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0b1220">
-<meta name="description" content="KAMPUS: TDIU — Telegram Mini App 3D o'yini. Haqiqiy kampus digital twin, bilim sinovlari, fakultetlar urushi.">
-<title>KAMPUS · TDIU — Chilonzor &amp; Yunusobod</title>
+<meta name="description" content="KAMPUS: TDIU — Telegram Mini App 3D o'yini. Toshkent shahri va TDIU kampuslari to'liq 3D raqamli egizagi: 12 tuman, Humo Arena, Magic City, Tashkent City, Ice City.">
+<title>KAMPUS · TDIU — Toshkent 3D digital twin</title>
 <style>__CSS__</style>
 </head>
 <body>
@@ -13,34 +13,34 @@
 
 <div id="hud">
   <div class="topbar">
-    <div class="brand">KAMPUS <b>TDIU</b><span>DIGITAL TWIN v0.3</span></div>
-    <h1>KAMPUS TDIU — 3D kampus o'yini</h1>
+    <div class="brand">KAMPUS <b>TDIU</b><span>DIGITAL TWIN v0.4</span></div>
+    <h1>KAMPUS TDIU — Toshkent 3D shahar o'yini</h1>
     <div class="chips">
-      <div class="chip mablag"><i>💰</i><span id="r-mablag">0</span></div>
-      <div class="chip bilim"><i>📘</i><span id="r-bilim">0</span></div>
-      <div class="chip nufuz"><i>⭐</i><span id="r-nufuz">0</span></div>
-      <div class="chip energy"><i>⚡</i><span id="r-energy">5/5</span></div>
-      <div class="chip hq"><i>🏛</i><span id="hq-lvl">1</span></div>
+      <div class="chip mablag"><i><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M5.6 9.6h.01M18.4 14.4h.01"/></svg></i><span id="r-mablag">0</span></div>
+      <div class="chip bilim"><i><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5.4A2.4 2.4 0 0 1 4.4 3H11v15.2H4.4A2.4 2.4 0 0 0 2 20.6z"/><path d="M22 5.4A2.4 2.4 0 0 0 19.6 3H13v15.2h6.6A2.4 2.4 0 0 1 22 20.6z"/></svg></i><span id="r-bilim">0</span></div>
+      <div class="chip nufuz"><i><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.5 6 .9-4.35 4.2 1.05 6L12 16.9 6.6 19.6l1.05-6L3.3 9.4l6-.9z"/></svg></i><span id="r-nufuz">0</span></div>
+      <div class="chip energy"><i><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></i><span id="r-energy">5/5</span></div>
+      <div class="chip hq"><i><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 4l9 5.5"/><path d="M4 10h16"/><path d="M6 10v8M10.2 10v8M13.8 10v8M18 10v8"/><path d="M3 21h18"/></svg></i><span id="hq-lvl">1</span></div>
     </div>
   </div>
 
   <div class="subbar">
     <div class="pill"><span class="dot" id="fac-dot"></span><span id="fac-name">Iqtisodiyot</span></div>
-    <div class="pill">📍 <span id="campus-name">Asosiy kampus</span></div>
+    <div class="pill"><svg class="ic ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span id="campus-name">Asosiy kampus</span></div>
   </div>
 
   <div id="queue">
-    <span>🔨</span>
+    <span class="q-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
     <span class="qname" id="q-name">—</span>
     <span class="qtime" id="q-time">0s</span>
     <span id="q-track"><i id="q-bar"></i></span>
   </div>
 
   <div class="nav">
-    <button data-v="map"><em>🗺</em>Kampus</button>
-    <button data-v="quiz"><em>📘</em>Sinov</button>
-    <button data-v="duel"><em>⚔️</em>Darvoza</button>
-    <button data-v="season"><em>🏆</em>Mavsum</button>
+    <button data-v="map"><span class="n-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4L1 6z"/><path d="M8 2v16M16 6v16"/></svg></span>Kampus</button>
+    <button data-v="quiz"><span class="n-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5.4A2.4 2.4 0 0 1 4.4 3H11v15.2H4.4A2.4 2.4 0 0 0 2 20.6z"/><path d="M22 5.4A2.4 2.4 0 0 0 19.6 3H13v15.2h6.6A2.4 2.4 0 0 1 22 20.6z"/></svg></span>Sinov</button>
+    <button data-v="duel"><span class="n-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Darvoza</button>
+    <button data-v="season"><span class="n-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6.2H4.6a1.4 1.4 0 0 0 1.4 4.3H7M17 6.2h2.4a1.4 1.4 0 0 1-1.4 4.3H17"/></svg></span>Mavsum</button>
   </div>
 
   <div id="panel"></div>
@@ -49,7 +49,7 @@
 <!-- Bilim sinovi -->
 <div id="quiz" class="overlay">
   <div class="o-top">
-    <span>📘 Bilim sinovi</span>
+    <span class="o-title"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5.4A2.4 2.4 0 0 1 4.4 3H11v15.2H4.4A2.4 2.4 0 0 0 2 20.6z"/><path d="M22 5.4A2.4 2.4 0 0 0 19.6 3H13v15.2h6.6A2.4 2.4 0 0 1 22 20.6z"/></svg> Bilim sinovi</span>
     <b id="q-count">1/8</b>
     <span id="q-combo"></span>
     <button id="quiz-close" class="o-x">✕</button>
@@ -62,12 +62,12 @@
 <!-- Darvoza (1v1) -->
 <div id="duel" class="overlay">
   <div class="o-top">
-    <span>⚔️ Darvoza — 1v1</span>
+    <span class="o-title"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Darvoza — 1v1</span>
     <b id="d-n">1/6</b>
     <button id="duel-close" class="o-x">✕</button>
   </div>
-  <div class="hp-row" style="margin-top:16px"><span>🛡</span><div class="hp-track"><i id="d-hp-p"></i></div><b id="d-hp-pv">100</b></div>
-  <div class="hp-row"><span>💀</span><div class="hp-track"><i id="d-hp-o"></i></div><b id="d-hp-ov">100</b></div>
+  <div class="hp-row" style="margin-top:16px"><span class="hp-ic me"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><div class="hp-track"><i id="d-hp-p"></i></div><b id="d-hp-pv">100</b></div>
+  <div class="hp-row"><span class="hp-ic foe"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 5h13l-2.5 4L18 13H5"/></svg></span><div class="hp-track"><i id="d-hp-o"></i></div><b id="d-hp-ov">100</b></div>
   <div class="hp-row" style="color:#8ba0c6"><span>Raqib:</span><b id="d-opp" style="min-width:0;text-align:left;color:#ffb86b"></b></div>
   <div id="d-log"></div>
   <div id="d-text"></div>
@@ -77,25 +77,33 @@
 <!-- Mavsum -->
 <div id="season" class="overlay">
   <button id="season-close" class="o-x" style="align-self:flex-end">✕</button>
-  <h2 class="o-h2">🏆 Fakultetlar mavsumi</h2>
+  <h2 class="o-h2 o-title"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6.2H4.6a1.4 1.4 0 0 0 1.4 4.3H7M17 6.2h2.4a1.4 1.4 0 0 1-1.4 4.3H17"/></svg> Fakultetlar mavsumi</h2>
   <div id="season-list"></div>
 </div>
 
-<!-- Kampus tanlash -->
+<!-- Xarita & landmarklar -->
 <div id="campus" class="overlay">
   <button id="campus-close" class="o-x" style="align-self:flex-end">✕</button>
-  <h2 class="o-h2">🗺 Kampusni tanlang</h2>
+  <h2 class="o-h2 o-title"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4L1 6z"/><path d="M8 2v16M16 6v16"/></svg> Xarita &amp; landmarklar</h2>
+  <div class="campus-sect">Kampuslar</div>
   <button class="campus-card" data-id="main">
-    <em>🏛</em><div><b>Asosiy kampus</b><span>Islom Karimov ko'chasi 49 · TDIU bosh binosi</span></div>
+    <em><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 4l9 5.5"/><path d="M4 10h16"/><path d="M6 10v8M10.2 10v8M13.8 10v8M18 10v8"/><path d="M3 21h18"/></svg></em><div><b>Asosiy kampus</b><span>Islom Karimov ko'chasi 49 · TDIU bosh binosi</span></div>
   </button>
   <button class="campus-card" data-id="finance">
-    <em>🏦</em><div><b>Moliya kampusi</b><span>Sobiq Toshkent moliya instituti</span></div>
+    <em><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 4l9 5.5"/><path d="M4 10h16"/><path d="M6 10v8M10.2 10v8M13.8 10v8M18 10v8"/><path d="M3 21h18"/></svg></em><div><b>Moliya kampusi</b><span>Sobiq Toshkent moliya instituti</span></div>
   </button>
   <button class="campus-card" data-id="all">
-    <em>🛰</em><div><b>Umumiy ko'rinish</b><span>Ikkala kampus bir xaritada</span></div>
+    <em><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a13.6 13.6 0 0 1 3.5 9A13.6 13.6 0 0 1 12 21a13.6 13.6 0 0 1-3.5-9A13.6 13.6 0 0 1 12 3z"/></svg></em><div><b>Umumiy ko'rinish</b><span>Butun Toshkent — 12 tuman bir xaritada</span></div>
   </button>
-  <p class="hint" style="margin-top:8px">
-    Ikkala kampus ham bir 3D dunyoda, haqiqiy geografik joylashuvida (orası ~3,3 km).
+  <div class="campus-sect">Landmarklar</div>
+  <div class="lm-grid">
+    <button class="lm-card" data-lm="tashkent_city"><b>Tashkent City</b><span>Nest One · 266 m</span></button>
+    <button class="lm-card" data-lm="humo_arena"><b>Humo Arena</b><span>Muz saroyi · 12 500 o'rin</span></button>
+    <button class="lm-card" data-lm="magic_city"><b>Magic City</b><span>Ko'ngilochar park</span></button>
+    <button class="lm-card" data-lm="ice_city"><b>Ice City</b><span>Yopiq muz majmuasi</span></button>
+  </div>
+  <p class="hint" style="margin-top:10px">
+    Toshkent shahri to'liq: Chilonzor va Yunusobod haqiqiy OSM geometriyasi, qolgan tumanlar protsedural model.
     Ma'lumot: © OpenStreetMap contributors (ODbL).
   </p>
 </div>
@@ -103,7 +111,7 @@
 <!-- Check-in -->
 <div id="checkin" class="overlay">
   <button id="checkin-close" class="o-x" style="align-self:flex-end">✕</button>
-  <h2 class="o-h2">📍 QR check-in</h2>
+  <h2 class="o-h2 o-title"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> QR check-in</h2>
   <p class="hint">Bino oldidagi QR kodni skanlang yoki kodni kiriting. Kodlar:
     TDIU-HQ, TDIU-EDU, TDIU-MONEY, TDIU-FLOW, TDIU-ENERGY, TDIU-INNOVATION,
     MOLIYA-HQ, MOLIYA-EDU, MOLIYA-MONEY, MOLIYA-FLOW, MOLIYA-ENERGY, MOLIYA-INNOVATION</p>
