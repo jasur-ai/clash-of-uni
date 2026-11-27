@@ -263,3 +263,17 @@ h1 { font-size: 0; margin: 0; }
 .lm-card b { font-size: 13px; color: #ffe9b0; }
 .lm-card span { font-size: 10.5px; color: #a8b4cf; line-height: 1.35; }
 .lm-card:active { transform: scale(.97); background: linear-gradient(160deg, rgba(255,209,102,.2), rgba(255,255,255,.06)); }
+
+/* panel tablari (TDIU xonalar / ichki ko‘rinish) */
+.p-tabs { display: flex; gap: 6px; margin: 10px 0 2px; padding: 4px; border-radius: 12px; background: rgba(15,24,40,.72); border: 1px solid rgba(140,180,235,.12); }
+.p-tab { flex: 1; padding: 7px 4px; border: 0; border-radius: 9px; background: transparent; color: #9db0d6; font-size: 11.5px; font-weight: 700; letter-spacing: .02em; cursor: pointer; transition: .15s; }
+.p-tab.on { background: linear-gradient(160deg, rgba(110,160,235,.35), rgba(110,160,235,.16)); color: #dceaff; box-shadow: 0 0 0 1px rgba(140,190,255,.35) inset; }
+.rooms-list { max-height: 46vh; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 2px; }
+.room-row { display: grid; grid-template-columns: 52px 1fr; gap: 8px; padding: 7px 9px; border-radius: 10px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.06); font-size: 11px; }
+.room-row b { color: #ffe9b0; font-size: 11px; align-self: start; }
+.room-row span { color: #b9c6de; line-height: 1.45; }
+.floor-btns { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 8px; }
+.floor-btn { width: 34px; height: 34px; border-radius: 10px; border: 1px solid rgba(140,190,255,.25); background: rgba(20,32,54,.85); color: #cfe0ff; font-size: 12.5px; font-weight: 800; cursor: pointer; transition: .12s; }
+.floor-btn.on { background: linear-gradient(160deg, #3f7ad0, #2a4f8f); border-color: #7db3ff; color: #fff; box-shadow: 0 0 14px rgba(80,140,255,.35); }
+.room-info { padding: 10px 12px; border-radius: 11px; background: rgba(255,209,102,.09); border: 1px solid rgba(255,209,102,.28); color: #ffe9b0; font-size: 12px; line-height: 1.5; min-height: 40px; }
+.room-info b { color: #ffd166; }
