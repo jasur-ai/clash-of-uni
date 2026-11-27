@@ -1,0 +1,23 @@
+name: Deploy to Vercel (production)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Link Vercel project (kampus-tdiu)
+        run: |
+          mkdir -p kampus-app/.vercel
+          printf '{"orgId":"team_66P4fjrngeXuucmcUOSpvGNe","projectId":"prj_OcbmJm1dE4r3ueRpvHFFeWMvItfg"}' > kampus-app/.vercel/project.json
+
+      - name: Deploy to Vercel
+        working-directory: kampus-app
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"
