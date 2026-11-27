@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>KAMPUS · TDIU — 3D prototip</title>
+<style>__CSS__</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+
+<div id="hud">
+  <div class="topbar">
+    <div class="brand">KAMPUS <b>TDIU</b><span>VERTICAL SLICE v0.1</span></div>
+    <h1>TDIU kampus 3D</h1>
+    <div class="chips">
+      <div class="chip mablag"><i>💰</i><span id="r-mablag">0</span></div>
+      <div class="chip bilim"><i>📘</i><span id="r-bilim">0</span></div>
+      <div class="chip nufuz"><i>⭐</i><span id="r-nufuz">0</span></div>
+      <div class="chip energy"><i>⚡</i><span id="r-energy">5/5</span></div>
+      <div class="hq">🏛 <span>Rektorat</span> <b id="hq-lvl">1</b></div>
+    </div>
+  </div>
+
+  <div id="queue">
+    <span>🔨</span>
+    <span class="qname" id="q-name">—</span>
+    <span class="qtime" id="q-time">0s</span>
+    <span id="q-track"><i id="q-bar"></i></span>
+  </div>
+
+  <div class="nav">
+    <button data-v="map" class="on"><em>🗺</em>Kampus</button>
+    <button data-v="quiz"><em>📘</em>Bilim sinovi</button>
+    <button data-v="rank"><em>🏆</em>Reyting</button>
+  </div>
+
+  <div id="panel"></div>
+</div>
+
+<div id="quiz">
+  <div class="q-top">
+    <span>📘 Bilim sinovi</span>
+    <b id="q-count">1/8</b>
+    <span id="q-combo"></span>
+    <button id="quiz-close">✕</button>
+  </div>
+  <div class="q-track"><div id="q-timer"></div></div>
+  <div id="q-text"></div>
+  <div id="q-opts"></div>
+</div>
+
+<div id="rank">
+  <button id="rank-close">✕</button>
+  <h2>🏆 Fakultetlar reytingi</h2>
+  <div id="rank-list"></div>
+  <p style="font-size:11px;color:#6d81a4;margin-top:14px;line-height:1.5">
+    Doc'da tavsiflanganidek: reyting Telegram guruhlari / fakultetlar bo'yicha haftalik mavsumga bog'lanadi.
+    Bu yerda — statik namuna.
+  </p>
+</div>
+
+<div id="toast"></div>
+
+<script>__THREE__</script>
+<script>window.CAMPUS = __DATA__;</script>
+<script>__GAME__</script>
+</body>
+</html>

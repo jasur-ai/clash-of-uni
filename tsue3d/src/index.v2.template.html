@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="KAMPUS: TDIU — Telegram Mini App 3D o'yini. Haqiqiy kampus digital twin, bilim sinovlari, fakultetlar urushi.">
+<title>KAMPUS · TDIU — Chilonzor &amp; Yunusobod</title>
+<style>__CSS__</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+
+<div id="hud">
+  <div class="topbar">
+    <div class="brand">KAMPUS <b>TDIU</b><span>DIGITAL TWIN v0.3</span></div>
+    <h1>KAMPUS TDIU — 3D kampus o'yini</h1>
+    <div class="chips">
+      <div class="chip mablag"><i>💰</i><span id="r-mablag">0</span></div>
+      <div class="chip bilim"><i>📘</i><span id="r-bilim">0</span></div>
+      <div class="chip nufuz"><i>⭐</i><span id="r-nufuz">0</span></div>
+      <div class="chip energy"><i>⚡</i><span id="r-energy">5/5</span></div>
+      <div class="chip hq"><i>🏛</i><span id="hq-lvl">1</span></div>
+    </div>
+  </div>
+
+  <div class="subbar">
+    <div class="pill"><span class="dot" id="fac-dot"></span><span id="fac-name">Iqtisodiyot</span></div>
+    <div class="pill">📍 <span id="campus-name">Asosiy kampus</span></div>
+  </div>
+
+  <div id="queue">
+    <span>🔨</span>
+    <span class="qname" id="q-name">—</span>
+    <span class="qtime" id="q-time">0s</span>
+    <span id="q-track"><i id="q-bar"></i></span>
+  </div>
+
+  <div class="nav">
+    <button data-v="map"><em>🗺</em>Kampus</button>
+    <button data-v="quiz"><em>📘</em>Sinov</button>
+    <button data-v="duel"><em>⚔️</em>Darvoza</button>
+    <button data-v="season"><em>🏆</em>Mavsum</button>
+  </div>
+
+  <div id="panel"></div>
+</div>
+
+<!-- Bilim sinovi -->
+<div id="quiz" class="overlay">
+  <div class="o-top">
+    <span>📘 Bilim sinovi</span>
+    <b id="q-count">1/8</b>
+    <span id="q-combo"></span>
+    <button id="quiz-close" class="o-x">✕</button>
+  </div>
+  <div class="q-track"><div id="q-timer"></div></div>
+  <div id="q-text"></div>
+  <div id="q-opts"></div>
+</div>
+
+<!-- Darvoza (1v1) -->
+<div id="duel" class="overlay">
+  <div class="o-top">
+    <span>⚔️ Darvoza — 1v1</span>
+    <b id="d-n">1/6</b>
+    <button id="duel-close" class="o-x">✕</button>
+  </div>
+  <div class="hp-row" style="margin-top:16px"><span>🛡</span><div class="hp-track"><i id="d-hp-p"></i></div><b id="d-hp-pv">100</b></div>
+  <div class="hp-row"><span>💀</span><div class="hp-track"><i id="d-hp-o"></i></div><b id="d-hp-ov">100</b></div>
+  <div class="hp-row" style="color:#8ba0c6"><span>Raqib:</span><b id="d-opp" style="min-width:0;text-align:left;color:#ffb86b"></b></div>
+  <div id="d-log"></div>
+  <div id="d-text"></div>
+  <div id="d-opts"></div>
+</div>
+
+<!-- Mavsum -->
+<div id="season" class="overlay">
+  <button id="season-close" class="o-x" style="align-self:flex-end">✕</button>
+  <h2 class="o-h2">🏆 Fakultetlar mavsumi</h2>
+  <div id="season-list"></div>
+</div>
+
+<!-- Kampus tanlash -->
+<div id="campus" class="overlay">
+  <button id="campus-close" class="o-x" style="align-self:flex-end">✕</button>
+  <h2 class="o-h2">🗺 Kampusni tanlang</h2>
+  <button class="campus-card" data-id="main">
+    <em>🏛</em><div><b>Asosiy kampus</b><span>Islom Karimov ko'chasi 49 · TDIU bosh binosi</span></div>
+  </button>
+  <button class="campus-card" data-id="finance">
+    <em>🏦</em><div><b>Moliya kampusi</b><span>Sobiq Toshkent moliya instituti</span></div>
+  </button>
+  <button class="campus-card" data-id="all">
+    <em>🛰</em><div><b>Umumiy ko'rinish</b><span>Ikkala kampus bir xaritada</span></div>
+  </button>
+  <p class="hint" style="margin-top:8px">
+    Ikkala kampus ham bir 3D dunyoda, haqiqiy geografik joylashuvida (orası ~3,3 km).
+    Ma'lumot: © OpenStreetMap contributors (ODbL).
+  </p>
+</div>
+
+<!-- Check-in -->
+<div id="checkin" class="overlay">
+  <button id="checkin-close" class="o-x" style="align-self:flex-end">✕</button>
+  <h2 class="o-h2">📍 QR check-in</h2>
+  <p class="hint">Bino oldidagi QR kodni skanlang yoki kodni kiriting. Kodlar:
+    TDIU-HQ, TDIU-EDU, TDIU-MONEY, TDIU-FLOW, TDIU-ENERGY, TDIU-INNOVATION,
+    MOLIYA-HQ, MOLIYA-EDU, MOLIYA-MONEY, MOLIYA-FLOW, MOLIYA-ENERGY, MOLIYA-INNOVATION</p>
+  <input id="checkin-code" class="field" placeholder="TDIU-HQ" autocomplete="off">
+  <button id="checkin-go" class="btn">Tasdiqlash (+80 Bilim, +15 Nufuz)</button>
+  <p class="hint" style="margin-top:12px">
+    Faqat kampus hududida (geofence 120 m) ishlaydi — prototipda kod tekshiruvi bilan simulyatsiya qilinadi.
+  </p>
+  <input type="hidden" id="checkin-id">
+</div>
+
+<div id="toast"></div>
+
+<script>__THREE__</script>
+<script>window.CAMPUS = __DATA__;</script>
+<script>window.DISTRICTS = __DISTRICTS__;</script>
+<script>window.DISTRICT_ROADS = __ROADS__;</script>
+<script>__GAME__</script>
+</body>
+</html>

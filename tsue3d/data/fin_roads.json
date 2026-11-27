@@ -1,0 +1,4230 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.4 2390de5a",
+  "osm3s": {
+    "timestamp_osm_base": "2026-11-27T06:33:51Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "way",
+  "id": 31953678,
+  "bounds": {
+    "minlat": 41.3209445,
+    "minlon": 69.2829238,
+    "maxlat": 41.3213953,
+    "maxlon": 69.2864889
+  },
+  "geometry": [
+    { "lat": 41.3213953, "lon": 69.2829238 },
+    { "lat": 41.3209445, "lon": 69.2864889 }
+  ],
+  "tags": {
+    "cutting": "yes",
+    "highway": "primary",
+    "incline": "up",
+    "lanes": "3",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Abdulla Qodiriy ko'chasi",
+    "name:en": "Abdulla Qodiriy Street",
+    "name:eo": "Abdulla Qodiriy strato",
+    "name:ru": "Абдулла Кадыри улица",
+    "name:uz": "Abdulla Qodiriy ko'chasi",
+    "old_name": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "old_name:ru": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban"
+  }
+},
+{
+  "type": "way",
+  "id": 32010905,
+  "bounds": {
+    "minlat": 41.3233941,
+    "minlon": 69.2859690,
+    "maxlat": 41.3253006,
+    "maxlon": 69.2862792
+  },
+  "geometry": [
+    { "lat": 41.3233941, "lon": 69.2859690 },
+    { "lat": 41.3244331, "lon": 69.2861400 },
+    { "lat": 41.3253006, "lon": 69.2862792 }
+  ],
+  "tags": {
+    "highway": "living_street",
+    "int_name": "Niyozbek Yuli Passage 1",
+    "maxspeed": "60",
+    "name": "Niyozbek Yo'li 1-ko'chasi",
+    "name:ru": "1-я улица Ниёзбек йули",
+    "old_name": "Ширшова улица",
+    "old_name:ru": "Ширшова улица",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 32010968,
+  "bounds": {
+    "minlat": 41.3220004,
+    "minlon": 69.2792710,
+    "maxlat": 41.3222670,
+    "maxlon": 69.2819995
+  },
+  "geometry": [
+    { "lat": 41.3221356, "lon": 69.2819995 },
+    { "lat": 41.3220560, "lon": 69.2818533 },
+    { "lat": 41.3220364, "lon": 69.2818069 },
+    { "lat": 41.3220178, "lon": 69.2817411 },
+    { "lat": 41.3220066, "lon": 69.2816734 },
+    { "lat": 41.3220004, "lon": 69.2816006 },
+    { "lat": 41.3220032, "lon": 69.2815279 },
+    { "lat": 41.3220600, "lon": 69.2810158 },
+    { "lat": 41.3220841, "lon": 69.2808064 },
+    { "lat": 41.3221884, "lon": 69.2799339 },
+    { "lat": 41.3222670, "lon": 69.2792710 }
+  ],
+  "tags": {
+    "highway": "primary",
+    "lanes": "3",
+    "name": "Abdulla Qodiriy ko'chasi",
+    "name:en": "Abdulla Qodiriy Street",
+    "name:eo": "Abdulla Qodiriy strato",
+    "name:ru": "Абдулла Кадыри улица",
+    "name:uz": "Abdulla Qodiriy ko'chasi",
+    "old_name": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "old_name:ru": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 32010998,
+  "bounds": {
+    "minlat": 41.3213636,
+    "minlon": 69.2808279,
+    "maxlat": 41.3220600,
+    "maxlon": 69.2811788
+  },
+  "geometry": [
+    { "lat": 41.3213636, "lon": 69.2808279 },
+    { "lat": 41.3213679, "lon": 69.2808771 },
+    { "lat": 41.3213752, "lon": 69.2809251 },
+    { "lat": 41.3213876, "lon": 69.2809697 },
+    { "lat": 41.3214048, "lon": 69.2810143 },
+    { "lat": 41.3214317, "lon": 69.2810507 },
+    { "lat": 41.3214645, "lon": 69.2810768 },
+    { "lat": 41.3215167, "lon": 69.2811093 },
+    { "lat": 41.3217425, "lon": 69.2811741 },
+    { "lat": 41.3217922, "lon": 69.2811788 },
+    { "lat": 41.3218413, "lon": 69.2811775 },
+    { "lat": 41.3218866, "lon": 69.2811706 },
+    { "lat": 41.3219267, "lon": 69.2811569 },
+    { "lat": 41.3219688, "lon": 69.2811255 },
+    { "lat": 41.3220040, "lon": 69.2810912 },
+    { "lat": 41.3220333, "lon": 69.2810543 },
+    { "lat": 41.3220600, "lon": 69.2810158 }
+  ],
+  "tags": {
+    "highway": "primary_link",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 32011017,
+  "bounds": {
+    "minlat": 41.3215189,
+    "minlon": 69.2810679,
+    "maxlat": 41.3217382,
+    "maxlon": 69.2829457
+  },
+  "geometry": [
+    { "lat": 41.3215189, "lon": 69.2829457 },
+    { "lat": 41.3217382, "lon": 69.2810679 }
+  ],
+  "tags": {
+    "highway": "primary",
+    "incline": "down",
+    "lanes": "3",
+    "layer": "-2",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Abdulla Qodiriy ko'chasi",
+    "name:en": "Abdulla Qodiriy Street",
+    "name:eo": "Abdulla Qodiriy strato",
+    "name:ru": "Абдулла Кадыри улица",
+    "name:uz": "Abdulla Qodiriy ko'chasi",
+    "old_name": "Ак-мечеть улица;Пятьдесят лет УзССР проспект;50 лет УзССР проспект",
+    "old_name:ru": "Ак-мечеть улица;Пятьдесят лет УзССР проспект;50 лет УзССР проспект",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 33074416,
+  "bounds": {
+    "minlat": 41.3277602,
+    "minlon": 69.2831915,
+    "maxlat": 41.3277801,
+    "maxlon": 69.2833788
+  },
+  "geometry": [
+    { "lat": 41.3277602, "lon": 69.2833788 },
+    { "lat": 41.3277801, "lon": 69.2831915 }
+  ],
+  "tags": {
+    "cycleway:both": "no",
+    "highway": "secondary",
+    "maxspeed": "60",
+    "name": "Osiyo ko'chasi",
+    "name:en": "Osiyo Street",
+    "name:eo": "Osiyo strato",
+    "name:ru": "Осиё улица",
+    "name:uz": "Osiyo ko'chasi",
+    "old_name": "Хуршида улица",
+    "old_name:en": "Xurshid Street",
+    "old_name:ru": "Хуршида улица",
+    "old_name:uz": "Xurshid ko'chasi",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 33074431,
+  "bounds": {
+    "minlat": 41.3268573,
+    "minlon": 69.2833577,
+    "maxlat": 41.3276675,
+    "maxlon": 69.2908841
+  },
+  "geometry": [
+    { "lat": 41.3276675, "lon": 69.2833577 },
+    { "lat": 41.3276524, "lon": 69.2834984 },
+    { "lat": 41.3275809, "lon": 69.2841626 },
+    { "lat": 41.3275105, "lon": 69.2848159 },
+    { "lat": 41.3273572, "lon": 69.2862399 },
+    { "lat": 41.3273372, "lon": 69.2864256 },
+    { "lat": 41.3272293, "lon": 69.2874285 },
+    { "lat": 41.3270398, "lon": 69.2891891 },
+    { "lat": 41.3269312, "lon": 69.2901980 },
+    { "lat": 41.3268970, "lon": 69.2905157 },
+    { "lat": 41.3268814, "lon": 69.2906598 },
+    { "lat": 41.3268573, "lon": 69.2908841 }
+  ],
+  "tags": {
+    "cycleway:both": "no",
+    "highway": "secondary",
+    "lanes": "4",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Osiyo ko'chasi",
+    "name:en": "Osiyo Street",
+    "name:eo": "Osiyo strato",
+    "name:ru": "Осиё улица",
+    "name:uz": "Osiyo ko'chasi",
+    "old_name": "Азиатская улица; Каюма Муртазоева улица; Осие улица",
+    "old_name:ru": "Азиатская улица; Каюма Муртазоева улица; Осие улица",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 33074469,
+  "bounds": {
+    "minlat": 41.3276875,
+    "minlon": 69.2744731,
+    "maxlat": 41.3285713,
+    "maxlon": 69.2831722
+  },
+  "geometry": [
+    { "lat": 41.3285713, "lon": 69.2744731 },
+    { "lat": 41.3285369, "lon": 69.2747662 },
+    { "lat": 41.3285347, "lon": 69.2747881 },
+    { "lat": 41.3284873, "lon": 69.2752679 },
+    { "lat": 41.3283554, "lon": 69.2766030 },
+    { "lat": 41.3281625, "lon": 69.2785545 },
+    { "lat": 41.3281052, "lon": 69.2791186 },
+    { "lat": 41.3280975, "lon": 69.2791945 },
+    { "lat": 41.3280853, "lon": 69.2793110 },
+    { "lat": 41.3280704, "lon": 69.2794516 },
+    { "lat": 41.3280570, "lon": 69.2795801 },
+    { "lat": 41.3279850, "lon": 69.2802675 },
+    { "lat": 41.3277995, "lon": 69.2820925 },
+    { "lat": 41.3277274, "lon": 69.2828013 },
+    { "lat": 41.3277176, "lon": 69.2828921 },
+    { "lat": 41.3276875, "lon": 69.2831722 }
+  ],
+  "tags": {
+    "cycleway:both": "no",
+    "highway": "secondary",
+    "lanes": "3",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Osiyo ko'chasi",
+    "name:en": "Osiyo Street",
+    "name:eo": "Osiyo strato",
+    "name:ru": "Осиё улица",
+    "name:uz": "Osiyo ko'chasi",
+    "old_name": "Хуршида улица",
+    "old_name:en": "Xurshid Street",
+    "old_name:ru": "Хуршида улица",
+    "old_name:uz": "Xurshid ko'chasi",
+    "oneway": "yes",
+    "smoothness": "good",
+    "surface": "asphalt",
+    "turn:lanes": "left|through|through;right"
+  }
+},
+{
+  "type": "way",
+  "id": 99341644,
+  "bounds": {
+    "minlat": 41.3206551,
+    "minlon": 69.2840216,
+    "maxlat": 41.3209647,
+    "maxlon": 69.2863349
+  },
+  "geometry": [
+    { "lat": 41.3209647, "lon": 69.2840216 },
+    { "lat": 41.3208904, "lon": 69.2843265 },
+    { "lat": 41.3208357, "lon": 69.2848797 },
+    { "lat": 41.3207951, "lon": 69.2852894 },
+    { "lat": 41.3206551, "lon": 69.2863349 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "old_name": "Каракалпакская улица",
+    "old_name:ru": "Каракалпакская улица",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 99341645,
+  "bounds": {
+    "minlat": 41.3211004,
+    "minlon": 69.2827896,
+    "maxlat": 41.3217968,
+    "maxlon": 69.2830512
+  },
+  "geometry": [
+    { "lat": 41.3217968, "lon": 69.2830512 },
+    { "lat": 41.3217873, "lon": 69.2830118 },
+    { "lat": 41.3217752, "lon": 69.2829811 },
+    { "lat": 41.3217579, "lon": 69.2829521 },
+    { "lat": 41.3217354, "lon": 69.2829231 },
+    { "lat": 41.3217204, "lon": 69.2829078 },
+    { "lat": 41.3217032, "lon": 69.2828959 },
+    { "lat": 41.3216805, "lon": 69.2828846 },
+    { "lat": 41.3216574, "lon": 69.2828744 },
+    { "lat": 41.3213054, "lon": 69.2827914 },
+    { "lat": 41.3212755, "lon": 69.2827896 },
+    { "lat": 41.3212486, "lon": 69.2827930 },
+    { "lat": 41.3212227, "lon": 69.2827978 },
+    { "lat": 41.3211998, "lon": 69.2828078 },
+    { "lat": 41.3211724, "lon": 69.2828213 },
+    { "lat": 41.3211509, "lon": 69.2828399 },
+    { "lat": 41.3211325, "lon": 69.2828619 },
+    { "lat": 41.3211004, "lon": 69.2829145 }
+  ],
+  "tags": {
+    "highway": "primary_link",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 104666940,
+  "bounds": {
+    "minlat": 41.3244331,
+    "minlon": 69.2845160,
+    "maxlat": 41.3245644,
+    "maxlon": 69.2861400
+  },
+  "geometry": [
+    { "lat": 41.3244331, "lon": 69.2861400 },
+    { "lat": 41.3244669, "lon": 69.2856912 },
+    { "lat": 41.3245190, "lon": 69.2850404 },
+    { "lat": 41.3245644, "lon": 69.2845160 }
+  ],
+  "tags": {
+    "highway": "service",
+    "living_street": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 104666941,
+  "bounds": {
+    "minlat": 41.3211413,
+    "minlon": 69.2868645,
+    "maxlat": 41.3251974,
+    "maxlon": 69.2875814
+  },
+  "geometry": [
+    { "lat": 41.3211413, "lon": 69.2869171 },
+    { "lat": 41.3212132, "lon": 69.2868977 },
+    { "lat": 41.3212985, "lon": 69.2868736 },
+    { "lat": 41.3213575, "lon": 69.2868645 },
+    { "lat": 41.3216259, "lon": 69.2869168 },
+    { "lat": 41.3222872, "lon": 69.2870429 },
+    { "lat": 41.3231131, "lon": 69.2872003 },
+    { "lat": 41.3251974, "lon": 69.2875814 }
+  ],
+  "tags": {
+    "highway": "living_street",
+    "maxspeed": "60",
+    "name": "Sharofob ko'chasi",
+    "name:en": "Sharafabad street",
+    "name:ru": "Шарафабад улица"
+  }
+},
+{
+  "type": "way",
+  "id": 116064778,
+  "bounds": {
+    "minlat": 41.3276875,
+    "minlon": 69.2831722,
+    "maxlat": 41.3277801,
+    "maxlon": 69.2831915
+  },
+  "geometry": [
+    { "lat": 41.3277801, "lon": 69.2831915 },
+    { "lat": 41.3276875, "lon": 69.2831722 }
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "cycleway:both": "no",
+    "highway": "primary",
+    "maxspeed": "60",
+    "name": "Amir Temur shoh ko'chasi",
+    "name:en": "Amir Timur Avenue",
+    "name:ru": "Амира Тимура проспект",
+    "name:uz": "Amir Temur shoh ko'chasi",
+    "old_name": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "old_name:ru": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 138203718,
+  "bounds": {
+    "minlat": 41.3265971,
+    "minlon": 69.2815051,
+    "maxlat": 41.3267042,
+    "maxlon": 69.2823994
+  },
+  "geometry": [
+    { "lat": 41.3267042, "lon": 69.2815051 },
+    { "lat": 41.3265971, "lon": 69.2823994 }
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "service",
+    "horse": "private",
+    "living_street": "yes",
+    "motor_vehicle": "yes",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 143446086,
+  "bounds": {
+    "minlat": 41.3253073,
+    "minlon": 69.2859000,
+    "maxlat": 41.3273572,
+    "maxlon": 69.2862399
+  },
+  "geometry": [
+    { "lat": 41.3253073, "lon": 69.2859000 },
+    { "lat": 41.3253623, "lon": 69.2859060 },
+    { "lat": 41.3258357, "lon": 69.2859834 },
+    { "lat": 41.3259096, "lon": 69.2859936 },
+    { "lat": 41.3267451, "lon": 69.2861256 },
+    { "lat": 41.3269424, "lon": 69.2861620 },
+    { "lat": 41.3272370, "lon": 69.2862213 },
+    { "lat": 41.3273572, "lon": 69.2862399 }
+  ],
+  "tags": {
+    "highway": "living_street",
+    "maxspeed": "60",
+    "name": "Xalqobod ko'chasi",
+    "name:en": "Khalkabad street",
+    "name:ru": "Халкабад улица",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 165165907,
+  "bounds": {
+    "minlat": 41.3255472,
+    "minlon": 69.2829281,
+    "maxlat": 41.3276675,
+    "maxlon": 69.2833577
+  },
+  "geometry": [
+    { "lat": 41.3255472, "lon": 69.2829281 },
+    { "lat": 41.3265448, "lon": 69.2831288 },
+    { "lat": 41.3274274, "lon": 69.2833087 },
+    { "lat": 41.3274914, "lon": 69.2833218 },
+    { "lat": 41.3276675, "lon": 69.2833577 }
+  ],
+  "tags": {
+    "highway": "primary",
+    "lanes": "5",
+    "maxspeed": "60",
+    "name": "Amir Temur shoh ko'chasi",
+    "name:en": "Amir Timur Avenue",
+    "name:ru": "Амира Тимура проспект",
+    "name:uz": "Amir Temur shoh ko'chasi",
+    "old_name": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "old_name:ru": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "oneway": "yes",
+    "smoothness": "good",
+    "source:maxspeed": "UZ:urban",
+    "surface": "asphalt",
+    "turn:lanes": "left|through|through|through|right"
+  }
+},
+{
+  "type": "way",
+  "id": 165165915,
+  "bounds": {
+    "minlat": 41.3221356,
+    "minlon": 69.2819995,
+    "maxlat": 41.3255853,
+    "maxlon": 69.2827270
+  },
+  "geometry": [
+    { "lat": 41.3255853, "lon": 69.2827270 },
+    { "lat": 41.3254467, "lon": 69.2826988 },
+    { "lat": 41.3248967, "lon": 69.2825891 },
+    { "lat": 41.3244671, "lon": 69.2824919 },
+    { "lat": 41.3242503, "lon": 69.2824461 },
+    { "lat": 41.3238455, "lon": 69.2823606 },
+    { "lat": 41.3237786, "lon": 69.2823465 },
+    { "lat": 41.3237418, "lon": 69.2823387 },
+    { "lat": 41.3234326, "lon": 69.2822734 },
+    { "lat": 41.3224298, "lon": 69.2820616 },
+    { "lat": 41.3221356, "lon": 69.2819995 }
+  ],
+  "tags": {
+    "highway": "primary",
+    "lane_markings": "yes",
+    "lanes": "5",
+    "maxspeed": "60",
+    "name": "Amir Temur shoh ko'chasi",
+    "name:en": "Amir Timur Avenue",
+    "name:ru": "Амира Тимура проспект",
+    "name:uz": "Amir Temur shoh ko'chasi",
+    "old_name": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "old_name:ru": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 165717385,
+  "bounds": {
+    "minlat": 41.3210544,
+    "minlon": 69.2824766,
+    "maxlat": 41.3213225,
+    "maxlon": 69.2825357
+  },
+  "geometry": [
+    { "lat": 41.3210544, "lon": 69.2824766 },
+    { "lat": 41.3213225, "lon": 69.2825357 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "layer": "-1",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 165717392,
+  "bounds": {
+    "minlat": 41.3213225,
+    "minlon": 69.2825357,
+    "maxlat": 41.3216605,
+    "maxlon": 69.2826033
+  },
+  "geometry": [
+    { "lat": 41.3213225, "lon": 69.2825357 },
+    { "lat": 41.3216605, "lon": 69.2826033 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "layer": "-1"
+  }
+},
+{
+  "type": "way",
+  "id": 165717394,
+  "bounds": {
+    "minlat": 41.3216605,
+    "minlon": 69.2826033,
+    "maxlat": 41.3217142,
+    "maxlon": 69.2826135
+  },
+  "geometry": [
+    { "lat": 41.3216605, "lon": 69.2826033 },
+    { "lat": 41.3217142, "lon": 69.2826135 }
+  ],
+  "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "step_count": "15"
+  }
+},
+{
+  "type": "way",
+  "id": 165717395,
+  "bounds": {
+    "minlat": 41.3213812,
+    "minlon": 69.2816602,
+    "maxlat": 41.3217533,
+    "maxlon": 69.2817430
+  },
+  "geometry": [
+    { "lat": 41.3213812, "lon": 69.2816602 },
+    { "lat": 41.3217533, "lon": 69.2817430 }
+  ],
+  "tags": {
+    "cutting": "yes",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 165717396,
+  "bounds": {
+    "minlat": 41.3217533,
+    "minlon": 69.2817430,
+    "maxlat": 41.3217983,
+    "maxlon": 69.2817529
+  },
+  "geometry": [
+    { "lat": 41.3217533, "lon": 69.2817430 },
+    { "lat": 41.3217983, "lon": 69.2817529 }
+  ],
+  "tags": {
+    "highway": "steps"
+  }
+},
+{
+  "type": "way",
+  "id": 165719405,
+  "bounds": {
+    "minlat": 41.3261599,
+    "minlon": 69.2833650,
+    "maxlat": 41.3261629,
+    "maxlon": 69.2833991
+  },
+  "geometry": [
+    { "lat": 41.3261599, "lon": 69.2833991 },
+    { "lat": 41.3261629, "lon": 69.2833650 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "layer": "-2",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 165719406,
+  "bounds": {
+    "minlat": 41.3274300,
+    "minlon": 69.2835133,
+    "maxlat": 41.3274475,
+    "maxlon": 69.2836415
+  },
+  "geometry": [
+    { "lat": 41.3274300, "lon": 69.2836415 },
+    { "lat": 41.3274475, "lon": 69.2835133 }
+  ],
+  "tags": {
+    "highway": "steps",
+    "layer": "-1"
+  }
+},
+{
+  "type": "way",
+  "id": 165719407,
+  "bounds": {
+    "minlat": 41.3262299,
+    "minlon": 69.2833703,
+    "maxlat": 41.3262333,
+    "maxlon": 69.2834123
+  },
+  "geometry": [
+    { "lat": 41.3262333, "lon": 69.2833703 },
+    { "lat": 41.3262299, "lon": 69.2834123 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 165719408,
+  "bounds": {
+    "minlat": 41.3261629,
+    "minlon": 69.2833650,
+    "maxlat": 41.3262170,
+    "maxlon": 69.2833754
+  },
+  "geometry": [
+    { "lat": 41.3261629, "lon": 69.2833650 },
+    { "lat": 41.3262170, "lon": 69.2833754 }
+  ],
+  "tags": {
+    "handrail": "no",
+    "highway": "steps",
+    "layer": "-3",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 165719409,
+  "bounds": {
+    "minlat": 41.3261599,
+    "minlon": 69.2833991,
+    "maxlat": 41.3262299,
+    "maxlon": 69.2834123
+  },
+  "geometry": [
+    { "lat": 41.3262299, "lon": 69.2834123 },
+    { "lat": 41.3261599, "lon": 69.2833991 }
+  ],
+  "tags": {
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "layer": "-1",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 165719410,
+  "bounds": {
+    "minlat": 41.3273984,
+    "minlon": 69.2834486,
+    "maxlat": 41.3274300,
+    "maxlon": 69.2836415
+  },
+  "geometry": [
+    { "lat": 41.3274253, "lon": 69.2834486 },
+    { "lat": 41.3273984, "lon": 69.2836334 },
+    { "lat": 41.3274300, "lon": 69.2836415 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "layer": "-1",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 176132086,
+  "bounds": {
+    "minlat": 41.3255853,
+    "minlon": 69.2827270,
+    "maxlat": 41.3276875,
+    "maxlon": 69.2831722
+  },
+  "geometry": [
+    { "lat": 41.3276875, "lon": 69.2831722 },
+    { "lat": 41.3275064, "lon": 69.2831339 },
+    { "lat": 41.3271295, "lon": 69.2830543 },
+    { "lat": 41.3262832, "lon": 69.2828755 },
+    { "lat": 41.3256494, "lon": 69.2827419 },
+    { "lat": 41.3255853, "lon": 69.2827270 }
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "hgv": "no",
+    "highway": "primary",
+    "maxspeed": "60",
+    "name": "Amir Temur shoh ko'chasi",
+    "name:en": "Amir Timur Avenue",
+    "name:ru": "Амира Тимура проспект",
+    "name:uz": "Amir Temur shoh ko'chasi",
+    "old_name": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "old_name:ru": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 176132093,
+  "bounds": {
+    "minlat": 41.3276675,
+    "minlon": 69.2831722,
+    "maxlat": 41.3276875,
+    "maxlon": 69.2833577
+  },
+  "geometry": [
+    { "lat": 41.3276875, "lon": 69.2831722 },
+    { "lat": 41.3276675, "lon": 69.2833577 }
+  ],
+  "tags": {
+    "cycleway:both": "no",
+    "highway": "secondary",
+    "maxspeed": "60",
+    "name": "Osiyo ko'chasi",
+    "name:en": "Osiyo Street",
+    "name:eo": "Osiyo strato",
+    "name:ru": "Осиё улица",
+    "name:uz": "Osiyo ko'chasi",
+    "old_name": "Хуршида улица",
+    "old_name:en": "Xurshid Street",
+    "old_name:ru": "Хуршида улица",
+    "old_name:uz": "Xurshid ko'chasi",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 181732215,
+  "bounds": {
+    "minlat": 41.3217968,
+    "minlon": 69.2822254,
+    "maxlat": 41.3221129,
+    "maxlon": 69.2830512
+  },
+  "geometry": [
+    { "lat": 41.3217968, "lon": 69.2830512 },
+    { "lat": 41.3218114, "lon": 69.2829657 },
+    { "lat": 41.3218992, "lon": 69.2824495 },
+    { "lat": 41.3219171, "lon": 69.2823910 },
+    { "lat": 41.3219419, "lon": 69.2823325 },
+    { "lat": 41.3219749, "lon": 69.2822937 },
+    { "lat": 41.3220132, "lon": 69.2822641 },
+    { "lat": 41.3220574, "lon": 69.2822426 },
+    { "lat": 41.3221129, "lon": 69.2822254 }
+  ],
+  "tags": {
+    "highway": "primary_link",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Abdulla Qodiriy ko'chasi",
+    "name:en": "Abdulla Qodiriy Street",
+    "name:eo": "Abdulla Qodiriy strato",
+    "name:ru": "Абдулла Кадыри улица",
+    "name:uz": "Abdulla Qodiriy ko'chasi",
+    "old_name": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "old_name:ru": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 181733032,
+  "bounds": {
+    "minlat": 41.3257606,
+    "minlon": 69.2859834,
+    "maxlat": 41.3258357,
+    "maxlon": 69.2871007
+  },
+  "geometry": [
+    { "lat": 41.3258357, "lon": 69.2859834 },
+    { "lat": 41.3257673, "lon": 69.2870011 },
+    { "lat": 41.3257606, "lon": 69.2871007 }
+  ],
+  "tags": {
+    "highway": "service",
+    "living_street": "yes",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 181748296,
+  "bounds": {
+    "minlat": 41.3269583,
+    "minlon": 69.2833788,
+    "maxlat": 41.3277602,
+    "maxlon": 69.2908996
+  },
+  "geometry": [
+    { "lat": 41.3269583, "lon": 69.2908996 },
+    { "lat": 41.3269816, "lon": 69.2906807 },
+    { "lat": 41.3270434, "lon": 69.2901171 },
+    { "lat": 41.3270832, "lon": 69.2897286 },
+    { "lat": 41.3274258, "lon": 69.2865153 },
+    { "lat": 41.3274338, "lon": 69.2864402 },
+    { "lat": 41.3275964, "lon": 69.2849146 },
+    { "lat": 41.3277284, "lon": 69.2836769 },
+    { "lat": 41.3277456, "lon": 69.2835158 },
+    { "lat": 41.3277602, "lon": 69.2833788 }
+  ],
+  "tags": {
+    "cycleway:both": "no",
+    "highway": "secondary",
+    "lanes": "3",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Osiyo ko'chasi",
+    "name:en": "Osiyo Street",
+    "name:eo": "Osiyo strato",
+    "name:ru": "Осиё улица",
+    "name:uz": "Osiyo ko'chasi",
+    "old_name": "Азиатская улица; Каюма Муртазоева улица; Осие улица",
+    "old_name:ru": "Азиатская улица; Каюма Муртазоева улица; Осие улица",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 181748301,
+  "bounds": {
+    "minlat": 41.3277602,
+    "minlon": 69.2833788,
+    "maxlat": 41.3281794,
+    "maxlon": 69.2834704
+  },
+  "geometry": [
+    { "lat": 41.3277602, "lon": 69.2833788 },
+    { "lat": 41.3279382, "lon": 69.2834189 },
+    { "lat": 41.3280720, "lon": 69.2834477 },
+    { "lat": 41.3281794, "lon": 69.2834704 }
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "bus:lanes": "yes|yes|yes|designated",
+    "highway": "primary",
+    "lanes": "4",
+    "maxspeed": "60",
+    "name": "Amir Temur shoh ko'chasi",
+    "name:en": "Amir Timur Avenue",
+    "name:ru": "Амира Тимура проспект",
+    "name:uz": "Amir Temur shoh ko'chasi",
+    "old_name": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "old_name:ru": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "oneway": "yes",
+    "parking:both:restriction": "no_stopping",
+    "smoothness": "good",
+    "source:maxspeed": "UZ:urban",
+    "surface": "asphalt",
+    "turn:lanes": "|||merge_to_left"
+  }
+},
+{
+  "type": "way",
+  "id": 183843542,
+  "bounds": {
+    "minlat": 41.3226345,
+    "minlon": 69.2825236,
+    "maxlat": 41.3235757,
+    "maxlon": 69.2917282
+  },
+  "geometry": [
+    { "lat": 41.3235757, "lon": 69.2825236 },
+    { "lat": 41.3235528, "lon": 69.2827136 },
+    { "lat": 41.3235003, "lon": 69.2831653 },
+    { "lat": 41.3234661, "lon": 69.2834683 },
+    { "lat": 41.3234201, "lon": 69.2838888 },
+    { "lat": 41.3233083, "lon": 69.2849094 },
+    { "lat": 41.3232764, "lon": 69.2851841 },
+    { "lat": 41.3232783, "lon": 69.2852599 },
+    { "lat": 41.3232871, "lon": 69.2853388 },
+    { "lat": 41.3233941, "lon": 69.2859690 },
+    { "lat": 41.3233948, "lon": 69.2860012 },
+    { "lat": 41.3233934, "lon": 69.2860333 },
+    { "lat": 41.3233904, "lon": 69.2860633 },
+    { "lat": 41.3233850, "lon": 69.2860932 },
+    { "lat": 41.3231131, "lon": 69.2872003 },
+    { "lat": 41.3229767, "lon": 69.2884094 },
+    { "lat": 41.3228481, "lon": 69.2896999 },
+    { "lat": 41.3227453, "lon": 69.2907312 },
+    { "lat": 41.3226345, "lon": 69.2917282 }
+  ],
+  "tags": {
+    "access": "yes",
+    "admin_level": "6",
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "unclassified",
+    "int_name": "Niyozbek Yuli Passage 3",
+    "maxspeed": "50",
+    "motor_vehicle": "yes",
+    "name": "Niyozbek yo'li 3-otish ko'chasi",
+    "name:en": "Niyozbek Yuli Passage 3",
+    "name:ru": "Ниёзбек йули 3-й проезд",
+    "old_name": "Киргизская улица;Кара-Киргизская улица;улица Виктора Малясова",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 202279025,
+  "bounds": {
+    "minlat": 41.3229475,
+    "minlon": 69.2794589,
+    "maxlat": 41.3231539,
+    "maxlon": 69.2814611
+  },
+  "geometry": [
+    { "lat": 41.3231539, "lon": 69.2794589 },
+    { "lat": 41.3231147, "lon": 69.2800895 },
+    { "lat": 41.3231037, "lon": 69.2801793 },
+    { "lat": 41.3230844, "lon": 69.2803374 },
+    { "lat": 41.3229475, "lon": 69.2814611 }
+  ],
+  "tags": {
+    "highway": "service",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 202279031,
+  "bounds": {
+    "minlat": 41.3220929,
+    "minlon": 69.2800269,
+    "maxlat": 41.3225146,
+    "maxlon": 69.2817652
+  },
+  "geometry": [
+    { "lat": 41.3224236, "lon": 69.2800640 },
+    { "lat": 41.3223312, "lon": 69.2800421 },
+    { "lat": 41.3222669, "lon": 69.2800269 },
+    { "lat": 41.3221461, "lon": 69.2810477 },
+    { "lat": 41.3220929, "lon": 69.2814979 },
+    { "lat": 41.3221099, "lon": 69.2816066 },
+    { "lat": 41.3221712, "lon": 69.2817013 },
+    { "lat": 41.3224551, "lon": 69.2817541 },
+    { "lat": 41.3225146, "lon": 69.2817652 }
+  ],
+  "tags": {
+    "barrier": "fence"
+  }
+},
+{
+  "type": "way",
+  "id": 202284553,
+  "bounds": {
+    "minlat": 41.3232299,
+    "minlon": 69.2790345,
+    "maxlat": 41.3240639,
+    "maxlon": 69.2797075
+  },
+  "geometry": [
+    { "lat": 41.3240639, "lon": 69.2792265 },
+    { "lat": 41.3239959, "lon": 69.2797075 },
+    { "lat": 41.3232299, "lon": 69.2795281 },
+    { "lat": 41.3232834, "lon": 69.2790345 },
+    { "lat": 41.3240018, "lon": 69.2792110 },
+    { "lat": 41.3240639, "lon": 69.2792265 }
+  ],
+  "tags": {
+    "addr:place": "Киёт (Ц-5) массив",
+    "amenity": "kindergarten",
+    "barrier": "fence",
+    "name": "№414 \"Botko'z\" bolalar bog'chasi",
+    "name:ru": "Детский сад №414 \"Боткоз\""
+  }
+},
+{
+  "type": "way",
+  "id": 202284555,
+  "bounds": {
+    "minlat": 41.3240693,
+    "minlon": 69.2781795,
+    "maxlat": 41.3251188,
+    "maxlon": 69.2800892
+  },
+  "geometry": [
+    { "lat": 41.3251188, "lon": 69.2783956 },
+    { "lat": 41.3249798, "lon": 69.2783621 },
+    { "lat": 41.3242493, "lon": 69.2781795 },
+    { "lat": 41.3240693, "lon": 69.2797172 },
+    { "lat": 41.3241036, "lon": 69.2798731 },
+    { "lat": 41.3249235, "lon": 69.2800892 },
+    { "lat": 41.3251188, "lon": 69.2783956 }
+  ],
+  "tags": {
+    "addr:country": "UZ",
+    "addr:place": "Киёт (Ц-5) массив",
+    "amenity": "school",
+    "barrier": "wall",
+    "name": "80-maktab",
+    "name:ru": "Школа №80",
+    "operator": "O‘zbekiston Respublikasi maktabgacha va maktab ta'limi vazirligi",
+    "ref": "80"
+  }
+},
+{
+  "type": "way",
+  "id": 239913551,
+  "bounds": {
+    "minlat": 41.3255659,
+    "minlon": 69.2871007,
+    "maxlat": 41.3257606,
+    "maxlon": 69.2872471
+  },
+  "geometry": [
+    { "lat": 41.3255659, "lon": 69.2872390 },
+    { "lat": 41.3256787, "lon": 69.2872471 },
+    { "lat": 41.3257312, "lon": 69.2872281 },
+    { "lat": 41.3257453, "lon": 69.2871759 },
+    { "lat": 41.3257606, "lon": 69.2871007 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 256787914,
+  "bounds": {
+    "minlat": 41.3221129,
+    "minlon": 69.2822254,
+    "maxlat": 41.3255472,
+    "maxlon": 69.2829281
+  },
+  "geometry": [
+    { "lat": 41.3221129, "lon": 69.2822254 },
+    { "lat": 41.3224581, "lon": 69.2822988 },
+    { "lat": 41.3235757, "lon": 69.2825236 },
+    { "lat": 41.3236542, "lon": 69.2825396 },
+    { "lat": 41.3237168, "lon": 69.2825523 },
+    { "lat": 41.3244423, "lon": 69.2827003 },
+    { "lat": 41.3249641, "lon": 69.2828066 },
+    { "lat": 41.3252083, "lon": 69.2828564 },
+    { "lat": 41.3253666, "lon": 69.2828887 },
+    { "lat": 41.3254237, "lon": 69.2829003 },
+    { "lat": 41.3255472, "lon": 69.2829281 }
+  ],
+  "tags": {
+    "highway": "primary",
+    "lane_markings": "yes",
+    "lanes": "5",
+    "maxspeed": "60",
+    "name": "Amir Temur shoh ko'chasi",
+    "name:en": "Amir Timur Avenue",
+    "name:ru": "Амира Тимура проспект",
+    "name:uz": "Amir Temur shoh ko'chasi",
+    "old_name": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "old_name:ru": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 275187159,
+  "bounds": {
+    "minlat": 41.3213953,
+    "minlon": 69.2810403,
+    "maxlat": 41.3216170,
+    "maxlon": 69.2829238
+  },
+  "geometry": [
+    { "lat": 41.3216170, "lon": 69.2810403 },
+    { "lat": 41.3213953, "lon": 69.2829238 }
+  ],
+  "tags": {
+    "highway": "primary",
+    "incline": "up",
+    "lanes": "3",
+    "layer": "-2",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Abdulla Qodiriy ko'chasi",
+    "name:en": "Abdulla Qodiriy Street",
+    "name:eo": "Abdulla Qodiriy strato",
+    "name:ru": "Абдуллы Кодырий улица",
+    "name:uz": "Abdulla Qodiriy ko'chasi",
+    "old_name": "Ак-мечеть улица; Пятьдесят лет УзССР проспект; 50 лет УзССР проспект",
+    "old_name:ru": "Ак-мечеть улица; Пятьдесят лет УзССР проспект; 50 лет УзССР проспект",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 275187164,
+  "bounds": {
+    "minlat": 41.3210879,
+    "minlon": 69.2829457,
+    "maxlat": 41.3215189,
+    "maxlon": 69.2865451
+  },
+  "geometry": [
+    { "lat": 41.3210879, "lon": 69.2865451 },
+    { "lat": 41.3215189, "lon": 69.2829457 }
+  ],
+  "tags": {
+    "cutting": "yes",
+    "highway": "primary",
+    "incline": "down",
+    "lanes": "3",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Abdulla Qodiriy ko'chasi",
+    "name:en": "Abdulla Qodiriy Street",
+    "name:eo": "Abdulla Qodiriy strato",
+    "name:ru": "Абдулла Кадыри улица",
+    "name:uz": "Abdulla Qodiriy ko'chasi",
+    "old_name": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "old_name:ru": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban"
+  }
+},
+{
+  "type": "way",
+  "id": 349139060,
+  "bounds": {
+    "minlat": 41.3214478,
+    "minlon": 69.2834928,
+    "maxlat": 41.3217970,
+    "maxlon": 69.2858184
+  },
+  "geometry": [
+    { "lat": 41.3214478, "lon": 69.2858184 },
+    { "lat": 41.3216029, "lon": 69.2845782 },
+    { "lat": 41.3216464, "lon": 69.2841808 },
+    { "lat": 41.3216909, "lon": 69.2839687 },
+    { "lat": 41.3217850, "lon": 69.2835409 },
+    { "lat": 41.3217970, "lon": 69.2834928 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 349139061,
+  "bounds": {
+    "minlat": 41.3213564,
+    "minlon": 69.2858033,
+    "maxlat": 41.3214478,
+    "maxlon": 69.2858184
+  },
+  "geometry": [
+    { "lat": 41.3213564, "lon": 69.2858033 },
+    { "lat": 41.3214478, "lon": 69.2858184 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 349139063,
+  "bounds": {
+    "minlat": 41.3220205,
+    "minlon": 69.2825927,
+    "maxlat": 41.3220300,
+    "maxlon": 69.2826736
+  },
+  "geometry": [
+    { "lat": 41.3220300, "lon": 69.2825927 },
+    { "lat": 41.3220205, "lon": 69.2826736 }
+  ],
+  "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "down",
+    "layer": "-1",
+    "lit": "no",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 349139064,
+  "bounds": {
+    "minlat": 41.3217142,
+    "minlon": 69.2826135,
+    "maxlat": 41.3220205,
+    "maxlon": 69.2826736
+  },
+  "geometry": [
+    { "lat": 41.3217142, "lon": 69.2826135 },
+    { "lat": 41.3220205, "lon": 69.2826736 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "layer": "-1",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 349827174,
+  "bounds": {
+    "minlat": 41.3208537,
+    "minlon": 69.2826734,
+    "maxlat": 41.3210283,
+    "maxlon": 69.2834931
+  },
+  "geometry": [
+    { "lat": 41.3210283, "lon": 69.2826734 },
+    { "lat": 41.3210176, "lon": 69.2827565 },
+    { "lat": 41.3209169, "lon": 69.2828745 },
+    { "lat": 41.3208537, "lon": 69.2833457 },
+    { "lat": 41.3210202, "lon": 69.2834931 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 354311825,
+  "bounds": {
+    "minlat": 41.3213564,
+    "minlon": 69.2830512,
+    "maxlat": 41.3217968,
+    "maxlon": 69.2858033
+  },
+  "geometry": [
+    { "lat": 41.3213564, "lon": 69.2858033 },
+    { "lat": 41.3215059, "lon": 69.2845559 },
+    { "lat": 41.3215727, "lon": 69.2841373 },
+    { "lat": 41.3216075, "lon": 69.2839381 },
+    { "lat": 41.3217002, "lon": 69.2835144 },
+    { "lat": 41.3217792, "lon": 69.2831367 },
+    { "lat": 41.3217968, "lon": 69.2830512 }
+  ],
+  "tags": {
+    "highway": "primary_link",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Abdulla Qodiriy ko'chasi",
+    "name:en": "Abdulla Qodiriy Street",
+    "name:eo": "Abdulla Qodiriy strato",
+    "name:ru": "Абдулла Кадыри улица",
+    "name:uz": "Abdulla Qodiriy ko'chasi",
+    "old_name": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "old_name:ru": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 355982856,
+  "bounds": {
+    "minlat": 41.3207110,
+    "minlon": 69.2822802,
+    "maxlat": 41.3211755,
+    "maxlon": 69.2875304
+  },
+  "geometry": [
+    { "lat": 41.3211755, "lon": 69.2822802 },
+    { "lat": 41.3211165, "lon": 69.2827762 },
+    { "lat": 41.3211004, "lon": 69.2829145 },
+    { "lat": 41.3210202, "lon": 69.2834931 },
+    { "lat": 41.3210019, "lon": 69.2836415 },
+    { "lat": 41.3209647, "lon": 69.2840216 },
+    { "lat": 41.3209229, "lon": 69.2844549 },
+    { "lat": 41.3208774, "lon": 69.2848862 },
+    { "lat": 41.3208148, "lon": 69.2855914 },
+    { "lat": 41.3207658, "lon": 69.2861379 },
+    { "lat": 41.3207159, "lon": 69.2866065 },
+    { "lat": 41.3207110, "lon": 69.2867664 },
+    { "lat": 41.3207168, "lon": 69.2869434 },
+    { "lat": 41.3207815, "lon": 69.2875304 }
+  ],
+  "tags": {
+    "highway": "primary_link",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Abdulla Qodiriy ko'chasi",
+    "name:en": "Abdulla Qodiriy Street",
+    "name:eo": "Abdulla Qodiriy strato",
+    "name:ru": "Абдулла Кадыри улица",
+    "name:uz": "Abdulla Qodiriy ko'chasi",
+    "old_name": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "old_name:ru": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 355982857,
+  "bounds": {
+    "minlat": 41.3209580,
+    "minlon": 69.2858033,
+    "maxlat": 41.3213564,
+    "maxlon": 69.2875129
+  },
+  "geometry": [
+    { "lat": 41.3209580, "lon": 69.2875129 },
+    { "lat": 41.3211413, "lon": 69.2869171 },
+    { "lat": 41.3212253, "lon": 69.2866101 },
+    { "lat": 41.3213035, "lon": 69.2862318 },
+    { "lat": 41.3213564, "lon": 69.2858033 }
+  ],
+  "tags": {
+    "highway": "primary_link",
+    "maxspeed": "60",
+    "maxweight": "4",
+    "name": "Abdulla Qodiriy ko'chasi",
+    "name:en": "Abdulla Qodiriy Street",
+    "name:eo": "Abdulla Qodiriy strato",
+    "name:ru": "Абдулла Кадыри улица",
+    "name:uz": "Abdulla Qodiriy ko'chasi",
+    "old_name": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "old_name:ru": "Каракалпакская улица;Абдухамида Каюмова улица",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 387470569,
+  "bounds": {
+    "minlat": 41.3210247,
+    "minlon": 69.2819847,
+    "maxlat": 41.3221129,
+    "maxlon": 69.2822254
+  },
+  "geometry": [
+    { "lat": 41.3210247, "lon": 69.2819847 },
+    { "lat": 41.3220405, "lon": 69.2822094 },
+    { "lat": 41.3221129, "lon": 69.2822254 }
+  ],
+  "tags": {
+    "highway": "primary",
+    "lanes": "5",
+    "maxspeed": "60",
+    "name": "Amir Temur shoh ko'chasi",
+    "name:en": "Amir Timur Avenue",
+    "name:ru": "Амира Тимура проспект",
+    "name:uz": "Amir Temur shoh ko'chasi",
+    "old_name": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "old_name:ru": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 480213098,
+  "bounds": {
+    "minlat": 41.3221048,
+    "minlon": 69.2818787,
+    "maxlat": 41.3221478,
+    "maxlon": 69.2823058
+  },
+  "geometry": [
+    { "lat": 41.3221478, "lon": 69.2818787 },
+    { "lat": 41.3221356, "lon": 69.2819995 },
+    { "lat": 41.3221129, "lon": 69.2822254 },
+    { "lat": 41.3221048, "lon": 69.2823058 }
+  ],
+  "tags": {
+    "crossing": "zebra",
+    "footway": "crossing",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 480572011,
+  "bounds": {
+    "minlat": 41.3218842,
+    "minlon": 69.2817762,
+    "maxlat": 41.3221897,
+    "maxlon": 69.2818466
+  },
+  "geometry": [
+    { "lat": 41.3218842, "lon": 69.2817762 },
+    { "lat": 41.3220364, "lon": 69.2818069 },
+    { "lat": 41.3221897, "lon": 69.2818466 }
+  ],
+  "tags": {
+    "crossing": "zebra",
+    "direction": "both",
+    "footway": "crossing",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 480572012,
+  "bounds": {
+    "minlat": 41.3220300,
+    "minlon": 69.2825488,
+    "maxlat": 41.3220789,
+    "maxlon": 69.2825927
+  },
+  "geometry": [
+    { "lat": 41.3220789, "lon": 69.2825488 },
+    { "lat": 41.3220300, "lon": 69.2825927 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 480572013,
+  "bounds": {
+    "minlat": 41.3220143,
+    "minlon": 69.2827441,
+    "maxlat": 41.3220511,
+    "maxlon": 69.2827874
+  },
+  "geometry": [
+    { "lat": 41.3220511, "lon": 69.2827874 },
+    { "lat": 41.3220143, "lon": 69.2827441 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 483064419,
+  "bounds": {
+    "minlat": 41.3221897,
+    "minlon": 69.2818466,
+    "maxlat": 41.3275181,
+    "maxlon": 69.2829804
+  },
+  "geometry": [
+    { "lat": 41.3221897, "lon": 69.2818466 },
+    { "lat": 41.3224428, "lon": 69.2818801 },
+    { "lat": 41.3227864, "lon": 69.2819437 },
+    { "lat": 41.3234550, "lon": 69.2820935 },
+    { "lat": 41.3237591, "lon": 69.2821612 },
+    { "lat": 41.3237992, "lon": 69.2821697 },
+    { "lat": 41.3242685, "lon": 69.2822910 },
+    { "lat": 41.3249049, "lon": 69.2824218 },
+    { "lat": 41.3250843, "lon": 69.2824585 },
+    { "lat": 41.3254643, "lon": 69.2825426 },
+    { "lat": 41.3256127, "lon": 69.2825775 },
+    { "lat": 41.3256198, "lon": 69.2825792 },
+    { "lat": 41.3263004, "lon": 69.2827210 },
+    { "lat": 41.3275181, "lon": 69.2829804 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 484547092,
+  "bounds": {
+    "minlat": 41.3263598,
+    "minlon": 69.2740608,
+    "maxlat": 41.3284111,
+    "maxlon": 69.2829804
+  },
+  "geometry": [
+    { "lat": 41.3275181, "lon": 69.2829804 },
+    { "lat": 41.3275801, "lon": 69.2828674 },
+    { "lat": 41.3275953, "lon": 69.2826514 },
+    { "lat": 41.3278497, "lon": 69.2802348 },
+    { "lat": 41.3279276, "lon": 69.2795612 },
+    { "lat": 41.3279586, "lon": 69.2792880 },
+    { "lat": 41.3279739, "lon": 69.2790945 },
+    { "lat": 41.3280330, "lon": 69.2785319 },
+    { "lat": 41.3280554, "lon": 69.2783006 },
+    { "lat": 41.3281194, "lon": 69.2776515 },
+    { "lat": 41.3282308, "lon": 69.2765780 },
+    { "lat": 41.3283072, "lon": 69.2756546 },
+    { "lat": 41.3284072, "lon": 69.2747393 },
+    { "lat": 41.3284111, "lon": 69.2747151 },
+    { "lat": 41.3282962, "lon": 69.2745590 },
+    { "lat": 41.3279749, "lon": 69.2744751 },
+    { "lat": 41.3271922, "lon": 69.2742816 },
+    { "lat": 41.3263598, "lon": 69.2740608 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 509603219,
+  "bounds": {
+    "minlat": 41.3264684,
+    "minlon": 69.2831288,
+    "maxlat": 41.3267119,
+    "maxlon": 69.2838997
+  },
+  "geometry": [
+    { "lat": 41.3267119, "lon": 69.2838997 },
+    { "lat": 41.3264684, "lon": 69.2838465 },
+    { "lat": 41.3264808, "lon": 69.2837469 },
+    { "lat": 41.3265119, "lon": 69.2834297 },
+    { "lat": 41.3265193, "lon": 69.2833550 },
+    { "lat": 41.3265290, "lon": 69.2832560 },
+    { "lat": 41.3265330, "lon": 69.2832240 },
+    { "lat": 41.3265381, "lon": 69.2831835 },
+    { "lat": 41.3265448, "lon": 69.2831288 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 509603222,
+  "bounds": {
+    "minlat": 41.3266373,
+    "minlon": 69.2844988,
+    "maxlat": 41.3266458,
+    "maxlon": 69.2846414
+  },
+  "geometry": [
+    { "lat": 41.3266373, "lon": 69.2846414 },
+    { "lat": 41.3266458, "lon": 69.2844988 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 509603223,
+  "bounds": {
+    "minlat": 41.3267451,
+    "minlon": 69.2847995,
+    "maxlat": 41.3268801,
+    "maxlon": 69.2861256
+  },
+  "geometry": [
+    { "lat": 41.3267451, "lon": 69.2861256 },
+    { "lat": 41.3268801, "lon": 69.2847995 }
+  ],
+  "tags": {
+    "highway": "service",
+    "living_street": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 509603224,
+  "bounds": {
+    "minlat": 41.3261987,
+    "minlon": 69.2845425,
+    "maxlat": 41.3270920,
+    "maxlon": 69.2861620
+  },
+  "geometry": [
+    { "lat": 41.3269424, "lon": 69.2861620 },
+    { "lat": 41.3270920, "lon": 69.2847375 },
+    { "lat": 41.3266373, "lon": 69.2846414 },
+    { "lat": 41.3261987, "lon": 69.2845425 }
+  ],
+  "tags": {
+    "highway": "service",
+    "living_street": "yes",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 509603225,
+  "bounds": {
+    "minlat": 41.3266458,
+    "minlon": 69.2842731,
+    "maxlat": 41.3266774,
+    "maxlon": 69.2844988
+  },
+  "geometry": [
+    { "lat": 41.3266458, "lon": 69.2844988 },
+    { "lat": 41.3266774, "lon": 69.2842731 }
+  ],
+  "tags": {
+    "foot": "permissive",
+    "highway": "footway",
+    "tunnel": "building_passage"
+  }
+},
+{
+  "type": "way",
+  "id": 526791658,
+  "bounds": {
+    "minlat": 41.3204108,
+    "minlon": 69.2826365,
+    "maxlat": 41.3211165,
+    "maxlon": 69.2827762
+  },
+  "geometry": [
+    { "lat": 41.3204108, "lon": 69.2826365 },
+    { "lat": 41.3205399, "lon": 69.2826633 },
+    { "lat": 41.3206422, "lon": 69.2826844 },
+    { "lat": 41.3207003, "lon": 69.2826958 },
+    { "lat": 41.3210176, "lon": 69.2827565 },
+    { "lat": 41.3211165, "lon": 69.2827762 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 531258542,
+  "bounds": {
+    "minlat": 41.3210515,
+    "minlon": 69.2817720,
+    "maxlat": 41.3221356,
+    "maxlon": 69.2819995
+  },
+  "geometry": [
+    { "lat": 41.3221356, "lon": 69.2819995 },
+    { "lat": 41.3210515, "lon": 69.2817720 }
+  ],
+  "tags": {
+    "highway": "primary",
+    "maxspeed": "60",
+    "name": "Amir Temur shoh ko'chasi",
+    "name:en": "Amir Timur Avenue",
+    "name:ru": "Амира Тимура проспект",
+    "name:uz": "Amir Temur shoh ko'chasi",
+    "old_name": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "old_name:ru": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 563860395,
+  "bounds": {
+    "minlat": 41.3267582,
+    "minlon": 69.2834851,
+    "maxlat": 41.3275318,
+    "maxlon": 69.2906302
+  },
+  "geometry": [
+    { "lat": 41.3267582, "lon": 69.2906302 },
+    { "lat": 41.3268169, "lon": 69.2901743 },
+    { "lat": 41.3269249, "lon": 69.2891731 },
+    { "lat": 41.3270896, "lon": 69.2876057 },
+    { "lat": 41.3272169, "lon": 69.2864108 },
+    { "lat": 41.3272370, "lon": 69.2862213 },
+    { "lat": 41.3272647, "lon": 69.2859565 },
+    { "lat": 41.3272674, "lon": 69.2859315 },
+    { "lat": 41.3273910, "lon": 69.2847941 },
+    { "lat": 41.3275318, "lon": 69.2835526 },
+    { "lat": 41.3275242, "lon": 69.2834851 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 563860397,
+  "bounds": {
+    "minlat": 41.3236839,
+    "minlon": 69.2826967,
+    "maxlat": 41.3255963,
+    "maxlon": 69.2830671
+  },
+  "geometry": [
+    { "lat": 41.3255963, "lon": 69.2830671 },
+    { "lat": 41.3255123, "lon": 69.2830492 },
+    { "lat": 41.3254114, "lon": 69.2830334 },
+    { "lat": 41.3249519, "lon": 69.2829449 },
+    { "lat": 41.3236839, "lon": 69.2826967 }
+  ],
+  "tags": {
+    "footway": "sidewalk",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 563861922,
+  "bounds": {
+    "minlat": 41.3217983,
+    "minlon": 69.2817529,
+    "maxlat": 41.3218842,
+    "maxlon": 69.2817762
+  },
+  "geometry": [
+    { "lat": 41.3218842, "lon": 69.2817762 },
+    { "lat": 41.3217983, "lon": 69.2817529 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 564755690,
+  "bounds": {
+    "minlat": 41.3220964,
+    "minlon": 69.2823799,
+    "maxlat": 41.3234637,
+    "maxlon": 69.2826900
+  },
+  "geometry": [
+    { "lat": 41.3220964, "lon": 69.2823799 },
+    { "lat": 41.3228657, "lon": 69.2825149 },
+    { "lat": 41.3234619, "lon": 69.2826386 },
+    { "lat": 41.3234637, "lon": 69.2826900 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 635611819,
+  "bounds": {
+    "minlat": 41.3276783,
+    "minlon": 69.2828811,
+    "maxlat": 41.3278453,
+    "maxlon": 69.2829119
+  },
+  "geometry": [
+    { "lat": 41.3278453, "lon": 69.2829119 },
+    { "lat": 41.3278106, "lon": 69.2829057 },
+    { "lat": 41.3277176, "lon": 69.2828921 },
+    { "lat": 41.3276783, "lon": 69.2828811 }
+  ],
+  "tags": {
+    "crossing": "traffic_signals",
+    "footway": "crossing",
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 635638243,
+  "bounds": {
+    "minlat": 41.3274763,
+    "minlon": 69.2834513,
+    "maxlat": 41.3275242,
+    "maxlon": 69.2834851
+  },
+  "geometry": [
+    { "lat": 41.3275242, "lon": 69.2834851 },
+    { "lat": 41.3274763, "lon": 69.2834513 }
+  ],
+  "tags": {
+    "footway": "sidewalk",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 635638250,
+  "bounds": {
+    "minlat": 41.3253623,
+    "minlon": 69.2830671,
+    "maxlat": 41.3274763,
+    "maxlon": 69.2859060
+  },
+  "geometry": [
+    { "lat": 41.3274763, "lon": 69.2834513 },
+    { "lat": 41.3274549, "lon": 69.2834469 },
+    { "lat": 41.3274415, "lon": 69.2834441 },
+    { "lat": 41.3265290, "lon": 69.2832560 },
+    { "lat": 41.3255963, "lon": 69.2830671 },
+    { "lat": 41.3255090, "lon": 69.2843492 },
+    { "lat": 41.3253623, "lon": 69.2859060 }
+  ],
+  "tags": {
+    "footway": "sidewalk",
+    "highway": "footway",
+    "surface": "paving_stones"
+  }
+},
+{
+  "type": "way",
+  "id": 635638252,
+  "bounds": {
+    "minlat": 41.3274763,
+    "minlon": 69.2830629,
+    "maxlat": 41.3275108,
+    "maxlon": 69.2834513
+  },
+  "geometry": [
+    { "lat": 41.3275108, "lon": 69.2830629 },
+    { "lat": 41.3275064, "lon": 69.2831339 },
+    { "lat": 41.3274914, "lon": 69.2833218 },
+    { "lat": 41.3274821, "lon": 69.2833885 },
+    { "lat": 41.3274779, "lon": 69.2834322 },
+    { "lat": 41.3274763, "lon": 69.2834513 }
+  ],
+  "tags": {
+    "crossing": "traffic_signals",
+    "footway": "crossing",
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 635638257,
+  "bounds": {
+    "minlat": 41.3263444,
+    "minlon": 69.2823433,
+    "maxlat": 41.3275953,
+    "maxlon": 69.2826514
+  },
+  "geometry": [
+    { "lat": 41.3275953, "lon": 69.2826514 },
+    { "lat": 41.3272877, "lon": 69.2825508 },
+    { "lat": 41.3270640, "lon": 69.2825016 },
+    { "lat": 41.3268456, "lon": 69.2824577 },
+    { "lat": 41.3265971, "lon": 69.2823994 },
+    { "lat": 41.3263444, "lon": 69.2823433 }
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "service",
+    "horse": "private",
+    "living_street": "yes",
+    "motor_vehicle": "yes",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 635638260,
+  "bounds": {
+    "minlat": 41.3262832,
+    "minlon": 69.2823433,
+    "maxlat": 41.3263444,
+    "maxlon": 69.2828755
+  },
+  "geometry": [
+    { "lat": 41.3263444, "lon": 69.2823433 },
+    { "lat": 41.3263004, "lon": 69.2827210 },
+    { "lat": 41.3262832, "lon": 69.2828755 }
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "service",
+    "horse": "private",
+    "living_street": "yes",
+    "motor_vehicle": "yes",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 636076489,
+  "bounds": {
+    "minlat": 41.3254114,
+    "minlon": 69.2825426,
+    "maxlat": 41.3254643,
+    "maxlon": 69.2830334
+  },
+  "geometry": [
+    { "lat": 41.3254114, "lon": 69.2830334 },
+    { "lat": 41.3254191, "lon": 69.2829665 },
+    { "lat": 41.3254237, "lon": 69.2829003 },
+    { "lat": 41.3254467, "lon": 69.2826988 },
+    { "lat": 41.3254643, "lon": 69.2825426 }
+  ],
+  "tags": {
+    "crossing": "zebra",
+    "footway": "crossing",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 636076490,
+  "bounds": {
+    "minlat": 41.3236024,
+    "minlon": 69.2826967,
+    "maxlat": 41.3236839,
+    "maxlon": 69.2835050
+  },
+  "geometry": [
+    { "lat": 41.3236839, "lon": 69.2826967 },
+    { "lat": 41.3236837, "lon": 69.2826970 },
+    { "lat": 41.3236024, "lon": 69.2835050 }
+  ],
+  "tags": {
+    "footway": "sidewalk",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 636076491,
+  "bounds": {
+    "minlat": 41.3235836,
+    "minlon": 69.2808319,
+    "maxlat": 41.3237992,
+    "maxlon": 69.2823465
+  },
+  "geometry": [
+    { "lat": 41.3237786, "lon": 69.2823465 },
+    { "lat": 41.3237992, "lon": 69.2821697 },
+    { "lat": 41.3237822, "lon": 69.2821609 },
+    { "lat": 41.3237601, "lon": 69.2821348 },
+    { "lat": 41.3236697, "lon": 69.2821113 },
+    { "lat": 41.3236268, "lon": 69.2820786 },
+    { "lat": 41.3236016, "lon": 69.2820305 },
+    { "lat": 41.3235856, "lon": 69.2819757 },
+    { "lat": 41.3235836, "lon": 69.2819178 },
+    { "lat": 41.3236567, "lon": 69.2813225 },
+    { "lat": 41.3237350, "lon": 69.2808319 }
+  ],
+  "tags": {
+    "highway": "service",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 636076492,
+  "bounds": {
+    "minlat": 41.3236839,
+    "minlon": 69.2821612,
+    "maxlat": 41.3237591,
+    "maxlon": 69.2826967
+  },
+  "geometry": [
+    { "lat": 41.3236839, "lon": 69.2826967 },
+    { "lat": 41.3237168, "lon": 69.2825523 },
+    { "lat": 41.3237418, "lon": 69.2823387 },
+    { "lat": 41.3237591, "lon": 69.2821612 }
+  ],
+  "tags": {
+    "crossing": "zebra",
+    "footway": "crossing",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 636076493,
+  "bounds": {
+    "minlat": 41.3234637,
+    "minlon": 69.2826900,
+    "maxlat": 41.3236837,
+    "maxlon": 69.2827136
+  },
+  "geometry": [
+    { "lat": 41.3234637, "lon": 69.2826900 },
+    { "lat": 41.3235528, "lon": 69.2827136 },
+    { "lat": 41.3236837, "lon": 69.2826970 }
+  ],
+  "tags": {
+    "footway": "sidewalk",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 636076495,
+  "bounds": {
+    "minlat": 41.3217970,
+    "minlon": 69.2823799,
+    "maxlat": 41.3220964,
+    "maxlon": 69.2834928
+  },
+  "geometry": [
+    { "lat": 41.3217970, "lon": 69.2834928 },
+    { "lat": 41.3218709, "lon": 69.2831659 },
+    { "lat": 41.3218851, "lon": 69.2831031 },
+    { "lat": 41.3219059, "lon": 69.2829817 },
+    { "lat": 41.3219431, "lon": 69.2827839 },
+    { "lat": 41.3219908, "lon": 69.2827854 },
+    { "lat": 41.3220511, "lon": 69.2827874 },
+    { "lat": 41.3220789, "lon": 69.2825488 },
+    { "lat": 41.3220964, "lon": 69.2823799 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 636077095,
+  "bounds": {
+    "minlat": 41.3272855,
+    "minlon": 69.2801184,
+    "maxlat": 41.3273915,
+    "maxlon": 69.2825508
+  },
+  "geometry": [
+    { "lat": 41.3272877, "lon": 69.2825508 },
+    { "lat": 41.3273616, "lon": 69.2815232 },
+    { "lat": 41.3273208, "lon": 69.2813878 },
+    { "lat": 41.3272961, "lon": 69.2813355 },
+    { "lat": 41.3272855, "lon": 69.2812765 },
+    { "lat": 41.3273915, "lon": 69.2801184 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 636077096,
+  "bounds": {
+    "minlat": 41.3270640,
+    "minlon": 69.2813648,
+    "maxlat": 41.3271948,
+    "maxlon": 69.2825016
+  },
+  "geometry": [
+    { "lat": 41.3270640, "lon": 69.2825016 },
+    { "lat": 41.3271948, "lon": 69.2813648 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 636077097,
+  "bounds": {
+    "minlat": 41.3268456,
+    "minlon": 69.2815216,
+    "maxlat": 41.3269608,
+    "maxlon": 69.2824577
+  },
+  "geometry": [
+    { "lat": 41.3268456, "lon": 69.2824577 },
+    { "lat": 41.3269608, "lon": 69.2815216 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 653499127,
+  "bounds": {
+    "minlat": 41.3265330,
+    "minlon": 69.2832240,
+    "maxlat": 41.3274779,
+    "maxlon": 69.2834322
+  },
+  "geometry": [
+    { "lat": 41.3265330, "lon": 69.2832240 },
+    { "lat": 41.3274779, "lon": 69.2834322 }
+  ],
+  "tags": {
+    "highway": "cycleway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 666716867,
+  "bounds": {
+    "minlat": 41.3259327,
+    "minlon": 69.2812383,
+    "maxlat": 41.3273208,
+    "maxlon": 69.2816586
+  },
+  "geometry": [
+    { "lat": 41.3259685, "lon": 69.2812865 },
+    { "lat": 41.3259327, "lon": 69.2815268 },
+    { "lat": 41.3263724, "lon": 69.2816586 },
+    { "lat": 41.3265478, "lon": 69.2814273 },
+    { "lat": 41.3265581, "lon": 69.2813254 },
+    { "lat": 41.3265669, "lon": 69.2812383 },
+    { "lat": 41.3271948, "lon": 69.2813648 },
+    { "lat": 41.3273208, "lon": 69.2813878 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 666716868,
+  "bounds": {
+    "minlat": 41.3245881,
+    "minlon": 69.2808646,
+    "maxlat": 41.3246711,
+    "maxlon": 69.2819240
+  },
+  "geometry": [
+    { "lat": 41.3246711, "lon": 69.2808646 },
+    { "lat": 41.3245881, "lon": 69.2819240 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 666716869,
+  "bounds": {
+    "minlat": 41.3245881,
+    "minlon": 69.2809656,
+    "maxlat": 41.3251801,
+    "maxlon": 69.2819982
+  },
+  "geometry": [
+    { "lat": 41.3251801, "lon": 69.2809656 },
+    { "lat": 41.3250548, "lon": 69.2819982 },
+    { "lat": 41.3245881, "lon": 69.2819240 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 666716870,
+  "bounds": {
+    "minlat": 41.3237350,
+    "minlon": 69.2807190,
+    "maxlat": 41.3257259,
+    "maxlon": 69.2809656
+  },
+  "geometry": [
+    { "lat": 41.3257259, "lon": 69.2809088 },
+    { "lat": 41.3254873, "lon": 69.2808580 },
+    { "lat": 41.3254328, "lon": 69.2808605 },
+    { "lat": 41.3253876, "lon": 69.2808808 },
+    { "lat": 41.3253302, "lon": 69.2809197 },
+    { "lat": 41.3252681, "lon": 69.2809425 },
+    { "lat": 41.3251801, "lon": 69.2809656 },
+    { "lat": 41.3246711, "lon": 69.2808646 },
+    { "lat": 41.3243815, "lon": 69.2807990 },
+    { "lat": 41.3239093, "lon": 69.2807190 },
+    { "lat": 41.3238800, "lon": 69.2808587 },
+    { "lat": 41.3237350, "lon": 69.2808319 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 666716871,
+  "bounds": {
+    "minlat": 41.3255981,
+    "minlon": 69.2804921,
+    "maxlat": 41.3257794,
+    "maxlon": 69.2820319
+  },
+  "geometry": [
+    { "lat": 41.3256875, "lon": 69.2820319 },
+    { "lat": 41.3255981, "lon": 69.2820036 },
+    { "lat": 41.3256883, "lon": 69.2812311 },
+    { "lat": 41.3257259, "lon": 69.2809088 },
+    { "lat": 41.3257794, "lon": 69.2804921 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 678134832,
+  "bounds": {
+    "minlat": 41.3222563,
+    "minlon": 69.2845946,
+    "maxlat": 41.3232764,
+    "maxlon": 69.2851841
+  },
+  "geometry": [
+    { "lat": 41.3232764, "lon": 69.2851841 },
+    { "lat": 41.3228224, "lon": 69.2850618 },
+    { "lat": 41.3226703, "lon": 69.2850186 },
+    { "lat": 41.3226008, "lon": 69.2849833 },
+    { "lat": 41.3225767, "lon": 69.2849699 },
+    { "lat": 41.3225887, "lon": 69.2848371 },
+    { "lat": 41.3225948, "lon": 69.2847124 },
+    { "lat": 41.3225746, "lon": 69.2846775 },
+    { "lat": 41.3222563, "lon": 69.2845946 }
+  ],
+  "tags": {
+    "highway": "service",
+    "lanes": "1",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 707009440,
+  "bounds": {
+    "minlat": 41.3276675,
+    "minlon": 69.2833577,
+    "maxlat": 41.3277602,
+    "maxlon": 69.2833788
+  },
+  "geometry": [
+    { "lat": 41.3276675, "lon": 69.2833577 },
+    { "lat": 41.3277602, "lon": 69.2833788 }
+  ],
+  "tags": {
+    "highway": "primary",
+    "maxspeed": "60",
+    "name": "Amir Temur shoh ko'chasi",
+    "name:en": "Amir Timur Avenue",
+    "name:ru": "Амира Тимура проспект",
+    "name:uz": "Amir Temur shoh ko'chasi",
+    "old_name": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "old_name:ru": "Энгельса улица;Московская улица;Московский проспект;Чимкентский тракт;Российская улица",
+    "oneway": "yes",
+    "source:maxspeed": "UZ:urban",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 747170686,
+  "bounds": {
+    "minlat": 41.3239093,
+    "minlon": 69.2790507,
+    "maxlat": 41.3241166,
+    "maxlon": 69.2807190
+  },
+  "geometry": [
+    { "lat": 41.3241166, "lon": 69.2790507 },
+    { "lat": 41.3240325, "lon": 69.2797497 },
+    { "lat": 41.3240451, "lon": 69.2798432 },
+    { "lat": 41.3240543, "lon": 69.2799110 },
+    { "lat": 41.3239424, "lon": 69.2805149 },
+    { "lat": 41.3239093, "lon": 69.2807190 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 747170687,
+  "bounds": {
+    "minlat": 41.3230844,
+    "minlon": 69.2803374,
+    "maxlat": 41.3237884,
+    "maxlon": 69.2808319
+  },
+  "geometry": [
+    { "lat": 41.3237350, "lon": 69.2808319 },
+    { "lat": 41.3237884, "lon": 69.2804759 },
+    { "lat": 41.3236508, "lon": 69.2804535 },
+    { "lat": 41.3230844, "lon": 69.2803374 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 747171391,
+  "bounds": {
+    "minlat": 41.3236567,
+    "minlon": 69.2813225,
+    "maxlat": 41.3245881,
+    "maxlon": 69.2819240
+  },
+  "geometry": [
+    { "lat": 41.3245881, "lon": 69.2819240 },
+    { "lat": 41.3243150, "lon": 69.2818921 },
+    { "lat": 41.3242707, "lon": 69.2818505 },
+    { "lat": 41.3242365, "lon": 69.2817995 },
+    { "lat": 41.3241801, "lon": 69.2817566 },
+    { "lat": 41.3240834, "lon": 69.2817298 },
+    { "lat": 41.3240339, "lon": 69.2817160 },
+    { "lat": 41.3240689, "lon": 69.2814235 },
+    { "lat": 41.3236567, "lon": 69.2813225 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 747177400,
+  "bounds": {
+    "minlat": 41.3214212,
+    "minlon": 69.2845782,
+    "maxlat": 41.3216029,
+    "maxlon": 69.2858184
+  },
+  "geometry": [
+    { "lat": 41.3214478, "lon": 69.2858184 },
+    { "lat": 41.3214212, "lon": 69.2856499 },
+    { "lat": 41.3215331, "lon": 69.2846721 },
+    { "lat": 41.3216029, "lon": 69.2845782 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 816960239,
+  "bounds": {
+    "minlat": 41.3244328,
+    "minlon": 69.2829281,
+    "maxlat": 41.3255472,
+    "maxlon": 69.2906588
+  },
+  "geometry": [
+    { "lat": 41.3244328, "lon": 69.2906588 },
+    { "lat": 41.3245421, "lon": 69.2904379 },
+    { "lat": 41.3247157, "lon": 69.2901258 },
+    { "lat": 41.3247424, "lon": 69.2900542 },
+    { "lat": 41.3250137, "lon": 69.2890686 },
+    { "lat": 41.3250724, "lon": 69.2888039 },
+    { "lat": 41.3251226, "lon": 69.2885254 },
+    { "lat": 41.3251974, "lon": 69.2875814 },
+    { "lat": 41.3253006, "lon": 69.2862792 },
+    { "lat": 41.3253073, "lon": 69.2859000 },
+    { "lat": 41.3254171, "lon": 69.2844765 },
+    { "lat": 41.3254687, "lon": 69.2836953 },
+    { "lat": 41.3255048, "lon": 69.2831487 },
+    { "lat": 41.3255123, "lon": 69.2830492 },
+    { "lat": 41.3255472, "lon": 69.2829281 }
+  ],
+  "tags": {
+    "access": "yes",
+    "alt_name": "Ниязбекская улица",
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "tertiary",
+    "int_name": "Niyozbek yuli",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "maxspeed": "50",
+    "name": "Niyozbek yo'li ko'chasi",
+    "name:en": "Niazbek Street",
+    "name:eo": "Niazbek strato",
+    "name:ru": "Ниёзбек йули улица",
+    "old_name": "Урицкого улица;Ниязбекская улица",
+    "old_name:ru": "Урицкого улица;Ниязбекская улица",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 837621422,
+  "bounds": {
+    "minlat": 41.3275217,
+    "minlon": 69.2835617,
+    "maxlat": 41.3278617,
+    "maxlon": 69.2863941
+  },
+  "geometry": [
+    { "lat": 41.3278617, "lon": 69.2835617 },
+    { "lat": 41.3277023, "lon": 69.2849282 },
+    { "lat": 41.3276003, "lon": 69.2858979 },
+    { "lat": 41.3275741, "lon": 69.2859516 },
+    { "lat": 41.3275217, "lon": 69.2863941 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 837621424,
+  "bounds": {
+    "minlat": 41.3272169,
+    "minlon": 69.2864108,
+    "maxlat": 41.3274653,
+    "maxlon": 69.2865212
+  },
+  "geometry": [
+    { "lat": 41.3272169, "lon": 69.2864108 },
+    { "lat": 41.3273372, "lon": 69.2864256 },
+    { "lat": 41.3274338, "lon": 69.2864402 },
+    { "lat": 41.3274653, "lon": 69.2864598 },
+    { "lat": 41.3274603, "lon": 69.2865212 }
+  ],
+  "tags": {
+    "footway": "crossing",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 837621425,
+  "bounds": {
+    "minlat": 41.3272268,
+    "minlon": 69.2859485,
+    "maxlat": 41.3272647,
+    "maxlon": 69.2859565
+  },
+  "geometry": [
+    { "lat": 41.3272268, "lon": 69.2859485 },
+    { "lat": 41.3272647, "lon": 69.2859565 }
+  ],
+  "tags": {
+    "highway": "steps",
+    "incline": "down",
+    "ramp": "separate"
+  }
+},
+{
+  "type": "way",
+  "id": 837621426,
+  "bounds": {
+    "minlat": 41.3272268,
+    "minlon": 69.2858782,
+    "maxlat": 41.3272674,
+    "maxlon": 69.2859485
+  },
+  "geometry": [
+    { "lat": 41.3272268, "lon": 69.2859485 },
+    { "lat": 41.3272340, "lon": 69.2858782 },
+    { "lat": 41.3272443, "lon": 69.2858801 },
+    { "lat": 41.3272396, "lon": 69.2859261 },
+    { "lat": 41.3272674, "lon": 69.2859315 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "incline": "down",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 837621427,
+  "bounds": {
+    "minlat": 41.3272106,
+    "minlon": 69.2859454,
+    "maxlat": 41.3272268,
+    "maxlon": 69.2859485
+  },
+  "geometry": [
+    { "lat": 41.3272106, "lon": 69.2859454 },
+    { "lat": 41.3272268, "lon": 69.2859485 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 849576722,
+  "bounds": {
+    "minlat": 41.3275470,
+    "minlon": 69.2834744,
+    "maxlat": 41.3278319,
+    "maxlon": 69.2835329
+  },
+  "geometry": [
+    { "lat": 41.3278319, "lon": 69.2835329 },
+    { "lat": 41.3277456, "lon": 69.2835158 },
+    { "lat": 41.3276524, "lon": 69.2834984 },
+    { "lat": 41.3275470, "lon": 69.2834744 }
+  ],
+  "tags": {
+    "crossing": "zebra",
+    "footway": "crossing",
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 849576726,
+  "bounds": {
+    "minlat": 41.3275801,
+    "minlon": 69.2828674,
+    "maxlat": 41.3276783,
+    "maxlon": 69.2828811
+  },
+  "geometry": [
+    { "lat": 41.3276783, "lon": 69.2828811 },
+    { "lat": 41.3275801, "lon": 69.2828674 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "paving_stones"
+  }
+},
+{
+  "type": "way",
+  "id": 1062009533,
+  "bounds": {
+    "minlat": 41.3260664,
+    "minlon": 69.2804893,
+    "maxlat": 41.3262658,
+    "maxlon": 69.2807253
+  },
+  "geometry": [
+    { "lat": 41.3260664, "lon": 69.2807173 },
+    { "lat": 41.3260986, "lon": 69.2804893 },
+    { "lat": 41.3262658, "lon": 69.2804966 },
+    { "lat": 41.3262578, "lon": 69.2805724 },
+    { "lat": 41.3262356, "lon": 69.2807253 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1062009535,
+  "bounds": {
+    "minlat": 41.3256127,
+    "minlon": 69.2807173,
+    "maxlat": 41.3262356,
+    "maxlon": 69.2825775
+  },
+  "geometry": [
+    { "lat": 41.3256127, "lon": 69.2825775 },
+    { "lat": 41.3256875, "lon": 69.2820319 },
+    { "lat": 41.3257217, "lon": 69.2817828 },
+    { "lat": 41.3257993, "lon": 69.2812545 },
+    { "lat": 41.3259685, "lon": 69.2812865 },
+    { "lat": 41.3259857, "lon": 69.2811866 },
+    { "lat": 41.3260664, "lon": 69.2807173 },
+    { "lat": 41.3261782, "lon": 69.2807266 },
+    { "lat": 41.3262014, "lon": 69.2807266 },
+    { "lat": 41.3262356, "lon": 69.2807253 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1062009537,
+  "bounds": {
+    "minlat": 41.3264914,
+    "minlon": 69.2805509,
+    "maxlat": 41.3268036,
+    "maxlon": 69.2807414
+  },
+  "geometry": [
+    { "lat": 41.3268036, "lon": 69.2807414 },
+    { "lat": 41.3267533, "lon": 69.2806998 },
+    { "lat": 41.3265277, "lon": 69.2806609 },
+    { "lat": 41.3264985, "lon": 69.2806260 },
+    { "lat": 41.3264914, "lon": 69.2805509 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1062009538,
+  "bounds": {
+    "minlat": 41.3267624,
+    "minlon": 69.2806233,
+    "maxlat": 41.3272135,
+    "maxlon": 69.2811437
+  },
+  "geometry": [
+    { "lat": 41.3272135, "lon": 69.2807065 },
+    { "lat": 41.3271994, "lon": 69.2807146 },
+    { "lat": 41.3271249, "lon": 69.2807038 },
+    { "lat": 41.3271088, "lon": 69.2806676 },
+    { "lat": 41.3269265, "lon": 69.2806341 },
+    { "lat": 41.3268610, "lon": 69.2806233 },
+    { "lat": 41.3268036, "lon": 69.2807414 },
+    { "lat": 41.3267624, "lon": 69.2811437 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1121975263,
+  "bounds": {
+    "minlat": 41.3239776,
+    "minlon": 69.2880946,
+    "maxlat": 41.3240579,
+    "maxlon": 69.2886438
+  },
+  "geometry": [
+    { "lat": 41.3239776, "lon": 69.2880946 },
+    { "lat": 41.3239786, "lon": 69.2882636 },
+    { "lat": 41.3239937, "lon": 69.2884299 },
+    { "lat": 41.3240579, "lon": 69.2886438 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1121975264,
+  "bounds": {
+    "minlat": 41.3238107,
+    "minlon": 69.2836092,
+    "maxlat": 41.3239388,
+    "maxlon": 69.2846828
+  },
+  "geometry": [
+    { "lat": 41.3239388, "lon": 69.2836092 },
+    { "lat": 41.3238394, "lon": 69.2844521 },
+    { "lat": 41.3238107, "lon": 69.2846828 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1121975265,
+  "bounds": {
+    "minlat": 41.3238394,
+    "minlon": 69.2836446,
+    "maxlat": 41.3242415,
+    "maxlon": 69.2845074
+  },
+  "geometry": [
+    { "lat": 41.3242415, "lon": 69.2836446 },
+    { "lat": 41.3241358, "lon": 69.2845074 },
+    { "lat": 41.3238394, "lon": 69.2844521 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1121975266,
+  "bounds": {
+    "minlat": 41.3234661,
+    "minlon": 69.2834683,
+    "maxlat": 41.3249027,
+    "maxlon": 69.2836670
+  },
+  "geometry": [
+    { "lat": 41.3234661, "lon": 69.2834683 },
+    { "lat": 41.3235097, "lon": 69.2834762 },
+    { "lat": 41.3236024, "lon": 69.2835050 },
+    { "lat": 41.3239388, "lon": 69.2836092 },
+    { "lat": 41.3241765, "lon": 69.2836648 },
+    { "lat": 41.3242415, "lon": 69.2836446 },
+    { "lat": 41.3245135, "lon": 69.2836054 },
+    { "lat": 41.3249027, "lon": 69.2836670 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1193312646,
+  "bounds": {
+    "minlat": 41.3220699,
+    "minlon": 69.2731941,
+    "maxlat": 41.3231286,
+    "maxlon": 69.2818466
+  },
+  "geometry": [
+    { "lat": 41.3231286, "lon": 69.2731941 },
+    { "lat": 41.3230367, "lon": 69.2738925 },
+    { "lat": 41.3230043, "lon": 69.2741388 },
+    { "lat": 41.3228052, "lon": 69.2756512 },
+    { "lat": 41.3227620, "lon": 69.2759794 },
+    { "lat": 41.3227343, "lon": 69.2762013 },
+    { "lat": 41.3225843, "lon": 69.2774047 },
+    { "lat": 41.3223560, "lon": 69.2792362 },
+    { "lat": 41.3223486, "lon": 69.2792906 },
+    { "lat": 41.3222625, "lon": 69.2799493 },
+    { "lat": 41.3222298, "lon": 69.2801992 },
+    { "lat": 41.3221275, "lon": 69.2810482 },
+    { "lat": 41.3220699, "lon": 69.2815262 },
+    { "lat": 41.3220720, "lon": 69.2815871 },
+    { "lat": 41.3221897, "lon": 69.2818466 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1224002899,
+  "bounds": {
+    "minlat": 41.3244669,
+    "minlon": 69.2850404,
+    "maxlat": 41.3249817,
+    "maxlon": 69.2857397
+  },
+  "geometry": [
+    { "lat": 41.3245190, "lon": 69.2850404 },
+    { "lat": 41.3249163, "lon": 69.2851026 },
+    { "lat": 41.3249656, "lon": 69.2851120 },
+    { "lat": 41.3249817, "lon": 69.2851844 },
+    { "lat": 41.3249495, "lon": 69.2857021 },
+    { "lat": 41.3249253, "lon": 69.2857397 },
+    { "lat": 41.3248770, "lon": 69.2857397 },
+    { "lat": 41.3244669, "lon": 69.2856912 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 1224002900,
+  "bounds": {
+    "minlat": 41.3258779,
+    "minlon": 69.2815268,
+    "maxlat": 41.3259327,
+    "maxlon": 69.2818156
+  },
+  "geometry": [
+    { "lat": 41.3259327, "lon": 69.2815268 },
+    { "lat": 41.3258779, "lon": 69.2818156 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1224002901,
+  "bounds": {
+    "minlat": 41.3257217,
+    "minlon": 69.2817828,
+    "maxlat": 41.3262412,
+    "maxlon": 69.2819171
+  },
+  "geometry": [
+    { "lat": 41.3257217, "lon": 69.2817828 },
+    { "lat": 41.3258779, "lon": 69.2818156 },
+    { "lat": 41.3262412, "lon": 69.2819171 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1224002902,
+  "bounds": {
+    "minlat": 41.3237992,
+    "minlon": 69.2817160,
+    "maxlat": 41.3240339,
+    "maxlon": 69.2821697
+  },
+  "geometry": [
+    { "lat": 41.3237992, "lon": 69.2821697 },
+    { "lat": 41.3238418, "lon": 69.2821567 },
+    { "lat": 41.3238974, "lon": 69.2821525 },
+    { "lat": 41.3239415, "lon": 69.2821350 },
+    { "lat": 41.3239756, "lon": 69.2820987 },
+    { "lat": 41.3239932, "lon": 69.2820448 },
+    { "lat": 41.3240339, "lon": 69.2817160 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1224002903,
+  "bounds": {
+    "minlat": 41.3242503,
+    "minlon": 69.2818921,
+    "maxlat": 41.3243150,
+    "maxlon": 69.2824461
+  },
+  "geometry": [
+    { "lat": 41.3242503, "lon": 69.2824461 },
+    { "lat": 41.3242685, "lon": 69.2822910 },
+    { "lat": 41.3243150, "lon": 69.2818921 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1230791938,
+  "bounds": {
+    "minlat": 41.3275964,
+    "minlon": 69.2849146,
+    "maxlat": 41.3281179,
+    "maxlon": 69.2854245
+  },
+  "geometry": [
+    { "lat": 41.3275964, "lon": 69.2849146 },
+    { "lat": 41.3277023, "lon": 69.2849282 },
+    { "lat": 41.3277867, "lon": 69.2849413 },
+    { "lat": 41.3280827, "lon": 69.2850517 },
+    { "lat": 41.3281179, "lon": 69.2851013 },
+    { "lat": 41.3281169, "lon": 69.2851549 },
+    { "lat": 41.3280897, "lon": 69.2854245 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1264111406,
+  "bounds": {
+    "minlat": 41.3201407,
+    "minlon": 69.2835711,
+    "maxlat": 41.3210019,
+    "maxlon": 69.2837173
+  },
+  "geometry": [
+    { "lat": 41.3201407, "lon": 69.2835711 },
+    { "lat": 41.3202254, "lon": 69.2835905 },
+    { "lat": 41.3202465, "lon": 69.2836046 },
+    { "lat": 41.3202717, "lon": 69.2836301 },
+    { "lat": 41.3203069, "lon": 69.2836482 },
+    { "lat": 41.3203346, "lon": 69.2836549 },
+    { "lat": 41.3204953, "lon": 69.2836884 },
+    { "lat": 41.3206338, "lon": 69.2837173 },
+    { "lat": 41.3206570, "lon": 69.2837173 },
+    { "lat": 41.3207436, "lon": 69.2837173 },
+    { "lat": 41.3207939, "lon": 69.2837079 },
+    { "lat": 41.3208100, "lon": 69.2836931 },
+    { "lat": 41.3208312, "lon": 69.2836650 },
+    { "lat": 41.3208977, "lon": 69.2836368 },
+    { "lat": 41.3209541, "lon": 69.2836355 },
+    { "lat": 41.3210019, "lon": 69.2836415 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1324238234,
+  "bounds": {
+    "minlat": 41.3266774,
+    "minlon": 69.2838997,
+    "maxlat": 41.3267119,
+    "maxlon": 69.2842731
+  },
+  "geometry": [
+    { "lat": 41.3266774, "lon": 69.2842731 },
+    { "lat": 41.3267119, "lon": 69.2838997 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1326131561,
+  "bounds": {
+    "minlat": 41.3237884,
+    "minlon": 69.2804759,
+    "maxlat": 41.3243835,
+    "maxlon": 69.2805308
+  },
+  "geometry": [
+    { "lat": 41.3237884, "lon": 69.2804759 },
+    { "lat": 41.3239424, "lon": 69.2805149 },
+    { "lat": 41.3241136, "lon": 69.2805308 },
+    { "lat": 41.3241599, "lon": 69.2804879 },
+    { "lat": 41.3243835, "lon": 69.2805067 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1326345973,
+  "bounds": {
+    "minlat": 41.3223287,
+    "minlon": 69.2829214,
+    "maxlat": 41.3235003,
+    "maxlon": 69.2831653
+  },
+  "geometry": [
+    { "lat": 41.3235003, "lon": 69.2831653 },
+    { "lat": 41.3223287, "lon": 69.2829214 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1326345976,
+  "bounds": {
+    "minlat": 41.3222989,
+    "minlon": 69.2799566,
+    "maxlat": 41.3226952,
+    "maxlon": 69.2820616
+  },
+  "geometry": [
+    { "lat": 41.3222989, "lon": 69.2799566 },
+    { "lat": 41.3223236, "lon": 69.2800050 },
+    { "lat": 41.3223312, "lon": 69.2800421 },
+    { "lat": 41.3223417, "lon": 69.2801852 },
+    { "lat": 41.3226952, "lon": 69.2802740 },
+    { "lat": 41.3225337, "lon": 69.2815449 },
+    { "lat": 41.3224654, "lon": 69.2816594 },
+    { "lat": 41.3224551, "lon": 69.2817541 },
+    { "lat": 41.3224428, "lon": 69.2818801 },
+    { "lat": 41.3224298, "lon": 69.2820616 }
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "parking_aisle"
+  }
+},
+{
+  "type": "way",
+  "id": 1327393201,
+  "bounds": {
+    "minlat": 41.3245423,
+    "minlon": 69.2828066,
+    "maxlat": 41.3249641,
+    "maxlon": 69.2830524
+  },
+  "geometry": [
+    { "lat": 41.3249641, "lon": 69.2828066 },
+    { "lat": 41.3249519, "lon": 69.2829449 },
+    { "lat": 41.3249336, "lon": 69.2830524 },
+    { "lat": 41.3245423, "lon": 69.2829814 }
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "parking_aisle"
+  }
+},
+{
+  "type": "way",
+  "id": 1342191114,
+  "bounds": {
+    "minlat": 41.3260867,
+    "minlon": 69.2817162,
+    "maxlat": 41.3262643,
+    "maxlon": 69.2821707
+  },
+  "geometry": [
+    { "lat": 41.3262019, "lon": 69.2821707 },
+    { "lat": 41.3262412, "lon": 69.2819171 },
+    { "lat": 41.3262643, "lon": 69.2817678 },
+    { "lat": 41.3260867, "lon": 69.2817162 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1342191115,
+  "bounds": {
+    "minlat": 41.3255853,
+    "minlon": 69.2825775,
+    "maxlat": 41.3256127,
+    "maxlon": 69.2827270
+  },
+  "geometry": [
+    { "lat": 41.3255853, "lon": 69.2827270 },
+    { "lat": 41.3256127, "lon": 69.2825775 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1411460835,
+  "bounds": {
+    "minlat": 41.3224177,
+    "minlon": 69.2796194,
+    "maxlat": 41.3231147,
+    "maxlon": 69.2800895
+  },
+  "geometry": [
+    { "lat": 41.3224177, "lon": 69.2796194 },
+    { "lat": 41.3224842, "lon": 69.2796328 },
+    { "lat": 41.3227376, "lon": 69.2796836 },
+    { "lat": 41.3230102, "lon": 69.2797384 },
+    { "lat": 41.3229742, "lon": 69.2800565 },
+    { "lat": 41.3231147, "lon": 69.2800895 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "paving_stones",
+    "width": "2"
+  }
+},
+{
+  "type": "way",
+  "id": 1411465364,
+  "bounds": {
+    "minlat": 41.3217534,
+    "minlon": 69.2831285,
+    "maxlat": 41.3218709,
+    "maxlon": 69.2831659
+  },
+  "geometry": [
+    { "lat": 41.3218709, "lon": 69.2831659 },
+    { "lat": 41.3217792, "lon": 69.2831367 },
+    { "lat": 41.3217534, "lon": 69.2831285 }
+  ],
+  "tags": {
+    "crossing": "uncontrolled",
+    "crossing:island": "no",
+    "crossing:markings": "yes",
+    "footway": "crossing",
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1418562548,
+  "bounds": {
+    "minlat": 41.3222926,
+    "minlon": 69.2801852,
+    "maxlat": 41.3223417,
+    "maxlon": 69.2806300
+  },
+  "geometry": [
+    { "lat": 41.3223417, "lon": 69.2801852 },
+    { "lat": 41.3222926, "lon": 69.2806300 }
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "parking_aisle"
+  }
+},
+{
+  "type": "way",
+  "id": 1420743919,
+  "bounds": {
+    "minlat": 41.3256616,
+    "minlon": 69.2784736,
+    "maxlat": 41.3259118,
+    "maxlon": 69.2798938
+  },
+  "geometry": [
+    { "lat": 41.3259118, "lon": 69.2784736 },
+    { "lat": 41.3259049, "lon": 69.2785477 },
+    { "lat": 41.3258227, "lon": 69.2794325 },
+    { "lat": 41.3257633, "lon": 69.2794351 },
+    { "lat": 41.3257290, "lon": 69.2794459 },
+    { "lat": 41.3257059, "lon": 69.2794821 },
+    { "lat": 41.3256958, "lon": 69.2795518 },
+    { "lat": 41.3256616, "lon": 69.2798938 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420745545,
+  "bounds": {
+    "minlat": 41.3237884,
+    "minlon": 69.2798093,
+    "maxlat": 41.3240451,
+    "maxlon": 69.2804759
+  },
+  "geometry": [
+    { "lat": 41.3240451, "lon": 69.2798432 },
+    { "lat": 41.3238860, "lon": 69.2798093 },
+    { "lat": 41.3238658, "lon": 69.2798361 },
+    { "lat": 41.3238125, "lon": 69.2802756 },
+    { "lat": 41.3237884, "lon": 69.2804759 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420745947,
+  "bounds": {
+    "minlat": 41.3234326,
+    "minlon": 69.2804535,
+    "maxlat": 41.3236508,
+    "maxlon": 69.2822734
+  },
+  "geometry": [
+    { "lat": 41.3236508, "lon": 69.2804535 },
+    { "lat": 41.3234550, "lon": 69.2820935 },
+    { "lat": 41.3234326, "lon": 69.2822734 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420745948,
+  "bounds": {
+    "minlat": 41.3231037,
+    "minlon": 69.2801793,
+    "maxlat": 41.3238125,
+    "maxlon": 69.2802756
+  },
+  "geometry": [
+    { "lat": 41.3231037, "lon": 69.2801793 },
+    { "lat": 41.3234166, "lon": 69.2802465 },
+    { "lat": 41.3235093, "lon": 69.2802358 },
+    { "lat": 41.3236342, "lon": 69.2802331 },
+    { "lat": 41.3237389, "lon": 69.2802545 },
+    { "lat": 41.3238125, "lon": 69.2802756 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420902625,
+  "bounds": {
+    "minlat": 41.3219673,
+    "minlon": 69.2827854,
+    "maxlat": 41.3219908,
+    "maxlon": 69.2829904
+  },
+  "geometry": [
+    { "lat": 41.3219673, "lon": 69.2829904 },
+    { "lat": 41.3219908, "lon": 69.2827854 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420902626,
+  "bounds": {
+    "minlat": 41.3218114,
+    "minlon": 69.2829657,
+    "maxlat": 41.3219673,
+    "maxlon": 69.2834544
+  },
+  "geometry": [
+    { "lat": 41.3218114, "lon": 69.2829657 },
+    { "lat": 41.3219059, "lon": 69.2829817 },
+    { "lat": 41.3219673, "lon": 69.2829904 },
+    { "lat": 41.3219119, "lon": 69.2834544 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420902627,
+  "bounds": {
+    "minlat": 41.3216075,
+    "minlon": 69.2835144,
+    "maxlat": 41.3219824,
+    "maxlon": 69.2840270
+  },
+  "geometry": [
+    { "lat": 41.3217002, "lon": 69.2835144 },
+    { "lat": 41.3217850, "lon": 69.2835409 },
+    { "lat": 41.3218676, "lon": 69.2835662 },
+    { "lat": 41.3219533, "lon": 69.2835925 },
+    { "lat": 41.3219744, "lon": 69.2836087 },
+    { "lat": 41.3219824, "lon": 69.2836408 },
+    { "lat": 41.3219240, "lon": 69.2840123 },
+    { "lat": 41.3219008, "lon": 69.2840270 },
+    { "lat": 41.3218746, "lon": 69.2840257 },
+    { "lat": 41.3216909, "lon": 69.2839687 },
+    { "lat": 41.3216075, "lon": 69.2839381 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420902915,
+  "bounds": {
+    "minlat": 41.3221829,
+    "minlon": 69.2845946,
+    "maxlat": 41.3225767,
+    "maxlon": 69.2853869
+  },
+  "geometry": [
+    { "lat": 41.3225767, "lon": 69.2849699 },
+    { "lat": 41.3225232, "lon": 69.2849831 },
+    { "lat": 41.3224639, "lon": 69.2849980 },
+    { "lat": 41.3224125, "lon": 69.2850409 },
+    { "lat": 41.3223531, "lon": 69.2853682 },
+    { "lat": 41.3223289, "lon": 69.2853869 },
+    { "lat": 41.3222030, "lon": 69.2853548 },
+    { "lat": 41.3221829, "lon": 69.2853092 },
+    { "lat": 41.3222221, "lon": 69.2849779 },
+    { "lat": 41.3222563, "lon": 69.2845946 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420903107,
+  "bounds": {
+    "minlat": 41.3214478,
+    "minlon": 69.2858184,
+    "maxlat": 41.3228828,
+    "maxlon": 69.2870083
+  },
+  "geometry": [
+    { "lat": 41.3214478, "lon": 69.2858184 },
+    { "lat": 41.3217790, "lon": 69.2858952 },
+    { "lat": 41.3218112, "lon": 69.2858979 },
+    { "lat": 41.3218132, "lon": 69.2859596 },
+    { "lat": 41.3218031, "lon": 69.2860508 },
+    { "lat": 41.3218233, "lon": 69.2860803 },
+    { "lat": 41.3222282, "lon": 69.2861313 },
+    { "lat": 41.3222564, "lon": 69.2861474 },
+    { "lat": 41.3221677, "lon": 69.2868850 },
+    { "lat": 41.3221879, "lon": 69.2869145 },
+    { "lat": 41.3227922, "lon": 69.2870083 },
+    { "lat": 41.3228083, "lon": 69.2869681 },
+    { "lat": 41.3228828, "lon": 69.2863324 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420903416,
+  "bounds": {
+    "minlat": 41.3216259,
+    "minlon": 69.2861085,
+    "maxlat": 41.3217407,
+    "maxlon": 69.2869168
+  },
+  "geometry": [
+    { "lat": 41.3216259, "lon": 69.2869168 },
+    { "lat": 41.3217407, "lon": 69.2861085 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420903496,
+  "bounds": {
+    "minlat": 41.3222423,
+    "minlon": 69.2870429,
+    "maxlat": 41.3226613,
+    "maxlon": 69.2879605
+  },
+  "geometry": [
+    { "lat": 41.3222872, "lon": 69.2870429 },
+    { "lat": 41.3222423, "lon": 69.2874885 },
+    { "lat": 41.3226331, "lon": 69.2875528 },
+    { "lat": 41.3226613, "lon": 69.2875877 },
+    { "lat": 41.3226436, "lon": 69.2877795 },
+    { "lat": 41.3226270, "lon": 69.2879605 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1420903587,
+  "bounds": {
+    "minlat": 41.3218898,
+    "minlon": 69.2874348,
+    "maxlat": 41.3222423,
+    "maxlon": 69.2876762
+  },
+  "geometry": [
+    { "lat": 41.3222423, "lon": 69.2874885 },
+    { "lat": 41.3219381, "lon": 69.2874348 },
+    { "lat": 41.3219119, "lon": 69.2874482 },
+    { "lat": 41.3218898, "lon": 69.2876762 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1421483721,
+  "bounds": {
+    "minlat": 41.3259234,
+    "minlon": 69.2851254,
+    "maxlat": 41.3264864,
+    "maxlon": 69.2858523
+  },
+  "geometry": [
+    { "lat": 41.3259234, "lon": 69.2857718 },
+    { "lat": 41.3263756, "lon": 69.2858523 },
+    { "lat": 41.3264099, "lon": 69.2858389 },
+    { "lat": 41.3264864, "lon": 69.2851254 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 1421483722,
+  "bounds": {
+    "minlat": 41.3259096,
+    "minlon": 69.2849672,
+    "maxlat": 41.3260876,
+    "maxlon": 69.2859936
+  },
+  "geometry": [
+    { "lat": 41.3259096, "lon": 69.2859936 },
+    { "lat": 41.3259234, "lon": 69.2857718 },
+    { "lat": 41.3259305, "lon": 69.2857034 },
+    { "lat": 41.3259355, "lon": 69.2856122 },
+    { "lat": 41.3259768, "lon": 69.2854393 },
+    { "lat": 41.3260151, "lon": 69.2854044 },
+    { "lat": 41.3260453, "lon": 69.2853695 },
+    { "lat": 41.3260876, "lon": 69.2849672 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 1421490445,
+  "bounds": {
+    "minlat": 41.3263615,
+    "minlon": 69.2838465,
+    "maxlat": 41.3264684,
+    "maxlon": 69.2841625
+  },
+  "geometry": [
+    { "lat": 41.3264684, "lon": 69.2838465 },
+    { "lat": 41.3264340, "lon": 69.2841276 },
+    { "lat": 41.3264139, "lon": 69.2841625 },
+    { "lat": 41.3263615, "lon": 69.2841625 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 1421490446,
+  "bounds": {
+    "minlat": 41.3259305,
+    "minlon": 69.2837092,
+    "maxlat": 41.3264808,
+    "maxlon": 69.2842162
+  },
+  "geometry": [
+    { "lat": 41.3264808, "lon": 69.2837469 },
+    { "lat": 41.3262427, "lon": 69.2837092 },
+    { "lat": 41.3261802, "lon": 69.2842162 },
+    { "lat": 41.3259305, "lon": 69.2841652 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 1421490447,
+  "bounds": {
+    "minlat": 41.3270920,
+    "minlon": 69.2847375,
+    "maxlat": 41.3275105,
+    "maxlon": 69.2848159
+  },
+  "geometry": [
+    { "lat": 41.3270920, "lon": 69.2847375 },
+    { "lat": 41.3273910, "lon": 69.2847941 },
+    { "lat": 41.3275105, "lon": 69.2848159 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1421492665,
+  "bounds": {
+    "minlat": 41.3257673,
+    "minlon": 69.2870011,
+    "maxlat": 41.3260856,
+    "maxlon": 69.2870271
+  },
+  "geometry": [
+    { "lat": 41.3257673, "lon": 69.2870011 },
+    { "lat": 41.3260856, "lon": 69.2870271 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 1421493251,
+  "bounds": {
+    "minlat": 41.3246581,
+    "minlon": 69.2843805,
+    "maxlat": 41.3254171,
+    "maxlon": 69.2844765
+  },
+  "geometry": [
+    { "lat": 41.3254171, "lon": 69.2844765 },
+    { "lat": 41.3246581, "lon": 69.2843805 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 1421686850,
+  "bounds": {
+    "minlat": 41.3263192,
+    "minlon": 69.2876735,
+    "maxlat": 41.3267462,
+    "maxlon": 69.2876936
+  },
+  "geometry": [
+    { "lat": 41.3267462, "lon": 69.2876936 },
+    { "lat": 41.3267019, "lon": 69.2876735 },
+    { "lat": 41.3263192, "lon": 69.2876816 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 1421687063,
+  "bounds": {
+    "minlat": 41.3255071,
+    "minlon": 69.2882287,
+    "maxlat": 41.3255377,
+    "maxlon": 69.2885775
+  },
+  "geometry": [
+    { "lat": 41.3255071, "lon": 69.2885775 },
+    { "lat": 41.3255377, "lon": 69.2882287 }
+  ],
+  "tags": {
+    "highway": "service",
+    "maxspeed": "UZ:living_street"
+  }
+},
+{
+  "type": "way",
+  "id": 1428975380,
+  "bounds": {
+    "minlat": 41.3233083,
+    "minlon": 69.2835050,
+    "maxlat": 41.3236024,
+    "maxlon": 69.2849484
+  },
+  "geometry": [
+    { "lat": 41.3233083, "lon": 69.2849094 },
+    { "lat": 41.3234307, "lon": 69.2849484 },
+    { "lat": 41.3236024, "lon": 69.2835050 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1460240338,
+  "bounds": {
+    "minlat": 41.3255472,
+    "minlon": 69.2827270,
+    "maxlat": 41.3255853,
+    "maxlon": 69.2829281
+  },
+  "geometry": [
+    { "lat": 41.3255472, "lon": 69.2829281 },
+    { "lat": 41.3255853, "lon": 69.2827270 }
+  ],
+  "tags": {
+    "access": "yes",
+    "alt_name": "Ниязбекская улица",
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "primary",
+    "int_name": "Niyozbek yuli",
+    "lane_markings": "no",
+    "maxspeed": "50",
+    "name": "Niyozbek yo'li ko'chasi",
+    "name:en": "Niazbek Street",
+    "name:eo": "Niazbek strato",
+    "name:ru": "Ниёзбек йули улица",
+    "old_name": "Урицкого улица;Ниязбекская улица",
+    "old_name:ru": "Урицкого улица;Ниязбекская улица",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1463163341,
+  "bounds": {
+    "minlat": 41.3272965,
+    "minlon": 69.2834441,
+    "maxlat": 41.3274415,
+    "maxlon": 69.2835473
+  },
+  "geometry": [
+    { "lat": 41.3272965, "lon": 69.2835473 },
+    { "lat": 41.3274415, "lon": 69.2834441 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1463163342,
+  "bounds": {
+    "minlat": 41.3272881,
+    "minlon": 69.2835335,
+    "maxlat": 41.3273490,
+    "maxlon": 69.2836328
+  },
+  "geometry": [
+    { "lat": 41.3272881, "lon": 69.2835335 },
+    { "lat": 41.3272965, "lon": 69.2835473 },
+    { "lat": 41.3273490, "lon": 69.2836328 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1463163343,
+  "bounds": {
+    "minlat": 41.3265193,
+    "minlon": 69.2833550,
+    "maxlat": 41.3272881,
+    "maxlon": 69.2835335
+  },
+  "geometry": [
+    { "lat": 41.3265193, "lon": 69.2833550 },
+    { "lat": 41.3272881, "lon": 69.2835335 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1463163344,
+  "bounds": {
+    "minlat": 41.3265119,
+    "minlon": 69.2834297,
+    "maxlat": 41.3273490,
+    "maxlon": 69.2836328
+  },
+  "geometry": [
+    { "lat": 41.3265119, "lon": 69.2834297 },
+    { "lat": 41.3265554, "lon": 69.2834403 },
+    { "lat": 41.3273490, "lon": 69.2836328 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1463163345,
+  "bounds": {
+    "minlat": 41.3274475,
+    "minlon": 69.2834469,
+    "maxlat": 41.3274549,
+    "maxlon": 69.2835133
+  },
+  "geometry": [
+    { "lat": 41.3274549, "lon": 69.2834469 },
+    { "lat": 41.3274475, "lon": 69.2835133 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1463163346,
+  "bounds": {
+    "minlat": 41.3275108,
+    "minlon": 69.2829804,
+    "maxlat": 41.3275181,
+    "maxlon": 69.2830629
+  },
+  "geometry": [
+    { "lat": 41.3275181, "lon": 69.2829804 },
+    { "lat": 41.3275108, "lon": 69.2830629 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1463163349,
+  "bounds": {
+    "minlat": 41.3275242,
+    "minlon": 69.2834744,
+    "maxlat": 41.3275470,
+    "maxlon": 69.2834851
+  },
+  "geometry": [
+    { "lat": 41.3275470, "lon": 69.2834744 },
+    { "lat": 41.3275242, "lon": 69.2834851 }
+  ],
+  "tags": {
+    "crossing": "zebra",
+    "footway": "crossing",
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1465136941,
+  "bounds": {
+    "minlat": 41.3244423,
+    "minlon": 69.2824919,
+    "maxlat": 41.3244832,
+    "maxlon": 69.2827003
+  },
+  "geometry": [
+    { "lat": 41.3244423, "lon": 69.2827003 },
+    { "lat": 41.3244606, "lon": 69.2826742 },
+    { "lat": 41.3244721, "lon": 69.2826504 },
+    { "lat": 41.3244784, "lon": 69.2826233 },
+    { "lat": 41.3244832, "lon": 69.2825938 },
+    { "lat": 41.3244822, "lon": 69.2825438 },
+    { "lat": 41.3244757, "lon": 69.2825190 },
+    { "lat": 41.3244671, "lon": 69.2824919 }
+  ],
+  "tags": {
+    "highway": "primary_link",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1474725150,
+  "bounds": {
+    "minlat": 41.3215059,
+    "minlon": 69.2845559,
+    "maxlat": 41.3218233,
+    "maxlon": 69.2846265
+  },
+  "geometry": [
+    { "lat": 41.3218233, "lon": 69.2846265 },
+    { "lat": 41.3216029, "lon": 69.2845782 },
+    { "lat": 41.3215059, "lon": 69.2845559 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1474754621,
+  "bounds": {
+    "minlat": 41.3218334,
+    "minlon": 69.2835662,
+    "maxlat": 41.3218676,
+    "maxlon": 69.2838353
+  },
+  "geometry": [
+    { "lat": 41.3218676, "lon": 69.2835662 },
+    { "lat": 41.3218334, "lon": 69.2838353 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1474811483,
+  "bounds": {
+    "minlat": 41.3230430,
+    "minlon": 69.2838138,
+    "maxlat": 41.3234201,
+    "maxlon": 69.2838888
+  },
+  "geometry": [
+    { "lat": 41.3234201, "lon": 69.2838888 },
+    { "lat": 41.3230430, "lon": 69.2838138 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1475538755,
+  "bounds": {
+    "minlat": 41.3250830,
+    "minlon": 69.2836294,
+    "maxlat": 41.3254687,
+    "maxlon": 69.2836953
+  },
+  "geometry": [
+    { "lat": 41.3254687, "lon": 69.2836953 },
+    { "lat": 41.3250830, "lon": 69.2836294 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1475538756,
+  "bounds": {
+    "minlat": 41.3222342,
+    "minlon": 69.2874885,
+    "maxlat": 41.3226436,
+    "maxlon": 69.2877795
+  },
+  "geometry": [
+    { "lat": 41.3226436, "lon": 69.2877795 },
+    { "lat": 41.3222342, "lon": 69.2876950 },
+    { "lat": 41.3222423, "lon": 69.2874885 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1475538757,
+  "bounds": {
+    "minlat": 41.3221808,
+    "minlon": 69.2816124,
+    "maxlat": 41.3224654,
+    "maxlon": 69.2816594
+  },
+  "geometry": [
+    { "lat": 41.3221808, "lon": 69.2816124 },
+    { "lat": 41.3224654, "lon": 69.2816594 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1475538758,
+  "bounds": {
+    "minlat": 41.3221526,
+    "minlon": 69.2811272,
+    "maxlat": 41.3222597,
+    "maxlon": 69.2816124
+  },
+  "geometry": [
+    { "lat": 41.3222597, "lon": 69.2811322 },
+    { "lat": 41.3222231, "lon": 69.2814743 },
+    { "lat": 41.3221808, "lon": 69.2816124 },
+    { "lat": 41.3221526, "lon": 69.2814488 },
+    { "lat": 41.3222026, "lon": 69.2811272 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1475538759,
+  "bounds": {
+    "minlat": 41.3222072,
+    "minlon": 69.2807923,
+    "maxlat": 41.3222680,
+    "maxlon": 69.2810318
+  },
+  "geometry": [
+    { "lat": 41.3222680, "lon": 69.2807923 },
+    { "lat": 41.3222347, "lon": 69.2808332 },
+    { "lat": 41.3222072, "lon": 69.2810318 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1475538760,
+  "bounds": {
+    "minlat": 41.3222643,
+    "minlon": 69.2806300,
+    "maxlat": 41.3222926,
+    "maxlon": 69.2810368
+  },
+  "geometry": [
+    { "lat": 41.3222643, "lon": 69.2810368 },
+    { "lat": 41.3222886, "lon": 69.2808413 },
+    { "lat": 41.3222680, "lon": 69.2807923 },
+    { "lat": 41.3222926, "lon": 69.2806300 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1475538761,
+  "bounds": {
+    "minlat": 41.3221876,
+    "minlon": 69.2810217,
+    "maxlat": 41.3222793,
+    "maxlon": 69.2811424
+  },
+  "geometry": [
+    { "lat": 41.3222262, "lon": 69.2810217 },
+    { "lat": 41.3222072, "lon": 69.2810318 },
+    { "lat": 41.3221935, "lon": 69.2810560 },
+    { "lat": 41.3221876, "lon": 69.2810781 },
+    { "lat": 41.3221909, "lon": 69.2811049 },
+    { "lat": 41.3222026, "lon": 69.2811272 },
+    { "lat": 41.3222204, "lon": 69.2811406 },
+    { "lat": 41.3222408, "lon": 69.2811424 },
+    { "lat": 41.3222597, "lon": 69.2811322 },
+    { "lat": 41.3222734, "lon": 69.2811120 },
+    { "lat": 41.3222793, "lon": 69.2810860 },
+    { "lat": 41.3222760, "lon": 69.2810591 },
+    { "lat": 41.3222643, "lon": 69.2810368 },
+    { "lat": 41.3222465, "lon": 69.2810234 },
+    { "lat": 41.3222262, "lon": 69.2810217 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1475538762,
+  "bounds": {
+    "minlat": 41.3221275,
+    "minlon": 69.2810477,
+    "maxlat": 41.3221935,
+    "maxlon": 69.2810560
+  },
+  "geometry": [
+    { "lat": 41.3221275, "lon": 69.2810482 },
+    { "lat": 41.3221461, "lon": 69.2810477 },
+    { "lat": 41.3221748, "lon": 69.2810538 },
+    { "lat": 41.3221935, "lon": 69.2810560 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1475538763,
+  "bounds": {
+    "minlat": 41.3211308,
+    "minlon": 69.2858184,
+    "maxlat": 41.3214478,
+    "maxlon": 69.2881288
+  },
+  "geometry": [
+    { "lat": 41.3211308, "lon": 69.2881288 },
+    { "lat": 41.3211428, "lon": 69.2880809 },
+    { "lat": 41.3212985, "lon": 69.2868736 },
+    { "lat": 41.3213398, "lon": 69.2866771 },
+    { "lat": 41.3214478, "lon": 69.2858184 }
+  ],
+  "tags": {
+    "highway": "footway",
+    "name": "Хамидуллы Арипова улица",
+    "name:ru": "Хамидуллы Арипова улица"
+  }
+},
+{
+  "type": "way",
+  "id": 1491288001,
+  "bounds": {
+    "minlat": 41.3215578,
+    "minlon": 69.2810311,
+    "maxlat": 41.3218210,
+    "maxlon": 69.2810930
+  },
+  "geometry": [
+    { "lat": 41.3218210, "lon": 69.2810930 },
+    { "lat": 41.3215578, "lon": 69.2810311 }
+  ],
+  "tags": {
+    "barrier": "wall",
+    "height": "1",
+    "material": "concrete",
+    "wall": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1491288002,
+  "bounds": {
+    "minlat": 41.3218210,
+    "minlon": 69.2796072,
+    "maxlat": 41.3220034,
+    "maxlon": 69.2810930
+  },
+  "geometry": [
+    { "lat": 41.3220034, "lon": 69.2796072 },
+    { "lat": 41.3218210, "lon": 69.2810930 }
+  ],
+  "tags": {
+    "barrier": "retaining_wall"
+  }
+},
+{
+  "type": "way",
+  "id": 1491288004,
+  "bounds": {
+    "minlat": 41.3208062,
+    "minlon": 69.2828978,
+    "maxlat": 41.3213322,
+    "maxlon": 69.2867189
+  },
+  "geometry": [
+    { "lat": 41.3208062, "lon": 69.2867189 },
+    { "lat": 41.3209061, "lon": 69.2861957 },
+    { "lat": 41.3209512, "lon": 69.2859226 },
+    { "lat": 41.3209857, "lon": 69.2856709 },
+    { "lat": 41.3213312, "lon": 69.2829118 },
+    { "lat": 41.3213322, "lon": 69.2828978 }
+  ],
+  "tags": {
+    "barrier": "retaining_wall"
+  }
+},
+{
+  "type": "way",
+  "id": 1491288005,
+  "bounds": {
+    "minlat": 41.3211561,
+    "minlon": 69.2829448,
+    "maxlat": 41.3215999,
+    "maxlon": 69.2865976
+  },
+  "geometry": [
+    { "lat": 41.3215999, "lon": 69.2829448 },
+    { "lat": 41.3215977, "lon": 69.2829623 },
+    { "lat": 41.3212409, "lon": 69.2857872 },
+    { "lat": 41.3211561, "lon": 69.2865976 }
+  ],
+  "tags": {
+    "barrier": "retaining_wall"
+  }
+},
+{
+  "type": "way",
+  "id": 1491288006,
+  "bounds": {
+    "minlat": 41.3213322,
+    "minlon": 69.2828978,
+    "maxlat": 41.3215999,
+    "maxlon": 69.2829448
+  },
+  "geometry": [
+    { "lat": 41.3213322, "lon": 69.2828978 },
+    { "lat": 41.3215999, "lon": 69.2829448 }
+  ],
+  "tags": {
+    "barrier": "wall",
+    "height": "1",
+    "material": "concrete",
+    "wall": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1495522858,
+  "bounds": {
+    "minlat": 41.3220143,
+    "minlon": 69.2826736,
+    "maxlat": 41.3220205,
+    "maxlon": 69.2827441
+  },
+  "geometry": [
+    { "lat": 41.3220205, "lon": 69.2826736 },
+    { "lat": 41.3220143, "lon": 69.2827441 }
+  ],
+  "tags": {
+    "handrail": "yes",
+    "highway": "steps",
+    "incline": "up",
+    "layer": "-1",
+    "lit": "no",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1508201084,
+  "bounds": {
+    "minlat": 41.3220964,
+    "minlon": 69.2823058,
+    "maxlat": 41.3221048,
+    "maxlon": 69.2823799
+  },
+  "geometry": [
+    { "lat": 41.3221048, "lon": 69.2823058 },
+    { "lat": 41.3220964, "lon": 69.2823799 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1508201085,
+  "bounds": {
+    "minlat": 41.3221478,
+    "minlon": 69.2818466,
+    "maxlat": 41.3221897,
+    "maxlon": 69.2818787
+  },
+  "geometry": [
+    { "lat": 41.3221897, "lon": 69.2818466 },
+    { "lat": 41.3221478, "lon": 69.2818787 }
+  ],
+  "tags": {
+    "highway": "footway"
+  }
+},
+{
+  "type": "way",
+  "id": 1559843338,
+  "bounds": {
+    "minlat": 41.3240689,
+    "minlon": 69.2808646,
+    "maxlat": 41.3246711,
+    "maxlon": 69.2814235
+  },
+  "geometry": [
+    { "lat": 41.3246711, "lon": 69.2808646 },
+    { "lat": 41.3243195, "lon": 69.2811505 },
+    { "lat": 41.3240689, "lon": 69.2814235 }
+  ],
+  "tags": {
+    "bicycle": "no",
+    "foot": "yes",
+    "highway": "path",
+    "surface": "paving_stones",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 1559843339,
+  "bounds": {
+    "minlat": 41.3256883,
+    "minlon": 69.2812311,
+    "maxlat": 41.3257993,
+    "maxlon": 69.2812545
+  },
+  "geometry": [
+    { "lat": 41.3257993, "lon": 69.2812545 },
+    { "lat": 41.3256883, "lon": 69.2812311 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1559843340,
+  "bounds": {
+    "minlat": 41.3260696,
+    "minlon": 69.2812076,
+    "maxlat": 41.3265581,
+    "maxlon": 69.2813254
+  },
+  "geometry": [
+    { "lat": 41.3260696, "lon": 69.2812076 },
+    { "lat": 41.3265581, "lon": 69.2813254 }
+  ],
+  "tags": {
+    "highway": "service"
+  }
+},
+{
+  "type": "way",
+  "id": 1559843341,
+  "bounds": {
+    "minlat": 41.3259857,
+    "minlon": 69.2811866,
+    "maxlat": 41.3260696,
+    "maxlon": 69.2812076
+  },
+  "geometry": [
+    { "lat": 41.3259857, "lon": 69.2811866 },
+    { "lat": 41.3260696, "lon": 69.2812076 }
+  ],
+  "tags": {
+    "highway": "steps"
+  }
+},
+{
+  "type": "way",
+  "id": 1559843342,
+  "bounds": {
+    "minlat": 41.3262989,
+    "minlon": 69.2816586,
+    "maxlat": 41.3263724,
+    "maxlon": 69.2823433
+  },
+  "geometry": [
+    { "lat": 41.3263724, "lon": 69.2816586 },
+    { "lat": 41.3262989, "lon": 69.2821810 },
+    { "lat": 41.3263444, "lon": 69.2823433 }
+  ],
+  "tags": {
+    "highway": "path"
+  }
+}
+
+  ]
+}
