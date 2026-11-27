@@ -1,0 +1,23 @@
+# --- Downloaded archive (original lives in Google Drive) ---
+google_drive/
+.import/
+
+# --- Heavy, regenerable OSM cache (fetch_districts.py / fetch_roads.py) ---
+tsue3d/data/tiles/
+tsue3d/data/tiles_road/
+
+# --- Comparison screenshots (large, regenerable) ---
+tsue3d/shots/
+
+# --- System artifacts ---
+.sudo_as_admin_successful
+
+# --- Node / Vercel / env ---
+node_modules/
+.vercel/
+.env
+.env.*
+!.env.example
+
+# --- OS ---
+.DS_Store

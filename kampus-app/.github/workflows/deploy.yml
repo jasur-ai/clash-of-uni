@@ -1,0 +1,17 @@
+# GitHub'ga push qilinganda Vercelga avtomatik deploy.
+# Vercel → Project → Settings → Tokens: VERCEL_TOKEN yarating,
+# GitHub → Settings → Secrets → Actions: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID qo'shing.
+name: Deploy to Vercel
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy
+        run: npx vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
