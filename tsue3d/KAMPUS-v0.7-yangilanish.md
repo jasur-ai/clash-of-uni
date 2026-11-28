@@ -193,3 +193,114 @@ tsue3d/
 ```
 
 Lokal commit: v0.7 (push qilinmagan).
+
+---
+
+## 8. v0.8 — SAYR: personaj, mashina, mototsikl va haqiqiy interyer
+
+Bu bosqichda o'yin "kuzatish" rejimidan **o'ynaladigan** rejimga o'tdi: kamera ortidan
+boshqariladigan odam, transport va **ichiga kirib yuriladigan** bino.
+
+### 8.1 Boshqaruv
+
+| Amal | Telefonda | Klaviaturada |
+|---|---|---|
+| Yurish / haydash | chap pastdagi **joystik** | `W A S D` yoki strelkalar |
+| Yuguirsh | — | `Shift` (7.4 m/s) |
+| Kirish / chiqish / transportga o'tirish | o'ngdagi **E** | `E` |
+| Mashina / mototsikl chaqirish | «mashina» / «mototsikl» tugmalari | `E` (yaqin transportga) |
+| Sayrdan chiqish | yuqoridagi **✕** | `Esc` |
+
+Kirish: yuqori navigatsiyadagi yangi **"Sayr"** tugmasi. Sayr rejimida oddiy HUD
+(chip'lar, nav, toast) yashiriladi — faqat o'yin boshqaruvi qoladi.
+
+### 8.2 Personaj
+
+- Balandligi ≈1.8 m, 15 ta primitiv: tana, bosh + soch, **sonlar va yelkalar alohida
+  guruhlarda** — yurganda qo'l-oyoq qarshi fazada tebranadi (`sw` sinus), sakrash yo'q.
+- Tezlik: yurish **3.6 m/s**, yugurish **7.4 m/s**, burilish silliq (lerp).
+- Spawn: kampusdagi bo'sh joy **halqa bo'ylab qidiriladi** — bino qutisi ham, daraxt ham
+  5 m masofada bo'lmasligi shart (daraxtlar `Math.random` bilan qo'yiladi, shuning uchun
+  har yuklashda joy o'zgaradi — qidiruv ham har safar yangilanadi).
+
+### 8.3 Transport
+
+| | Mashina | Mototsikl |
+|---|---|---|
+| O'lcham | 4.35 × 1.86 m, shisha kabina, yon oynalar, ko'zgular, panjara, fara + stop | 2.4 m karkas, bak, o'rindiq, vilka, rul, egzoz, fara + stop |
+| Tezlik | max **27 m/s** (97 km/soat), tezlanish 9 | max **33 m/s** (119 km/soat), tezlanish 13 |
+| Kamera | orqada 13.5 m, balandlik 5.2 m | xuddi shunday |
+
+- Transport **E** bilan chaqiriladi va o'yinchining 5 m oldiga keladi (`SAYR.want` —
+  chaqirilgan transport ustuvor, aks holda eng yaqini tanlanadi).
+- Tushganda o'yinchi transportning yoniga (2.4 m) qo'yiladi; agar u joy to'siq bo'lsa —
+  narigi tomoniga.
+- Mototsiklda personaj transport ustida turadi (oyoqlari bukilgan), mashinada yashiriladi.
+
+### 8.4 Haqiqiy interyer (faqat struktura emas)
+
+Kampusdagi eng yaqin binoga (26 m) **E** bosilsa — bino ichiga "kiriladi". Interyer
+shahar koordinatalaridan **46 000 m** uzoqda, alohida guruhda quriladi (`ROOM_ORIGIN`),
+shuning uchun shahar bilan hech qanday ziddiyat yo'q va u yerda faqat xona renderlanadi
+(49 draw call).
+
+Xona: **38 × 30 m, balandligi 4.4 m**, haqiqiy yuriladigan:
+
+- marmar pol (chok chiziqlari), shiftda 5 ta yorug'lik paneli + **5 nuqtali yoritish**;
+- **+Z devorda 4.2 m eshik teshigi** (ikkita yon bo'lak + tepa qism) — o'yinchi shu yerdan
+  "kiradi";
+- 8 ta ustun (ikki qatorda), har biri **kollayder** (r 0.72 m) — urib o'tib ketilmaydi;
+- qabul peshtaxtasi (9 m) ustida monitor, orqasida stul, kollayderi bilan;
+- 2 ta **lift eshigi** + tugma paneli, 4 ta devor ramkasi, 4 ta skameyka, 2 ta fikus;
+- kirish gilami, orqa devorda bino nomi (`v7TextPlane` bilan avtomatik shrift);
+- xona tashqarisida katta "quti" (BackSide) — ko'chadagi shahar ko'rinmaydi;
+- devor/ustun/transport **kollayderlari**: AABB emas, aylana bo'yicha (tez va aniq).
+
+Chiqish — yana **E**; o'yinchi kirishdan oldingi joyiga qaytadi (`SAYR.roomReturn`).
+
+### 8.5 Bu bosqichda tuzatilgan xatolar
+
+1. **Kamera yaqin tekisligi 3 m edi** — sayrda personaj va transport ko'rinmasdi.
+   Endi sayrda `near = 0.3`, `fov = 58` (chiqishda 3 / 42 ga qaytadi).
+2. **Kamera lerpi past FPS'da yetib bormasdi** — 25 m dan uzoq bo'lsa darhol o'rnatiladi,
+   `dt` chegarasi 0.05 → **0.2 s**.
+3. **Transport 90° yonboshlab yurardi** — modellar +X bo'ylab qurilgan, `rotation.y = yaw`
+   esa +Z ni beradi → `yaw − π/2`. Mototsikldagi personaj burilishi ham tuzatildi.
+4. **Ustun/daraxt ichiga kirib ketish** — kamera endi o'yinchidan orqaga qarab qadamlab
+   tekshiradi (daraxt radiusi 3.4 m, xonada ustun/devor 0.45 m), birinchi bo'sh nuqtada
+   to'xtaydi; harakatda esa daraxt tanasi (r + 1 m) to'siq bo'ladi.
+5. **Ikki marta toast/ikki hint** — sayrda toast butunlay yashiriladi.
+6. **"Mototsikl" tugmasi mashinaga o'tirib olardi** — endi chaqirilgan transport ustuvor.
+7. Xona kollayderi **lokal** koordinatada hisoblanardi (46 000 → 16), shu sababli o'yinchi
+   devorga yopishib qolardi — jahon koordinatasiga o'tkazildi.
+
+### 8.6 O'lchov va sinov
+
+| Ko'rsatkich | Qiymat |
+|---|---|
+| `index.html` | 1052 KB (1045 edi) |
+| Tuman `.bin` | 12 ta, 4.87 MB |
+| Sayr — shahar | ~150 draw call |
+| Sayr — interyer | **49 draw call** |
+| Sahifa xatolari | 0 |
+| Yurish (3 s, dasturiy render ~4 FPS) | 4 m |
+| Mashina (3 s) | 33.7 m, `vel` 27.0 |
+| Mototsikl (2.5 s) | 31.9 m |
+| Kirish/chiqish, transportga o'tirish | ishlaydi (`SAYR.inRoom`, `SAYR.mode`), chiqishda `near/fov` tiklanadi |
+
+Eslatma: dasturiy render (SwiftShader) da FPS past bo'lgani uchun yurish masofasi kam
+ko'rinadi — haqiqiy qurilmada 60 FPS da tezlik to'liq (3.6 m/s).
+
+### 8.7 Fayllar
+
+```
+tsue3d/src/game.v2.js        +SAYR moduli (~600 satr): kolliziya, personaj, transport, interyer
+tsue3d/src/index.v2.template.html  +"Sayr" nav tugmasi
+kampus-app/index.html        1052 KB (qurilgan)
+tsue3d/shots/v8-01-sayr.png            piyoda
+tsue3d/shots/v8-03-mashina.png         mashinada
+tsue3d/shots/v8-04-mototsikl.png       mototsiklda
+tsue3d/shots/v8-05-interyer.png        interyer (kirish)
+tsue3d/shots/v8-06-interyer-yurish.png interyer (yurish)
+tsue3d/shots/v8-sayr-taqqoslash.jpg    4 rejim — 2×2
+```

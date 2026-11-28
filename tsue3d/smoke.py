@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""KAMPUS v0.7.2 smoke test — kampus-app/ statik to'plami to'g'riligini tekshiradi.
+"""KAMPUS v0.8 smoke test — kampus-app/ statik to'plami to'g'riligini tekshiradi.
 
 Ishlatish:  python3 tsue3d/smoke.py
 Chiqish kodi: 0 = SMOKE PASS, 1 = xato.
@@ -40,9 +40,9 @@ if not html:
     sys.exit(1)
 
 print('== 1) index.html asosiy ==')
-check('DIGITAL TWIN v0.7.2' in html, 'brand «DIGITAL TWIN v0.7.2»')
+check('DIGITAL TWIN v0.8' in html, 'brand «DIGITAL TWIN v0.8»')
 check('<title>KAMPUS · TDIU — Toshkent 3D digital twin</title>' in html, 'title')
-check('DIGITAL TWIN v0.6' not in html and 'DIGITAL TWIN v0.7</span>' not in html, 'eski brand yoʻq')
+check('DIGITAL TWIN v0.6' not in html and 'DIGITAL TWIN v0.7.2</span>' not in html, 'eski brand yoʻq')
 
 EMOJI = re.compile('['
     '\U0001F300-\U0001FAFF'   # symbols & pictographs, emoticons, etc.
@@ -71,10 +71,15 @@ def inline_json(marker, html_text=html):
     return json.loads(html_text[i + len(marker):j])
 
 print('== 1b) game (inline) mazmuni ==')
-for frag in ['buildChorsu', 'buildTVTower', 'AKADEMIK LITSEYI', 'LMARR', 'hasInterior']:
+for frag in ['buildChorsu', 'buildTVTower', 'AKADEMIK LITSEYI', 'LMARR', 'hasInterior',
+             'SAYR', 'sayrStart', 'sayrUpdate', 'sayrInteract', 'window.TREES']:
     check(frag in html, f'game: {frag}')
 check("b.campus === 'main'\n    ?" not in html, 'Finance-interior gate olib tashlangan (qaror)')
 check(html.count("b.campus === 'main'") >= 2, 'ichki koʻrinish gate main+finance')
+check('data-v="sayr"' in html, 'nav: Sayr tugmasi')
+check('sayrJoy' in html, 'sayr: joystik DOM')
+check('chorsu:        { r: 220' in html, 'LM_FLY chorsu')
+check('tv_tower:      { r: 760' in html, 'LM_FLY tv_tower')
 
 print('== 2) inline JSON bloklari ==')
 campus = inline_json('window.CAMPUS = ')
@@ -153,7 +158,7 @@ with socketserver.TCPServer(('127.0.0.1', 0), handler) as httpd:
         with urllib.request.urlopen(f'http://127.0.0.1:{port}/{path}', timeout=10) as r:
             return r.status, r.read()
     st, body = get('index.html')
-    check(st == 200 and b'DIGITAL TWIN v0.7.2' in body, 'index.html 200 + brand')
+    check(st == 200 and b'DIGITAL TWIN v0.8' in body, 'index.html 200 + brand')
     st, _ = get('data/roads.bin')
     check(st == 200, 'data/roads.bin 200')
     for k in dist['districts']:

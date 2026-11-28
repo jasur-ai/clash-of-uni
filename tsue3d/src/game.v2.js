@@ -1,8 +1,10 @@
 /* =====================================================================
-   KAMPUS: TDIU — v0.2 "Digital Twin"
-   • 2 kampus (Asosiy + Moliya), haqiqiy OSM geometriyasi
-   • protsedural fasad teksturalari (deraza toʻrlari), landmark minora
-   • 4 xil egallash usuli: qurilish, fakultet urushi, QR check-in, 1v1 duel
+   KAMPUS: TDIU — v0.8 "SAYR"
+   • 2 kampus (Asosiy + Moliya), haqiqiy OSM geometriyasi (12 tuman, 253 328 bino)
+   • v0.7.2: foto-asosli landmarklar — Chorsu gumbazi, teleminora, Nest One, litsey darvozasi
+   • v0.8: sayr rejimi — personaj (joystik/WASD, Shift 7.4 m/s), mashina (27 m/s),
+     mototsikl (33 m/s), yurib kiriladigan interyer (E — eng yaqin bino)
+   • Finance kampusida ham ichki koʻrinish (foydalanuvchi qarori, v0.7.2 porta)
    ===================================================================== */
 'use strict';
 
@@ -2255,6 +2257,7 @@ mergePoiModels();
         const x = cx + Math.cos(ang) * rr, z = cz + Math.sin(ang) * rr;
         const s = 0.75 + Math.random() * 0.75;
         d.position.set(x, 1.7 * s, z); d.scale.setScalar(s); d.rotation.set(0, Math.random() * 6, 0); d.updateMatrix();
+        (window.TREES || (window.TREES = [])).push([x, z, s]);
         trunk.setMatrixAt(n, d.matrix);
         d.position.y = 3.8 * s; d.updateMatrix();
         crown.setMatrixAt(n, d.matrix);
@@ -3137,6 +3140,7 @@ document.querySelectorAll('.nav button').forEach(btn => {
     if (v === 'quiz') startQuiz();
     if (v === 'duel') startDuel();
     if (v === 'season') { renderSeason(); $('#season').classList.add('open'); }
+    if (v === 'sayr') { closePanel(); sayrStart(); }
   };
 });
 $('#season-close').onclick = () => $('#season').classList.remove('open');
@@ -3144,6 +3148,8 @@ $('#campus-close').onclick = () => $('#campus').classList.remove('open');
 /* landmark tugmalari — kamerani landmarkga uchirish */
 const LM_FLY = {
   tashkent_city: { r: 640, theta: -0.72, phi: 0.66 },
+  chorsu:        { r: 220, theta: -0.6,  phi: 0.72 },
+  tv_tower:      { r: 760, theta: 0.4,   phi: 0.60 },
   humo_arena:    { r: 300, theta: -1.15, phi: 0.58 },
   magic_city:    { r: 260, theta: 0.9,   phi: 0.55 },
   ice_city:      { r: 170, theta: -0.8,  phi: 0.52 },
@@ -3201,6 +3207,595 @@ document.querySelectorAll('.campus-card').forEach(el => {
 
 /* ---------------------------------------------------------------- loop */
 let t = 0;
+
+/* ============================================================================
+   v0.8 — SAYR: personaj, mashina, mototsikl va yurib kiriladigan interyer
+   ============================================================================ */
+const SAYR = {
+  active: false, mode: 'walk',          // 'walk' | 'car' | 'moto'
+  pos: new THREE.Vector3(), yaw: 0, vel: 0,
+  keys: {}, avatar: null, car: null, moto: null, mounted: null,
+  inRoom: false, roomReturn: new THREE.Vector3(), coll: null, near: null, talk: null,
+};
+
+const SAYR_CELL = 40;
+function sayrBuildCollision() {
+  if (SAYR.coll) return SAYR.coll;
+  const M = new Map();
+  const push = (x0, z0, x1, z1) => {
+    const i0 = Math.floor(x0 / SAYR_CELL), i1 = Math.floor(x1 / SAYR_CELL);
+    const j0 = Math.floor(z0 / SAYR_CELL), j1 = Math.floor(z1 / SAYR_CELL);
+    for (let i = i0; i <= i1; i++) for (let j = j0; j <= j1; j++) {
+      const k = i + ',' + j;
+      if (!M.has(k)) M.set(k, []);
+      M.get(k).push({ x0, z0, x1, z1 });
+    }
+  };
+  for (const cp of CPS) for (const b of cp.buildings) {
+    if (!b.pts || b.pts.length < 3) continue;
+    let x0 = 1e9, z0 = 1e9, x1 = -1e9, z1 = -1e9;
+    for (const p of b.pts) { x0 = Math.min(x0, p[0]); x1 = Math.max(x1, p[0]); z0 = Math.min(z0, p[1]); z1 = Math.max(z1, p[1]); }
+    push(x0, z0, x1, z1);
+  }
+  for (const d of DISTRICTS) for (const b of (d.buildings || [])) {
+    if (!b.pts || b.pts.length < 3) continue;
+    let x0 = 1e9, z0 = 1e9, x1 = -1e9, z1 = -1e9;
+    for (const p of b.pts) { x0 = Math.min(x0, p[0]); x1 = Math.max(x1, p[0]); z0 = Math.min(z0, p[1]); z1 = Math.max(z1, p[1]); }
+    push(x0, z0, x1, z1);
+  }
+  SAYR.coll = M;
+  return M;
+}
+function sayrBlocked(x, z, r) {
+  const M = SAYR.coll; if (!M) return false;
+  const i = Math.floor(x / SAYR_CELL), j = Math.floor(z / SAYR_CELL);
+  for (let a = -1; a <= 1; a++) for (let c = -1; c <= 1; c++) {
+    const arr = M.get((i + a) + ',' + (j + c)); if (!arr) continue;
+    for (const b of arr) {
+      if (x > b.x0 - r && x < b.x1 + r && z > b.z0 - r && z < b.z1 + r) return true;
+    }
+  }
+  return false;
+}
+
+/* ---------------------------------------------------------------- modellar */
+function sayrMesh(geo, mat, x, y, z) {
+  const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); return m;
+}
+function buildPerson() {
+  const g = new THREE.Group();
+  const skin = new THREE.MeshLambertMaterial({ color: 0xd6a479 });
+  const shirt = new THREE.MeshPhongMaterial({ color: 0x2f74b8, shininess: 24 });
+  const pants = new THREE.MeshLambertMaterial({ color: 0x2a323d });
+  const shoe = new THREE.MeshLambertMaterial({ color: 0x14181e });
+  g.add(sayrMesh(new THREE.BoxGeometry(0.54, 0.7, 0.3), shirt, 0, 1.16, 0));
+  g.add(sayrMesh(new THREE.SphereGeometry(0.165, 12, 10), skin, 0, 1.63, 0));
+  const hair = new THREE.Mesh(new THREE.SphereGeometry(0.175, 12, 10, 0, Math.PI * 2, 0, Math.PI * 0.55),
+    new THREE.MeshLambertMaterial({ color: 0x241a13 }));
+  hair.position.set(0, 1.65, -0.01); g.add(hair);
+  const legs = [], arms = [];
+  for (const s of [-1, 1]) {
+    const hip = new THREE.Group(); hip.position.set(0.14 * s, 0.82, 0);
+    hip.add(sayrMesh(new THREE.BoxGeometry(0.18, 0.72, 0.2), pants, 0, -0.36, 0));
+    hip.add(sayrMesh(new THREE.BoxGeometry(0.2, 0.1, 0.28), shoe, 0, -0.74, 0.04));
+    g.add(hip); legs.push(hip);
+    const sh = new THREE.Group(); sh.position.set(0.35 * s, 1.44, 0);
+    sh.add(sayrMesh(new THREE.BoxGeometry(0.15, 0.62, 0.16), shirt, 0, -0.31, 0));
+    sh.add(sayrMesh(new THREE.BoxGeometry(0.14, 0.14, 0.14), skin, 0, -0.66, 0));
+    g.add(sh); arms.push(sh);
+  }
+  g.userData.legs = legs; g.userData.arms = arms;
+  return g;
+}
+function buildCarMesh() {
+  const g = new THREE.Group();
+  const body = new THREE.MeshPhongMaterial({ color: 0xc8342a, shininess: 80, specular: 0xffffff });
+  const glass = new THREE.MeshPhongMaterial({ color: 0x1d3644, shininess: 100, specular: 0xdff2ff, transparent: true, opacity: 0.92 });
+  const black = new THREE.MeshLambertMaterial({ color: 0x15181c });
+  g.add(sayrMesh(new THREE.BoxGeometry(4.35, 0.72, 1.86), body, 0, 0.72, 0));
+  g.add(sayrMesh(new THREE.BoxGeometry(2.3, 0.62, 1.72), glass, -0.12, 1.36, 0));
+  g.add(sayrMesh(new THREE.BoxGeometry(2.4, 0.12, 1.76), body, -0.12, 1.68, 0));
+  g.add(sayrMesh(new THREE.BoxGeometry(0.16, 0.26, 1.7), body, 2.1, 0.55, 0));
+  for (const x of [-1.42, 1.42]) for (const z of [-0.82, 0.82]) {
+    const w = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.26, 14), black);
+    w.rotation.x = Math.PI / 2; w.position.set(x, 0.36, z); g.add(w);
+  }
+  for (const s2 of [-1, 1]) g.add(sayrMesh(new THREE.BoxGeometry(2.0, 0.44, 0.04), glass, -0.12, 1.36, 0.87 * s2));  // yon oyna
+  g.add(sayrMesh(new THREE.BoxGeometry(0.1, 0.26, 1.5), black, 2.18, 0.5, 0));      // panjara
+  g.add(sayrMesh(new THREE.BoxGeometry(0.04, 0.16, 0.5), new THREE.MeshPhongMaterial({ color: 0xf2f4f6 }), 2.2, 0.42, 0));
+  for (const z of [-0.62, 0.62]) {                                                  // ko'zgu
+    g.add(sayrMesh(new THREE.BoxGeometry(0.12, 0.1, 0.2), body, 0.95, 1.42, 1.02));
+    g.add(sayrMesh(new THREE.BoxGeometry(0.12, 0.1, 0.2), body, 0.95, 1.42, -1.02));
+  }
+  const lens = new THREE.MeshPhongMaterial({ color: 0xfff3c4, emissive: 0x8a7a20 });
+  for (const z of [-0.6, 0.6]) g.add(sayrMesh(new THREE.BoxGeometry(0.12, 0.2, 0.4), lens, 2.16, 0.78, z));
+  const tail = new THREE.MeshPhongMaterial({ color: 0xd93a2a, emissive: 0x5a0f06 });
+  for (const z of [-0.62, 0.62]) g.add(sayrMesh(new THREE.BoxGeometry(0.1, 0.18, 0.36), tail, -2.16, 0.8, z));
+  return g;
+}
+function buildMotoMesh() {
+  const g = new THREE.Group();
+  const frame = new THREE.MeshPhongMaterial({ color: 0x1f5fa8, shininess: 90, specular: 0xffffff });
+  const black = new THREE.MeshLambertMaterial({ color: 0x14171b });
+  const chrome = new THREE.MeshPhongMaterial({ color: 0xcfd8de, shininess: 120, specular: 0xffffff });
+  for (const x of [-0.72, 0.72]) {
+    const w = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.14, 16), black);
+    w.rotation.x = Math.PI / 2; w.position.set(x, 0.34, 0); g.add(w);
+    const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.16, 12), chrome);
+    rim.rotation.x = Math.PI / 2; rim.position.set(x, 0.34, 0); g.add(rim);
+  }
+  g.add(sayrMesh(new THREE.BoxGeometry(1.34, 0.26, 0.3), frame, 0, 0.62, 0));      // rama
+  g.add(sayrMesh(new THREE.BoxGeometry(0.62, 0.3, 0.42), frame, 0.08, 0.9, 0));    // bak
+  g.add(sayrMesh(new THREE.BoxGeometry(0.66, 0.14, 0.34), black, -0.5, 0.9, 0));   // o'rindiq
+  g.add(sayrMesh(new THREE.BoxGeometry(0.14, 0.62, 0.14), chrome, 0.66, 0.72, 0)); // oldingi vilka
+  g.add(sayrMesh(new THREE.BoxGeometry(0.1, 0.1, 0.66), chrome, 0.7, 1.06, 0));    // rul
+  g.add(sayrMesh(new THREE.BoxGeometry(0.5, 0.1, 0.16), black, -0.72, 0.5, 0.2));  // egzoz
+  g.add(sayrMesh(new THREE.BoxGeometry(0.06, 0.34, 0.4), frame, 0.82, 0.52, 0));   // oldingi qanot
+  const lamp = new THREE.MeshPhongMaterial({ color: 0xfff6d0, emissive: 0x8a7a20 });
+  g.add(sayrMesh(new THREE.CylinderGeometry(0.13, 0.13, 0.12, 12), lamp, 0.78, 0.98, 0));  // fara
+  const tail = new THREE.MeshPhongMaterial({ color: 0xd93a2a, emissive: 0x5a0f06 });
+  g.add(sayrMesh(new THREE.BoxGeometry(0.06, 0.1, 0.22), tail, -0.82, 0.92, 0));   // stop
+  return g;
+}
+
+/* ---------------------------------------------------------------- interyer (haqiqiy, yurib kiriladi) */
+const ROOM_ORIGIN = { x: 46000, z: 46000 };
+let roomGroup = null;
+function buildShowroom(name) {
+  if (roomGroup) { roomGroup.visible = true; return roomGroup; }
+  const g = new THREE.Group();
+  g.position.set(ROOM_ORIGIN.x, 0, ROOM_ORIGIN.z);
+  const W = 38, D = 30, H = 4.4;
+  const floorMat = new THREE.MeshPhongMaterial({ color: 0xdfd8cc, shininess: 40 });
+  const wallMat = new THREE.MeshLambertMaterial({ color: 0xf0e9dc, emissive: 0x14120e });
+  const ceilMat = new THREE.MeshLambertMaterial({ color: 0xe8e4da, emissive: 0x6a6259 });
+  /* pol (marmar panellar) */
+  const fl = new THREE.Mesh(new THREE.PlaneGeometry(W, D), floorMat);
+  fl.rotation.x = -Math.PI / 2; g.add(fl);
+  for (let i = -4; i <= 4; i++) {                                  // chok chiziqlari
+    const ln = new THREE.Mesh(new THREE.PlaneGeometry(W, 0.06), new THREE.MeshBasicMaterial({ color: 0xc8c0b2 }));
+    ln.rotation.x = -Math.PI / 2; ln.position.set(0, 0.01, i * 2.6); g.add(ln);
+  }
+  /* shift */
+  const cl = new THREE.Mesh(new THREE.PlaneGeometry(W, D), ceilMat);
+  cl.rotation.x = Math.PI / 2; cl.position.y = H; g.add(cl);
+  for (let i = -2; i <= 2; i++) for (let j = -1; j <= 1; j++) {
+    const lp = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.08, 1.2),
+      new THREE.MeshPhongMaterial({ color: 0xfffdf2, emissive: 0xbdb48f }));
+    lp.position.set(i * 6, H - 0.1, j * 7); g.add(lp);
+  }
+  /* ichki yoritish: shift bo'ylab 5 nuqtali yorug'lik */
+  for (const [lx, lz] of [[-9, -6], [9, -6], [0, 0], [-9, 6], [9, 6]]) {
+    const pl = new THREE.PointLight(0xfff6e6, 0.85, 34, 1.4);
+    pl.position.set(lx, H - 0.7, lz); g.add(pl);
+  }
+  const amb = new THREE.PointLight(0xfff4e0, 0.9, 90, 1.0); amb.position.set(0, H - 0.6, 0); g.add(amb);
+  /* devorlar (eshik teshigi bilan) */
+  const wall = (w, h, d, x, y, z) => g.add(sayrMesh(new THREE.BoxGeometry(w, h, d), wallMat, x, y, z));
+  wall(W, H, 0.3, 0, H / 2, -D / 2);                 // orqa
+  wall(W, H, 0.3, 0, H / 2, D / 2);                  // old (kirish devori)
+  wall(0.3, H, D, -W / 2, H / 2, 0);
+  wall(0.3, H, D, W / 2, H / 2, 0);
+  /* oldingi devorda eshik teshigi: ikki yon bo'lak + tepa */
+  const doorW = 4.2;
+  wall(W / 2 - doorW / 2, H, 0.32, -(doorW / 2 + (W / 2 - doorW / 2) / 2), H / 2, D / 2 + 0.02);
+  wall(W / 2 - doorW / 2, H, 0.32, (doorW / 2 + (W / 2 - doorW / 2) / 2), H / 2, D / 2 + 0.02);
+  wall(doorW, H - 2.6, 0.32, 0, 2.6 + (H - 2.6) / 2, D / 2 + 0.02);
+  /* ustunlar */
+  const colMat = new THREE.MeshPhongMaterial({ color: 0xf6f1e6, shininess: 30 });
+  REALM.roomColl = [];
+  for (const x of [-13, -6.5, 6.5, 13]) for (const z of [-8, 8]) {
+    g.add(sayrMesh(new THREE.CylinderGeometry(0.55, 0.62, H, 14), colMat, x, H / 2, z));
+    g.add(sayrMesh(new THREE.CylinderGeometry(0.78, 0.78, 0.25, 14), colMat, x, 0.12, z));
+    REALM.roomColl.push({ x: ROOM_ORIGIN.x + x, z: ROOM_ORIGIN.z + z, r: 0.72 });
+  }
+  /* qabul peshtaxtasi */
+  const desk = new THREE.MeshPhongMaterial({ color: 0x6b4a33, shininess: 60 });
+  g.add(sayrMesh(new THREE.BoxGeometry(9, 1.15, 1.7), desk, 0, 0.58, -11.8));
+  g.add(sayrMesh(new THREE.BoxGeometry(9.3, 0.12, 2.0),
+    new THREE.MeshPhongMaterial({ color: 0xe9e2d4, shininess: 70 }), 0, 1.2, -11.8));
+  /* o'rindiqlar */
+  const bench = new THREE.MeshLambertMaterial({ color: 0x33506b });
+  for (const x of [-13, -9, 9, 13]) {
+    g.add(sayrMesh(new THREE.BoxGeometry(3.2, 0.16, 0.9), bench, x, 0.46, 3.6));
+    g.add(sayrMesh(new THREE.BoxGeometry(3.2, 0.7, 0.16), bench, x, 0.75, 3.15));
+  }
+  REALM.roomColl.push({ x: ROOM_ORIGIN.x, z: ROOM_ORIGIN.z - 11.8, r: 4.8 });   // peshtaxta
+  for (const x of [-13, -9, 9, 13]) REALM.roomColl.push({ x: ROOM_ORIGIN.x + x, z: ROOM_ORIGIN.z + 3.6, r: 1.9 });
+  /* o'simliklar */
+  const potMat = new THREE.MeshLambertMaterial({ color: 0x8d5a3c });
+  const leafMat = new THREE.MeshLambertMaterial({ color: 0x2f7a45 });
+  for (const x of [-17, 17]) for (const z of [-13, 13]) {
+    g.add(sayrMesh(new THREE.CylinderGeometry(0.5, 0.4, 0.7, 10), potMat, x, 0.35, z));
+    g.add(sayrMesh(new THREE.SphereGeometry(0.85, 10, 8), leafMat, x, 1.5, z));
+  }
+  /* lift eshiklari (orqa devor) */
+  const steel = new THREE.MeshPhongMaterial({ color: 0xb9c2c8, shininess: 110, specular: 0xffffff });
+  for (const x of [-6.4, -6.4 + 2.2]) {
+    g.add(sayrMesh(new THREE.BoxGeometry(1.05, 2.5, 0.1), steel, x, 1.25, -D / 2 + 0.18));
+  }
+  g.add(sayrMesh(new THREE.BoxGeometry(0.18, 0.34, 0.06), steel, -2.4, 1.2, -D / 2 + 0.2));  // tugma paneli
+  /* peshtaxta ustidagi monitor va stul */
+  g.add(sayrMesh(new THREE.BoxGeometry(0.72, 0.46, 0.05), new THREE.MeshPhongMaterial({ color: 0x101820 }),
+    -1.2, 1.5, -11.8));
+  g.add(sayrMesh(new THREE.BoxGeometry(0.06, 0.28, 0.06), steel, -1.2, 1.28, -11.9));
+  g.add(sayrMesh(new THREE.BoxGeometry(0.62, 0.12, 0.62), new THREE.MeshLambertMaterial({ color: 0x27313c }),
+    -1.2, 0.5, -13.2));
+  /* kirish gilami */
+  const rug = new THREE.Mesh(new THREE.PlaneGeometry(5.2, 3.2),
+    new THREE.MeshLambertMaterial({ color: 0x7d2b2b }));
+  rug.rotation.x = -Math.PI / 2; rug.position.set(0, 0.02, D / 2 - 2.6); g.add(rug);
+  /* devorlardagi ramkalar */
+  const frameMat = new THREE.MeshLambertMaterial({ color: 0x4a3a28 });
+  for (const x of [-16, -11, 11, 16]) {
+    g.add(sayrMesh(new THREE.BoxGeometry(1.8, 1.2, 0.08), frameMat, x, 2.4, -D / 2 + 0.22));
+    const pic = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 1.0),
+      new THREE.MeshLambertMaterial({ color: 0x9fb6c4 }));
+    pic.position.set(x, 2.4, -D / 2 + 0.27); g.add(pic);
+  }
+  /* devordagi lavha: bino nomi */
+  if (name) {
+    const p = v7TextPlane(name.toUpperCase(), 12, 1.5, 'rgba(240,233,220,1)', '#5d4630', 0);
+    p.position.set(0, 3.2, -D / 2 + 0.2); g.add(p);
+  }
+  /* tashqi dunyo ko'rinmasin: devor tashqarisiga katta "quti" */
+  const skyBox = new THREE.Mesh(new THREE.BoxGeometry(W + 40, H + 40, D + 40),
+    new THREE.MeshBasicMaterial({ color: 0x2c3a44, side: THREE.BackSide }));
+  skyBox.position.y = H / 2; g.add(skyBox);
+
+  world.add(g);
+  roomGroup = g;
+  REALM.roomBounds = {                                        // jahon koordinatalarida
+    x0: ROOM_ORIGIN.x - W / 2 + 0.8, x1: ROOM_ORIGIN.x + W / 2 - 0.8,
+    z0: ROOM_ORIGIN.z - D / 2 + 0.8, z1: ROOM_ORIGIN.z + D / 2 - 0.8 };
+  return g;
+}
+const REALM = { roomBounds: null };
+
+/* ---------------------------------------------------------------- UI */
+let sayrUI = null;
+function sayrBuildUI() {
+  if (sayrUI) return sayrUI;
+  const css = document.createElement('style');
+  css.textContent = `
+    #sayr { position:fixed; inset:0; pointer-events:none; z-index:60; font-family:system-ui,sans-serif; }
+    #sayr .joy { position:absolute; left:18px; bottom:96px; width:132px; height:132px; border-radius:50%;
+      background:rgba(10,18,28,.42); border:2px solid rgba(140,200,235,.5); pointer-events:auto; touch-action:none; }
+    #sayr .knob { position:absolute; left:50%; top:50%; width:58px; height:58px; margin:-29px 0 0 -29px; border-radius:50%;
+      background:rgba(120,200,240,.72); box-shadow:0 0 14px rgba(90,180,230,.6); }
+    #sayr .btn { position:absolute; right:18px; width:66px; height:66px; border-radius:50%; pointer-events:auto;
+      background:rgba(14,26,38,.72); border:2px solid rgba(140,200,235,.55); color:#dff0fa;
+      font-size:22px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+    #sayr .btn small { font-size:10px; font-weight:600; }
+    #sayr .hint { position:absolute; left:50%; transform:translateX(-50%); bottom:250px; padding:8px 14px;
+      border-radius:12px; background:rgba(8,14,22,.78); color:#eaf4fb; font-size:13px; display:none; }
+    #sayr .exit { position:absolute; right:18px; top:96px; width:44px; height:44px; border-radius:12px;
+      background:rgba(14,26,38,.72); border:1px solid rgba(200,120,120,.6); color:#ffd9d9; pointer-events:auto;
+      display:flex; align-items:center; justify-content:center; font-size:18px; }
+    #sayr .mode { position:absolute; left:18px; top:96px; padding:6px 12px; border-radius:10px;
+      background:rgba(8,14,22,.7); color:#cfe6f5; font-size:12px; font-weight:700; }
+  `;
+  document.head.appendChild(css);
+  const root = document.createElement('div');
+  root.id = 'sayr'; root.style.display = 'none';
+  root.innerHTML = `
+    <div class="joy" id="sayrJoy"><div class="knob" id="sayrKnob"></div></div>
+    <div class="btn" id="sayrE" style="bottom:246px">E</div>
+    <div class="btn" id="sayrCar" style="bottom:172px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13l1.5-4.6A2 2 0 0 1 7.9 7h8.2a2 2 0 0 1 1.9 1.4L19.5 13"/><path d="M3 13h18v4a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1v-.5H6.5V17a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4z"/><path d="M7 15.5h.01M17 15.5h.01"/></svg></div>
+    <div class="btn" id="sayrMoto" style="bottom:98px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="2.6"/><circle cx="18.5" cy="17" r="2.6"/><path d="M8.1 17h6.2l2.9-6h-3.4L12.1 6.8H9.6"/><path d="M12.3 17l2.8-6"/></svg></div>
+    <div class="exit" id="sayrExit">✕</div>
+    <div class="mode" id="sayrMode">SAYR</div>
+    <div class="hint" id="sayrHint"></div>
+  `;
+  document.body.appendChild(root);
+  sayrUI = root;
+
+  const joy = root.querySelector('#sayrJoy'), knob = root.querySelector('#sayrKnob');
+  const J = { active: false, x: 0, y: 0 };
+  window.SAYR_JOY = J;
+  const start = e => { J.active = true; sayrJoyMove(e); joy.setPointerCapture?.(e.pointerId); };
+  const sayrJoyMove = e => {
+    const r = joy.getBoundingClientRect();
+    let dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+    let dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+    const m = Math.hypot(dx, dy); if (m > 1) { dx /= m; dy /= m; }
+    J.x = dx; J.y = dy;
+    knob.style.transform = `translate(${dx * 36}px, ${dy * 36}px)`;
+  };
+  const end = () => { J.active = false; J.x = J.y = 0; knob.style.transform = 'translate(0,0)'; };
+  joy.addEventListener('pointerdown', start);
+  joy.addEventListener('pointermove', e => { if (J.active) sayrJoyMove(e); });
+  joy.addEventListener('pointerup', end);
+  joy.addEventListener('pointercancel', end);
+
+  root.querySelector('#sayrE').onclick = () => sayrInteract();
+  root.querySelector('#sayrCar').onclick = () => sayrSummon('car');
+  root.querySelector('#sayrMoto').onclick = () => sayrSummon('moto');
+  root.querySelector('#sayrExit').onclick = () => sayrStop();
+  return root;
+}
+function sayrHint(text) {
+  const el = document.getElementById('sayrHint');
+  if (!el) return;
+  if (text) {
+    el.textContent = text; el.style.display = 'block';
+    clearTimeout(el._t); el._t = setTimeout(() => { el.style.display = 'none'; }, 4200);
+  } else el.style.display = 'none';
+}
+function sayrModeLabel(text) {
+  const el = document.getElementById('sayrMode');
+  if (el) el.textContent = text;
+}
+
+/* ---------------------------------------------------------------- boshqaruv */
+function sayrStart() {
+  sayrBuildUI().style.display = 'block';
+  sayrBuildCollision();
+  if (!SAYR.avatar) {
+    SAYR.avatar = buildPerson(); world.add(SAYR.avatar);
+    SAYR.car = buildCarMesh(); world.add(SAYR.car);
+    SAYR.moto = buildMotoMesh(); world.add(SAYR.moto);
+  }
+  const hq = ALL_B.find(b => b.role === 'hq');
+  const a = (hq && hq.v7anchor) ? hq.v7anchor : { x: 0, z: 0 };
+  SAYR.active = true; SAYR.mode = 'walk'; SAYR.mounted = null; SAYR.inRoom = false; SAYR.vel = 0;
+  SAYR.nearSave = camera.near; SAYR.fovSave = camera.fov;
+  camera.near = 0.3; camera.fov = 58; camera.updateProjectionMatrix();   // sayr uchun yaqin tekislik
+  /* spawn: bino ichida qolmaslik uchun atrofni tekszhiramiz */
+  SAYR.yaw = Math.PI;
+  let sx = a.x + 6, sz = a.z + 26, found = false;
+  for (let ring = 0; ring < 26 && !found; ring++) {
+    for (let i = 0; i < 12 && !found; i++) {
+      const ang = i / 12 * Math.PI * 2;
+      const tx = a.x + Math.sin(ang) * (14 + ring * 4), tz = a.z + Math.cos(ang) * (14 + ring * 4);
+      let clear = !sayrBlocked(tx, tz, 1.2) && !sayrTreeNear(tx, tz, 5.0);
+      for (let k = 0; k < 8 && clear; k++) {                    // 4 m atrof ham bo'sh bo'lsin
+        const aa = k / 8 * Math.PI * 2;
+        const bx = tx + Math.sin(aa) * 4, bz = tz + Math.cos(aa) * 4;
+        if (sayrBlocked(bx, bz, 1.2) || sayrTreeNear(bx, bz, 5.0)) clear = false;
+      }
+      if (clear) { sx = tx; sz = tz; found = true; }
+    }
+  }
+  SAYR.pos.set(sx, 0, sz);
+  SAYR.car.position.set(a.x - 12, 0, a.z + 16); SAYR.car.rotation.y = 0; SAYR.car.visible = true;
+  SAYR.moto.position.set(a.x + 16, 0, a.z + 16); SAYR.moto.rotation.y = 0; SAYR.moto.visible = true;
+  SAYR.avatar.visible = true;
+  ['.nav','.topbar','.subbar','#queue','#panel','#sheet','#hint','#toast'].forEach(q => document.querySelectorAll(q).forEach(e => { e.style.opacity = '0'; e.style.pointerEvents = 'none'; }));
+  camera.position.set(SAYR.pos.x, 3.2, SAYR.pos.z + 6);
+  camera.lookAt(SAYR.pos.x, 1.4, SAYR.pos.z - 3);
+  sayrModeLabel("SAYR · TDIU kampusi");
+  sayrHint('Joystik bilan yuring · E — kirish/chiqish');
+}
+function sayrStop() {
+  if (SAYR.nearSave) { camera.near = SAYR.nearSave; camera.fov = SAYR.fovSave || 42; camera.updateProjectionMatrix(); }
+  SAYR.active = false;
+  if (sayrUI) sayrUI.style.display = 'none';
+  if (SAYR.avatar) SAYR.avatar.visible = false;
+  if (SAYR.car) SAYR.car.visible = false;
+  if (SAYR.moto) SAYR.moto.visible = false;
+  if (roomGroup) roomGroup.visible = false;
+  SAYR.inRoom = false;
+  ['.nav','.topbar','.subbar','#queue','#panel','#sheet','#hint','#toast'].forEach(q => document.querySelectorAll(q).forEach(e => { e.style.opacity = ''; e.style.pointerEvents = ''; }));
+  cam.r = 260; cam.phi = 1.0; applyCam();
+}
+function sayrSummon(kind) {
+  if (!SAYR.active) return;
+  const v = kind === 'car' ? SAYR.car : SAYR.moto;
+  const fx = Math.sin(SAYR.yaw), fz = Math.cos(SAYR.yaw);
+  v.position.set(SAYR.pos.x + fx * 5, 0, SAYR.pos.z + fz * 5);
+  v.rotation.y = SAYR.yaw - Math.PI / 2;
+  v.visible = true;
+  SAYR.want = kind;
+  sayrHint(kind === 'car' ? 'Mashina chaqirildi — E bilan o\'tiring' : 'Mototsikl chaqirildi — E bilan o\'tiring');
+}
+function sayrInteract() {
+  if (!SAYR.active) return;
+  if (SAYR.inRoom) { sayrLeaveRoom(); return; }
+  if (SAYR.mounted) {                                  // transportdan tushish
+    const v = SAYR.mounted;
+    const ox = Math.sin(SAYR.yaw + Math.PI / 2) * 2.4, oz = Math.cos(SAYR.yaw + Math.PI / 2) * 2.4;
+    if (!sayrBlocked(v.position.x + ox, v.position.z + oz, 0.6))
+      SAYR.pos.set(v.position.x + ox, 0, v.position.z + oz);
+    else SAYR.pos.set(v.position.x - ox, 0, v.position.z - oz);
+    SAYR.mounted = null; SAYR.mode = 'walk'; SAYR.vel = 0;
+    SAYR.avatar.visible = true;
+    sayrModeLabel('SAYR · piyoda');
+    return;
+  }
+  /* yaqin transport? */
+  if (SAYR.want) {                                     // chaqirilgan transport ustuvor
+    const wv = SAYR.want === 'car' ? SAYR.car : SAYR.moto;
+    if (wv && wv.visible && wv.position.distanceTo(SAYR.pos) < 14) {
+      SAYR.mounted = wv; SAYR.mode = SAYR.want; SAYR.vel = 0; SAYR.want = null;
+      SAYR.avatar.visible = SAYR.mode === 'moto';
+      sayrModeLabel(SAYR.mode === 'car' ? 'SAYR · mashina' : 'SAYR · mototsikl');
+      sayrHint('');
+      return;
+    }
+  }
+  let pickK = null, pickV = null, pickD = 7.0;
+  for (const [kind, v] of [['car', SAYR.car], ['moto', SAYR.moto]]) {
+    if (!v || !v.visible) continue;
+    const d = v.position.distanceTo(SAYR.pos);
+    if (d < pickD) { pickD = d; pickK = kind; pickV = v; }     // eng yaqin transport
+  }
+  if (pickV) {
+    SAYR.mounted = pickV; SAYR.mode = pickK; SAYR.vel = 0;
+    SAYR.avatar.visible = pickK === 'moto';
+    sayrModeLabel(pickK === 'car' ? 'SAYR · mashina' : 'SAYR · mototsikl');
+    sayrHint('');
+    return;
+  }
+  /* yaqin bino? */
+  let best = null, bd = 26;
+  for (const b of ALL_B) {
+    if (b.campus !== 'main') continue;
+    const a = b.v7anchor || { x: b.px, z: b.pz };
+    const d = Math.hypot(a.x - SAYR.pos.x, a.z - SAYR.pos.z);
+    if (d < bd) { bd = d; best = b; }
+  }
+  if (best) {
+    SAYR.roomReturn.copy(SAYR.pos);
+    const nm = (best.roleData && best.roleData.name) || 'TDIU';
+    buildShowroom(nm);
+    SAYR.inRoom = true;
+    SAYR.pos.set(ROOM_ORIGIN.x, 0, ROOM_ORIGIN.z + 8.5);
+    SAYR.yaw = Math.PI;   // xona ichiga qarab
+    SAYR.yaw = Math.PI;
+    sayrModeLabel('ICHI · ' + nm);
+    sayrHint('E — chiqish · joystik bilan yuring');
+    return;
+  }
+  sayrHint('Yaqin atrofda transport yoki bino yo\'q');
+}
+function sayrLeaveRoom() {
+  SAYR.inRoom = false;
+  if (roomGroup) roomGroup.visible = false;
+  SAYR.pos.copy(SAYR.roomReturn);
+  sayrModeLabel('SAYR · TDIU kampusi');
+  sayrHint('');
+}
+
+/* ---------------------------------------------------------------- kadr yangilash */
+function sayrUpdate(dt) {
+  const J = window.SAYR_JOY || { x: 0, y: 0 };
+  const k = SAYR.keys;
+  let fwd = (-J.y) + (k.w || k.ArrowUp ? 1 : 0) - (k.s || k.ArrowDown ? 1 : 0);
+  let turn = (-J.x) + (k.a || k.ArrowLeft ? 1 : 0) - (k.d || k.ArrowRight ? 1 : 0);
+  fwd = Math.max(-1, Math.min(1, fwd));
+  turn = Math.max(-1, Math.min(1, turn));
+
+  if (SAYR.mode === 'walk') {
+    const spd = (k.Shift ? 7.4 : 3.6);
+    SAYR.yaw += turn * 2.2 * dt;
+    const vx = Math.sin(SAYR.yaw) * fwd * spd * dt;
+    const vz = Math.cos(SAYR.yaw) * fwd * spd * dt;
+    sayrMove(vx, vz, 0.55);
+    /* yurish animatsiyasi */
+    const sw = fwd !== 0 ? Math.sin(performance.now() * 0.011) * 0.55 : 0;
+    const legs = SAYR.avatar.userData.legs, arms = SAYR.avatar.userData.arms;
+    if (legs) { legs[0].rotation.x = sw; legs[1].rotation.x = -sw; }
+    if (arms) { arms[0].rotation.x = -sw * 0.75; arms[1].rotation.x = sw * 0.75; }
+    if (SAYR.mounted === SAYR.moto) {
+      SAYR.avatar.position.set(SAYR.moto.position.x, 0.26, SAYR.moto.position.z);
+      SAYR.avatar.rotation.y = SAYR.yaw;
+    }
+  } else {
+    const maxSpd = SAYR.mode === 'car' ? 27 : 33;
+    const acc = SAYR.mode === 'car' ? 9 : 13;
+    SAYR.vel += (fwd * maxSpd - SAYR.vel) * Math.min(1, acc * dt);
+    SAYR.yaw += turn * (SAYR.mode === 'car' ? 1.35 : 1.9) * dt * Math.min(1, Math.abs(SAYR.vel) / 8 + 0.25);
+    const vx = Math.sin(SAYR.yaw) * SAYR.vel * dt;
+    const vz = Math.cos(SAYR.yaw) * SAYR.vel * dt;
+    const before = SAYR.pos.clone();
+    sayrMove(vx, vz, 1.5);
+    if (SAYR.pos.distanceTo(before) < Math.hypot(vx, vz) * 0.5) SAYR.vel *= 0.25;  // to'qnashuv
+    const v = SAYR.mounted;
+    if (v) {
+      v.position.set(SAYR.pos.x, 0, SAYR.pos.z);
+      v.rotation.y = SAYR.yaw - Math.PI / 2;
+      if (SAYR.mode === 'moto') {
+        SAYR.avatar.position.set(SAYR.pos.x, 0.26, SAYR.pos.z);
+        SAYR.avatar.rotation.y = SAYR.yaw;
+        const root = SAYR.avatar.userData.legs;
+        if (root) { root[0].rotation.x = 1.1; root[1].rotation.x = 1.1; }
+      }
+    }
+  }
+  if (SAYR.mode === 'walk' && !SAYR.mounted) {
+    SAYR.avatar.position.set(SAYR.pos.x, 0, SAYR.pos.z);
+    SAYR.avatar.rotation.y = SAYR.yaw;
+  }
+
+  /* kamera — uchinchi shaxs */
+  let back = SAYR.mode === 'walk' ? 9.0 : 13.5;
+  let high = SAYR.mode === 'walk' ? 3.8 : 5.2;
+  if (SAYR.inRoom) { back = 6.0; high = 2.8; }
+  const side = SAYR.mode === 'walk' ? 1.4 : 0;                       // yelka ustidan
+  const dx = SAYR.pos.x - Math.sin(SAYR.yaw) * back + Math.cos(SAYR.yaw) * side;
+  const dz = SAYR.pos.z - Math.cos(SAYR.yaw) * back - Math.sin(SAYR.yaw) * side;
+  const want = new THREE.Vector3(dx, high, dz);
+  if (!SAYR.inRoom) {                                    // kamera daraxt ichiga kirmasin
+    let kk = 0.4;
+    for (let k = 1.0; k >= 0.4; k -= 0.06) {
+      const tx = SAYR.pos.x + (want.x - SAYR.pos.x) * k;
+      const tz = SAYR.pos.z + (want.z - SAYR.pos.z) * k;
+      if (!sayrTreeNear(tx, tz, 3.4)) { kk = k; break; }
+    }
+    want.x = SAYR.pos.x + (want.x - SAYR.pos.x) * kk;
+    want.z = SAYR.pos.z + (want.z - SAYR.pos.z) * kk;
+  }
+  if (SAYR.inRoom) {                                     // kamera devor/ustun ichiga kirmasin
+    const rb = REALM.roomBounds;
+    if (rb) {
+      want.y = Math.min(3.5, want.y);
+      let ok = false;
+      for (let k = 1.0; k >= 0.3; k -= 0.1) {            // o'yinchidan orqaga qarab tekshirish
+        const tx = SAYR.pos.x + (want.x - SAYR.pos.x) * k;
+        const tz = SAYR.pos.z + (want.z - SAYR.pos.z) * k;
+        if (!sayrRoomBlocked(tx, tz, 0.45)) { want.x = tx; want.z = tz; ok = true; break; }
+      }
+      if (!ok) { want.x = SAYR.pos.x; want.z = SAYR.pos.z; }
+    }
+  }
+  if (camera.position.distanceTo(want) > 25) camera.position.copy(want);   // past FPS da darhol
+  else camera.position.lerp(want, Math.min(1, dt * 9));
+  camera.lookAt(SAYR.pos.x + Math.sin(SAYR.yaw) * 4, 1.6, SAYR.pos.z + Math.cos(SAYR.yaw) * 4);
+}
+function sayrTreeNear(x, z, r) {
+  const T = window.TREES;
+  if (!T) return false;
+  const r2 = r * r;
+  for (let i = 0; i < T.length; i++) {
+    const dx = x - T[i][0], dz = z - T[i][1];
+    if (dx * dx + dz * dz < r2) return true;
+  }
+  return false;
+}
+function sayrRoomBlocked(x, z, r) {
+  const b = REALM.roomBounds;
+  if (!b) return false;
+  if (x < b.x0 || x > b.x1 || z < b.z0 || z > b.z1) return true;
+  if (REALM.roomColl) for (const c of REALM.roomColl) {
+    const dx = x - c.x, dz = z - c.z, rr = c.r + r;
+    if (dx * dx + dz * dz < rr * rr) return true;
+  }
+  return false;
+}
+function sayrMove(vx, vz, r) {
+  if (SAYR.inRoom) {
+    const nx = SAYR.pos.x + vx, nz = SAYR.pos.z + vz;
+    if (!sayrRoomBlocked(nx, SAYR.pos.z, r)) SAYR.pos.x = nx;
+    if (!sayrRoomBlocked(SAYR.pos.x, nz, r)) SAYR.pos.z = nz;
+    return;
+  }
+  /* X o'qi */
+  let nx = SAYR.pos.x + vx;
+  if (SAYR.inRoom) {
+    const b = REALM.roomBounds;
+    nx = Math.max(b.x0, Math.min(b.x1, nx));
+  } else if (!sayrBlocked(nx, SAYR.pos.z, r) && !sayrTreeNear(nx, SAYR.pos.z, r + 1.0)) SAYR.pos.x = nx;
+  if (SAYR.inRoom) SAYR.pos.x = nx;
+  /* Z o'qi */
+  let nz = SAYR.pos.z + vz;
+  if (SAYR.inRoom) {
+    const b = REALM.roomBounds;
+    nz = Math.max(b.z0, Math.min(b.z1, nz));
+  } else if (!sayrBlocked(SAYR.pos.x, nz, r) && !sayrTreeNear(SAYR.pos.x, nz, r + 1.0)) SAYR.pos.z = nz;
+  if (SAYR.inRoom) SAYR.pos.z = nz;
+}
+
+/* klaviatura */
+document.addEventListener('keydown', e => {
+  if (!SAYR.active) return;
+  SAYR.keys[e.key] = true;
+  if (e.key === 'e' || e.key === 'E') { sayrInteract(); e.preventDefault(); }
+  if (e.key === 'Escape') sayrStop();
+  if (['w', 'a', 's', 'd', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) e.preventDefault();
+});
+document.addEventListener('keyup', e => { SAYR.keys[e.key] = false; });
+
 function loop(now) {
   /* dastlabki yuklash: kampus tumani darhol, qolganlari kamera bo'yicha */
 scheduleDistricts(true);
@@ -3209,7 +3804,9 @@ loadDistrict('yunusobod');
 requestAnimationFrame(loop);
   tick(now);
   t += 0.016;
-  applyCam();
+  if (SAYR.active) sayrUpdate(Math.min(0.2, (now - (loop._last || now)) / 1000 || 0.016));
+  else applyCam();
+  loop._last = now;
   if (selRing.visible) selRing.material.opacity = 0.5 + 0.35 * Math.sin(t * 3);
 
   for (const b of ALL_B) {
