@@ -3,11 +3,12 @@
 Offline: data/tiles/*.json (Overpass bbox tile'lari) lardan 12 tumanning
 HAQIQIY bino geometriyasini yig'adi -> build/districts.json ['districts'].
 
-Chegara: build/districts.json dagi mavjud `ring`lar ishlatiladi
-(chilonzor/yunusobod — haqiqiy OSM relation ring; qolgan 10 — Voronoi,
-avvaldan shu faylda). Overpass kerak emas.
-Joylashuv ustuvorligi: avval haqiqiy ringlar (chilonzor, yunusobod),
-keyin qolgan 10 tuman (eng yaqin sayt = Voronoi bilan bir xil).
+Chegara: build/districts.json dagi `ring`lar — 12 tumanning hammasi endi
+HAQIQIY OSM relation chegaralari (v0.7, 2026-11-28).
+Avval har bir ring tekshiriladi (point-in-poly); hech qaysisiga tushmasa,
+shahar chegarasi (BOUND_XY) ichida bo'lsa — eng yaqin sayt (Voronoi)
+zaxira varianti sifatida, log'da sanaladi; aks holda tashlab yuboriladi.
+Overpass kerak emas.
 """
 import json, math, os, struct, base64, hashlib, sys
 
@@ -90,23 +91,26 @@ def dp(points, tol):
     return out if len(out) >= 3 else points
 
 def assign(cx, cz):
-    for k in REAL_FIRST:
+    # 1) haqiqiy relation ringlar (12 tuman — barchasi)
+    for k in RINGS:
         if point_in_poly(cx, cz, RINGS[k]):
-            return k
+            return k, 'ring'
+    # 2) zaxira: shahar ichida, lekin hech bir ringga tushmadi -> yaqin sayt
     if not point_in_poly(cx, cz, BOUND_XY):
-        return None
+        return None, 'tashqarida'
     best_k, best_d = None, None
     for k, (sx, sz) in SITES_XY.items():
         d2 = (cx - sx) ** 2 + (cz - sz) ** 2
         if best_d is None or d2 < best_d:
             best_d, best_k = d2, k
-    return best_k
+    return best_k, 'voronoi-fallback'
 
 cur = json.load(open(os.path.join(BUILD, 'districts.json'), encoding='utf-8'))
 RINGS = {k: d['ring'] for k, d in cur['districts'].items()}
 assert set(RINGS) == set(SITES), (sorted(RINGS), sorted(SITES))
 print('ringlar yuklandi:', {k: len(v) for k, v in RINGS.items()})
 
+assign_stats = {}
 seen = {}
 n_files = 0
 for fn in os.listdir(CACHE):
@@ -134,7 +138,8 @@ for wid, e in seen.items():
         continue
     cx = sum(p[0] for p in pts) / len(pts)
     cz = sum(p[1] for p in pts) / len(pts)
-    key = assign(cx, cz)
+    key, how = assign(cx, cz)
+    assign_stats[how] = assign_stats.get(how, 0) + 1
     if key is None:
         dropped_out += 1
         continue
@@ -166,6 +171,7 @@ for wid, e in seen.items():
     bins[key].append((simp, max(3.0, min(90.0, h))))
 
 print(f'shahar tashqarida tashlandi: {dropped_out} | mayda/yaroqsiz: {dropped_small}')
+print('joylashuv statistikasi:', assign_stats)
 
 out = {}
 total = 0
@@ -188,21 +194,25 @@ for key, arr in bins.items():
         for dx, dz in q[1:]:
             buf += struct.pack('<hh', dx - prev[0], dz - prev[1])
             prev = [dx, dz]
+    xs = [p[0] for p in RINGS[key]]; zs = [p[1] for p in RINGS[key]]
     out[key] = {
         'name': NAMES[key],
         'ring': RINGS[key],
+        'bbox': [min(xs), min(zs), max(xs), max(zs)],
         'count': len(arr) - skipped,
         'skipped': skipped,
+        'bytes': len(buf),
         'b64': base64.b64encode(bytes(buf)).decode(),
     }
     total += out[key]['count']
     print(f'{key:14s} {out[key]["count"]:6d} bino | binary {len(buf)/1024:8.0f} KB')
 
 cur['districts'] = out
-cur.setdefault('meta', {})['source'] = ('OpenStreetMap (Overpass API) 2026-11-28 — barcha 12 tuman HAQIQIY geometriya; '
-                                        'Chilonzor/Yunusobod relation-ring bilan, qolgan 10 tuman eng-yaqin-tuman (Voronoi) '
-                                        'taqsimoti bo’yicha. Chegara kiplar: data/tiles/*.json. ODbL — © OpenStreetMap contributors. '
+cur.setdefault('meta', {})['source'] = ('Toshkent shahri 12 tumani: (c) OpenStreetMap contributors, ODbL 1.0 — '
+                                        '12 tumanning hammasi haqiqiy OSM relation chegaralari (2026-11-28). '
+                                        'Chegara kiplar: data/tiles/*.json. '
                                         'Landmarklar: Wikidata/ommaviy manbalar.')
+cur['meta']['built'] = '2026-11-28'
 cur['meta']['realDistricts'] = sorted(SITES)
 with open(os.path.join(BUILD, 'districts.json'), 'w', encoding='utf-8') as f:
     json.dump(cur, f, separators=(',', ':'))

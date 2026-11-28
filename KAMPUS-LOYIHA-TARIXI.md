@@ -8,7 +8,7 @@
 > Vercel'ga deploy qilish uchun. Fayl o'z-o'zini to'liq ta'minlaydi — boshqa hech qanday
 > hujjat o'qish shart emas.
 >
-> **Sana:** 2026-11-28 (v0.6 gacha yangilandi) · **Til:** o'zbek · **Loyiha papkasi:** `tsue3d/` (manba) + `kampus-app/` (deploy)
+> **Sana:** 2026-11-28 (v0.7 gacha yangilandi) · **Til:** o'zbek · **Loyiha papkasi:** `tsue3d/` (manba) + `kampus-app/` (deploy)
 
 ---
 
@@ -96,16 +96,16 @@ upgrade + QR check-in + duel + mavsum + faculty war — hammasi parallel qo'shil
 
 | # | Talab | Holat |
 |---|---|---|
-| 1 | Telegram Mini App (WebView ichida ishlaydi) | ✅ |
-| 2 | TDIU kampusi to'liq 3D, haqiqiyga o'xshash | ✅ 70 bino, 211 yo'l, 51 maydon |
-| 3 | Moliya kampusi + xarita almashish | ✅ 132 bino, 145 yo'l |
-| 4 | Egallashning barcha usullari | ✅ upgrade, QR, duel, mavsum, faculty war |
-| 5 | Butun Chilonzor + Yunusobod | ✅ 42 065 bino, 4 234 ko'cha |
-| 6 | Binolar to'rtburchak emas | ✅ real OSM konturlar |
-| 7 | Universitet hududi rang bilan ajraladi | ✅ firuza #2fd6c0 |
-| 8 | Bot ulangan | ✅ kod tayyor, deploy+token kerak |
+| 1 | Telegram Mini App (WebView ichida ishlaydi) | ✓ |
+| 2 | TDIU kampusi to'liq 3D, haqiqiyga o'xshash | ✓ 70 bino, 211 yo'l, 51 maydon |
+| 3 | Moliya kampusi + xarita almashish | ✓ 132 bino, 145 yo'l |
+| 4 | Egallashning barcha usullari | ✓ upgrade, QR, duel, mavsum, faculty war |
+| 5 | Butun Chilonzor + Yunusobod | ✓ 42 065 bino, 4 234 ko'cha |
+| 6 | Binolar to'rtburchak emas | ✓ real OSM konturlar |
+| 7 | Universitet hududi rang bilan ajraladi | ✓ firuza #2fd6c0 |
+| 8 | Bot ulangan | ✓ kod tayyor, deploy+token kerak |
 | 9 | Vercel'ga deploy | ⏳ foydalanuvchi tomondan |
-| 10 | Versiyalar parallel | ✅ v0.1 / v0.2 / v0.3 |
+| 10 | Versiyalar parallel | ✓ v0.1 / v0.2 / v0.3 |
 
 ---
 
@@ -239,10 +239,10 @@ butun tumanlar ≈ x ∈ [−8446, 7873], z ∈ [−9878, 9591] (≈16×19 km).
 |---|---|
 | `overpass-api.de` | **406 Not Acceptable** |
 | `kumi.systems`, `private.coffee` | timeout |
-| **`maps.mail.ru/osm/tools/overpass/api/interpreter`** | ✅ ishlaydi |
-| `area(360002441810)` (butun tuman) | ❌ **504 gateway timeout** |
-| `way["building"](area.a)(bbox)` | ❌ **0 natija** (area bu mirror'da yaratilmaydi) |
-| `way["building"](41.26,69.19,41.28,69.21)` | ✅ **2 668 way / 7.4 s** |
+| **`maps.mail.ru/osm/tools/overpass/api/interpreter`** | ✓ ishlaydi |
+| `area(360002441810)` (butun tuman) | ✕ **504 gateway timeout** |
+| `way["building"](area.a)(bbox)` | ✕ **0 natija** (area bu mirror'da yaratilmaydi) |
+| `way["building"](41.26,69.19,41.28,69.21)` | ✓ **2 668 way / 7.4 s** |
 
 **Xulosa:** `area()` umuman ishlatilmaydi. Faqat **raqamli bbox** + o'zimiz poligon bo'yicha filtrlaymiz.
 
@@ -542,7 +542,21 @@ keyingi sprintning 1-raqamli vazifasi (`initData` HMAC).
 - 10 ta tuman taqsimoti — eng-yaqin-tuman (Voronoi) bo'yicha (Overpass'siz, offline; rasmiy chegaralar Internetli mashinada olinishi mumkin — `rebuild_real.py`)
 - REAL_DATA (OSM badge) endi 12 tuman uchun; hint "12 tumanning hammasi haqiqiy"; «Digital Twin v0.6»
 - Smoke: SMOKE PASS (231 042 total, INTERIORS/FLOOR/POI/FACE-MAP/GEN-PANEL OK)
-- Deploy: `create_deployment` (main) → clash-of-uni.vercel.app
+- Deploy: `create_deployment` (main) → clash-of-uni.vercel.app (`dpl_3hU3iu6YjgrSyxfCThLPUg3C7Mne`, READY/PROMOTED)
+
+---
+
+### v0.7 — LAZY-LOADING + 12 TUMAN REAL RELATION ← **joriy**
+- **Lazy-loading arxitektura** — `index.html` 7 138 KB → **1 014 KB**. Har tuman geometriyasi endi inline emas, alohida `kampus-app/data/d_<tuman>.bin` (12 fayl, 5.1 MB); `roads.bin` (124 384 B) ham alohida. Birinchi ochilish ≈1 MB + Chilonzor/Yunusobod; qolgan 10 tuman kamera yaqinlashganda `fetch` (`scheduleDistricts` + `loadDistrict`, radius = `max(2600, cam.r*1.25)`, 900 ms throttle). `window.DISTRICT_ROADS = {"count":8844,"file":"data/roads.bin","bytes":124384}` (pointer). `tsue3d/build_v2.py` ikki target yozadi: `kampus-app/` (lazy) va `tsue-campus-v3.html` (standalone, hamma b64 inline — game `d.b64` fallback'i bilan ishlaydi).
+- **253 328 ta haqiqiy bino** (Chilonzor 15 661, Yunusobod 26 405, Olmazor 24 495, Uchtepa 26 183, Mirzo Ulug'bek 18 893, Mirobod 12 692, Shayxontohur 23 927, Sergeli 28 422, Bektemir 16 171, Yashnobod 34 316, Yakkasaroy 10 040, Yangihayot 16 123) — v0.6'dagi 231 042 dan +22 286.
+- **12 tumanning hammasi HAQIQIY OSM relation chegaralari** (v0.6'da 10 tasi 5–8 nuqtali Voronoi joy-tutuvchi edi; endi 40–123 nuqtali zich halqalar — Chilonzor 81 va Yunusobod 111 nuqta v0.6 bilan bayt-bayt bir xil → manba izchil). Manba: `kampus-v0.7-foto-2026-11-28.zip` (Drive) — author'ning to'liq geometriya yuki; binaries repoga `build/districts.json` (b64) orqali kiritildi, build'da `.bin`larga dekod qilinadi (binary walk: 12/12 tuman `end == file`, jami 253 328 ✓).
+- **Yangi «soviet» facade** (foto-mos: TDIU iqtisodiyot fakulteti minorasi — `v7-taqqoslash.jpg` taqqoslashida ko'rinadi), IELTS markazi va Mustaqillik shoh maydoni label'lari. `game.v2.js` inline == standalone (bayt-bayt teng, oxirida bitta `\n` farqi).
+- `roads.bin` IDENTIK (8 844 yo'l), `api/telegram.js` + `api/setup.js` IDENTIK, `window.CAMPUS` IDENTIK, POI (64) / parks (20) / trees (1 879) / lamps (1 529) / landmarks (4) / avenues (10) — hammasi o'zgarishsiz.
+- `vercel.json`: `/data/(.*)` → `Cache-Control: public, max-age=31536000, immutable` qo'shildi. `package.json` 0.7.0.
+- `build/districts.json` formati kengaytirildi: har tuman uchun `bbox` (ring bbox bilan teng), `bytes` (bin hajmi); `meta.source` endi "12 tuman haqiqiy relation chegaralari" deb atributsiya qiladi; `realDistricts` = 12.
+- `tsue3d/rebuild_real.py`: endi 12 ring point-in-poly (avval faqat 2tasi + Voronoi), zaxira Voronoi fallback log'ga yoziladi; `bbox`/`bytes` ham yoziladi.
+- `tsue3d/smoke.py` (yangi): HTTP server bilan 79 ta tekshiruv — bin walk, inline meta/b64 yo'qligi, HTTP 200'lar, CSP/immutable/nosniff, API token xavfsizligi. **SMOKE PASS**.
+- PR #7 → main; deploy: `create_deployment` (main) → clash-of-uni.vercel.app
 
 ---
 
@@ -629,7 +643,7 @@ TELEGRAM_BOT_TOKEN=<token> APP_URL=https://<loyiha>.vercel.app ./bot-setup.sh
 Skript: `setWebhook` (`/api/telegram`), `setChatMenuButton` (web_app), `setMyCommands`,
 `getWebhookInfo` bilan tekshirish.
 
-### 10.4 ⚠️ Token xavfsizligi
+### 10.4 DIQQAT: Token xavfsizligi
 Token chatda yozilgan edi → **BotFather → `/mybots` → API Token → Revoke current token**.
 Yangi token faqat Vercel *Environment Variables*da (`TELEGRAM_BOT_TOKEN`), repoda **yo'q**.
 

@@ -2,10 +2,11 @@
 
 **Telegram Mini App** — TDIU (Toshkent Davlat Iqtisodiyot Universiteti) kampusining
 interaktiv 3D "digital twin" o'yini: Clash of Clans uslubida hudud egallash, upgrade,
-QR check-in, duel, mavsum va fakultet urushlari. **Butun Toshkent** — 12 tuman, hammasi **real OpenStreetMap (Overpass, 2026-11-28)**
-— jami **231 042 ta haqiqiy bino** + 8 844 ta haqiqiy ko'cha + 64 ta maskanning 3D modellari (universitetlar, litseylar,
+QR check-in, duel, mavsum va fakultet urushlari. **Butun Toshkent** — 12 tuman, hammasi **real OpenStreetMap**
+(12 tumanning hammasi haqiqiy OSM relation chegaralari) — jami **253 328 ta haqiqiy bino** + 8 844 ta haqiqiy ko'cha + 64 ta maskanning 3D modellari (universitetlar, litseylar,
 maktablar, bog'chalar, ovqatlanish, xiyobonlar), TDIU binolarining ichki ko'rinishi
-(xonalar), hammasi bitta self-contained `three.js` HTML faylda. v0.6 — jonli:
+(xonalar). v0.7 — **lazy-loading**: `index.html` ≈1.0 MB (three.js + o'yin mantiqi ichida),
+tuman geometriyalari `kampus-app/data/*.bin` (13 fayl, 5.2 MB) — kamera yaqinlashganda yuklanadi. v0.7 — jonli:
 https://clash-of-uni.vercel.app/
 
 ## Repo tuzilishi
@@ -13,7 +14,7 @@ https://clash-of-uni.vercel.app/
 | Yo'l | Nima |
 |---|---|
 | `kampus-app/` | **Deploy qilinadigan tayyor app** — `index.html` (≈7.1 MB, hamma narsa ichida), `api/` (Vercel serverless: Telegram bot webhook), `vercel.json` |
-| `tsue3d/` | Manba kod va hujjatlar — OSM fetch/build skriptlari (Python), `src/`, `vendor/`, oldingi versiyalar (v2, v3, game) |
+| `tsue3d/` | Manba kod va hujjatlar — OSM fetch/build skriptlari (Python), `src/`, `vendor/`, `build/` (districts.json/roads.json/campuses.json), `smoke.py`, oldingi versiyalar (v2, v3, game) |
 | `image-search/` | Kampus foto-referenslar |
 | `KAMPUS-LOYIHA-TARIXI.md` | To'liq loyiha tarixi va texnik hujjat (o'zbek tilida) |
 
@@ -29,6 +30,16 @@ npm run dev        # yoki: python3 -m http.server 5173
 ```
 
 Brauzerda: <http://localhost:5173>
+
+> v0.7'da binolar `data/*.bin` orqali yuklanadi — `file://` bilan ochilmaydi,
+> statik server kerak (yuqoridagilar shunday).
+
+## Build + smoke test
+
+```bash
+python3 tsue3d/build_v2.py    # -> kampus-app/ (index.html + data/*.bin) + tsue-campus-v3.html
+python3 tsue3d/smoke.py       # 79 ta tekshiruv (bin walk, HTTP, CSP, header'lar)
+```
 
 ## Vercel'ga deploy
 

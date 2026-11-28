@@ -1,7 +1,8 @@
 /* =====================================================================
-   KAMPUS: TDIU — v0.2 "Digital Twin"
+   KAMPUS: TDIU — v0.7 "Digital Twin"
    • 2 kampus (Asosiy + Moliya), haqiqiy OSM geometriyasi
-   • protsedural fasad teksturalari (deraza toʻrlari), landmark minora
+   • 12 tuman — haqiqiy OSM relation chegaralari; binolar lazy-load (data/d_*.bin)
+   • protsedural + SOVIET (foto-mos) fasad teksturalari, landmark minora
    • 4 xil egallash usuli: qurilish, fakultet urushi, QR check-in, 1v1 duel
    ===================================================================== */
 'use strict';
@@ -196,6 +197,54 @@ function facadeTexture(style) {
     c.beginPath(); c.moveTo(S / 2, 18); c.lineTo(S / 2, S - 28); c.stroke();
     c.beginPath(); c.moveTo(14, S / 2 - 4); c.lineTo(S - 14, S / 2 - 4); c.stroke();
     c.fillStyle = 'rgba(0,0,0,0.10)'; c.fillRect(12, S - 26, S - 24, 6);   // soyabon tokcha
+  } else if (style === 'soviet') {
+    /* TDIU fakulteti (Foto: Faculty of Economics Building, TSUE, Wikimedia Commons)
+       shaftoli suvoq + oq rom + kemerli deraza boshi */
+    c.fillStyle = '#e9caa8'; c.fillRect(0, 0, S, S);
+    const g3 = c.createLinearGradient(0, 0, S, S);
+    g3.addColorStop(0, 'rgba(255,255,255,0.16)'); g3.addColorStop(1, 'rgba(120,80,40,0.10)');
+    c.fillStyle = g3; c.fillRect(0, 0, S, S);
+    c.fillStyle = '#f6f1e7';                       // oq ramka
+    c.fillRect(12, 18, S - 24, S - 44);
+    const wg = c.createLinearGradient(0, 18, S, S - 26);
+    wg.addColorStop(0, '#4e7186'); wg.addColorStop(0.5, '#2f4d60'); wg.addColorStop(1, '#5d8296');
+    c.fillStyle = wg; c.fillRect(17, 30, S - 34, S - 62);
+    c.strokeStyle = '#f6f1e7'; c.lineWidth = 4;    // uch tavaqa
+    c.beginPath(); c.moveTo(S * 0.36, 30); c.lineTo(S * 0.36, S - 32);
+    c.moveTo(S * 0.64, 30); c.lineTo(S * 0.64, S - 32);
+    c.moveTo(17, S * 0.44); c.lineTo(S - 17, S * 0.44); c.stroke();
+    c.beginPath();                                  // kemerli bosh
+    c.arc(S / 2, 30, (S - 34) / 2, Math.PI, 0); c.strokeStyle = '#f6f1e7'; c.lineWidth = 5; c.stroke();
+    c.fillStyle = 'rgba(150,100,60,0.18)'; c.fillRect(0, S - 16, S, 6);
+    c.fillStyle = 'rgba(255,255,255,0.5)'; c.fillRect(0, S - 22, S, 3);
+  } else if (style === 'curtain') {
+    /* TDIU minorasi (Foto: Main Administrative Building of TSUE)
+       to'q ko'k-yashil oyna + qora vertikal ustunlar + yorug' aks */
+    const g4 = c.createLinearGradient(0, 0, 0, S);
+    g4.addColorStop(0, '#3d7a92'); g4.addColorStop(0.35, '#1f4d63');
+    g4.addColorStop(0.62, '#173d52'); g4.addColorStop(1, '#2d6076');
+    c.fillStyle = g4; c.fillRect(0, 0, S, S);
+    c.fillStyle = 'rgba(200,235,250,0.07)';
+    c.beginPath(); c.moveTo(10, S); c.lineTo(48, 0); c.lineTo(60, 0); c.lineTo(22, S); c.fill();
+    c.strokeStyle = 'rgba(16,28,36,0.85)'; c.lineWidth = 6;   // vertikal ustun
+    c.beginPath(); c.moveTo(2, 0); c.lineTo(2, S); c.stroke();
+    c.strokeStyle = 'rgba(18,32,42,0.55)'; c.lineWidth = 3;
+    c.beginPath(); c.moveTo(S * 0.5, 0); c.lineTo(S * 0.5, S); c.stroke();
+    c.strokeStyle = 'rgba(20,36,46,0.35)'; c.lineWidth = 2;   // qavat chizig'i
+    c.beginPath(); c.moveTo(0, 4); c.lineTo(S, 4); c.stroke();
+  } else if (style === 'stone') {
+    /* sarg'ish tosh qoplama (TDIU minorasi yon peshtoqi) */
+    c.fillStyle = '#ded3c0'; c.fillRect(0, 0, S, S);
+    for (let y = 0; y < S; y += 16) {
+      c.fillStyle = `rgba(${210 + (y % 32)},${200 + (y % 24)},${180 + (y % 18)},0.5)`;
+      c.fillRect(0, y, S, 15);
+      c.strokeStyle = 'rgba(120,110,95,0.22)'; c.lineWidth = 1;
+      c.beginPath(); c.moveTo(0, y + 15.5); c.lineTo(S, y + 15.5); c.stroke();
+    }
+    c.fillStyle = '#4a6577'; c.fillRect(30, 34, S - 60, S - 70);
+    c.fillStyle = 'rgba(190,220,235,0.35)'; c.fillRect(30, 34, S - 60, 12);
+    c.strokeStyle = 'rgba(245,240,230,0.9)'; c.lineWidth = 3;
+    c.strokeRect(30, 34, S - 60, S - 70);
   } else {
     // oddiy panel derazasi (2 ta)
     for (const x of [16, S / 2 + 4]) {
@@ -219,6 +268,9 @@ const TEX = {
   panel: facadeTexture('panel'),
   classic: facadeTexture('classic'),
   glass: facadeTexture('glass'),
+  soviet: facadeTexture('soviet'),
+  curtain: facadeTexture('curtain'),
+  stone: facadeTexture('stone'),
   roof: new THREE.CanvasTexture(noiseCanvas(128, '#8b8f94', 26)),
   grass: new THREE.CanvasTexture(noiseCanvas(256, '#5f8b62', 26)),
   asphalt: new THREE.CanvasTexture(noiseCanvas(128, '#3a424c', 16)),
@@ -227,7 +279,7 @@ for (const k of ['roof', 'grass', 'asphalt']) {
   TEX[k].wrapS = TEX[k].wrapT = THREE.RepeatWrapping;
   TEX[k].colorSpace = THREE.SRGBColorSpace;
 }
-TEX.grass.repeat.set(320, 320);
+TEX.grass.repeat.set(1400, 1400);
 TEX.roof.repeat.set(1, 1);
 
 /* ---------------------------------------------------------------- geometriya yigʻuvchi */
@@ -313,10 +365,361 @@ function extrudeInto(sb, rb, pts, h, base, color, style) {
   }
 }
 
+
+/* ============================================================================
+   v7 — FOTO-ASOSLI MAXSUS BINOLAR
+   Har bir model Wikimedia Commons'dagi haqiqiy foto asosida qurilgan:
+     • TDIU bosh binosi   — File:Main Administrative Building of TSUE 2.jpg
+     • TDIU 1-o'quv korp. — File:Faculty of Economics Building, TSUE.jpg
+   O'lchovlar rasmdan: qavat 3.4 m, minora 18 qavat (62 m), fasad moduli 3.0 m
+   ============================================================================ */
+
+/* kampus binolari fasadi katta ko'cha tomonga (58°) — campuses.json yo'llaridan */
+const V7_FRONT = [0.5, 0.866];
+const V7_ALONG = [-0.866, 0.5];
+
+/** markaz + eni(d) bo'yicha to'rtburchak kontur (fasad yo'nalishida) */
+function rectPts(cx, cz, w, d, ax, az, fx, fz) {
+  const ax2 = ax * w / 2, az2 = az * w / 2, fx2 = fx * d / 2, fz2 = fz * d / 2;
+  return [
+    [cx - ax2 - fx2, cz - az2 - fz2],
+    [cx + ax2 - fx2, cz + az2 - fz2],
+    [cx + ax2 + fx2, cz + az2 + fz2],
+    [cx - ax2 + fx2, cz - az2 + fz2],
+  ];
+}
+
+/** uslub bo'yicha yig'uvchi: har uslub uchun 1 mesh (draw call tejaydi) */
+function solidGroup() {
+  const B = {};
+  return {
+    add(pts, h, base, hex, style) {
+      if (h <= 0.02) return;
+      const k = style || 'panel';
+      if (!B[k]) B[k] = { sb: new Builder(), rb: new Builder() };
+      extrudeInto(B[k].sb, B[k].rb, pts, h, base, new THREE.Color(hex), k);
+    },
+    finish(g) {
+      for (const k in B) {
+        const wg = B[k].sb.geometry();
+        if (wg && wg.attributes.position.count) g.add(new THREE.Mesh(wg, matForStyle(k)));
+        const rg = B[k].rb.geometry();
+        if (rg && rg.attributes.position.count) g.add(new THREE.Mesh(rg, roofMaterial));
+      }
+    },
+  };
+}
+
+/** yozuvli lavha (kirish soyabonidagi yozuv) */
+function v7TextPlane(text, w, h, bg, fg, rotY) {
+  const cv = document.createElement('canvas'); cv.width = 1024; cv.height = 128;
+  const c = cv.getContext('2d');
+  c.fillStyle = bg; c.fillRect(0, 0, 1024, 128);
+  c.fillStyle = fg;
+  c.font = '700 58px system-ui, -apple-system, sans-serif';
+  c.textAlign = 'center'; c.textBaseline = 'middle';
+  c.fillText(text, 512, 68);
+  const t = new THREE.CanvasTexture(cv);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = 4;
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h),
+    new THREE.MeshLambertMaterial({ map: t, emissive: 0x3a3128 }));
+  m.rotation.y = rotY;
+  return m;
+}
+
+/**
+ * Fasad yo'nalishi: 16 yo'nalish sinaladi, qo'shni binolar to'sib qo'ymagan
+ * (eng ochiq) tomon tanlanadi; kampus uchun odatiy yo'nalishga yaqinligi ustuvor.
+ */
+function pickFront(b, ctx) {
+  /* 1) binoning eng uzun devori -> fasad normali (faqat 2 nomzod) */
+  let cand = null;
+  if (b.pts && b.pts.length > 3) {
+    let best = -1, nx = 0, nz = 0;
+    for (let i = 0; i < b.pts.length; i++) {
+      const p0 = b.pts[i], p1 = b.pts[(i + 1) % b.pts.length];
+      const dx = p1[0] - p0[0], dz = p1[1] - p0[1];
+      const L = Math.hypot(dx, dz);
+      if (L > best) { best = L; nx = dz / L; nz = -dx / L; }
+    }
+    if (best > 8) cand = [[nx, nz], [-nx, -nz]];
+  }
+  /* 2) nomzodlar yo'q bo'lsa — 16 yo'nalish */
+  if (!cand) {
+    cand = [];
+    for (let i = 0; i < 16; i++) {
+      const a = (i / 16) * Math.PI * 2;
+      cand.push([Math.sin(a), Math.cos(a)]);
+    }
+  }
+  /* 3) ochiqligi bo'yicha tanlov (qo'shni binolar to'sib qo'ymasa) */
+  const sibs = (ctx && ctx.buildings || []).filter(o => o !== b && o.px !== undefined);
+  let bestSc = -1e9, bestV = cand[0];
+  for (const v of cand) {
+    let blocked = 400;
+    for (const o of sibs) {
+      const dx = o.px - b.px, dz = o.pz - b.pz;
+      const d = Math.hypot(dx, dz);
+      if (d < 4 || d > 150) continue;
+      const dot = (dx * v[0] + dz * v[1]) / d;
+      if (dot > 0.86) blocked = Math.min(blocked, d);
+    }
+    const pref = v[0] * V7_FRONT[0] + v[1] * V7_FRONT[1];
+    const sc = blocked + pref * 60;
+    if (sc > bestSc) { bestSc = sc; bestV = v; }
+  }
+  return bestV;
+}
+
+/** konturning fasad tomonidagi cheti — markaziy 28 m oraliqda (qanotlar hisobga olinmaydi) */
+function frontEdge(b, fx, fz, ax, az, halfW = 14) {
+  let d = -1e9;
+  for (const p of b.pts) {
+    const dx = p[0] - b.px, dz = p[1] - b.pz;
+    const along = dx * ax + dz * az;
+    if (Math.abs(along) > halfW) continue;
+    d = Math.max(d, dx * fx + dz * fz);
+  }
+  if (d === -1e9) {                                   // markazda nuqta yo'q — butun kontur
+    for (const p of b.pts) d = Math.max(d, (p[0] - b.px) * fx + (p[1] - b.pz) * fz);
+  }
+  return d;
+}
+
+/* ---------------------------------------------------------------- TDIU bosh binosi */
+function v7_tdiuMain(b, ctx) {
+  const g = new THREE.Group();
+  const [fx, fz] = pickFront(b, ctx);
+  const [ax, az] = [-fz, fx];
+  const cx = b.px, cz = b.pz;
+  const SG = solidGroup();
+
+  /* 1) podiym: OSM konturi, 8.6 m (rasmda 2 qavatli tosh qanot) */
+  const POD = 8.6;
+  SG.add(b.pts, POD, 0, '#e7dfd0', 'stone');
+
+  /* 2) minora: 34 x 17 m, 54 m (18 qavat) — oldi podiym chetiga tekis */
+  const TW = 34, TD = 17, TH = 54;
+  const eD = frontEdge(b, fx, fz, ax, az);
+  const tx = cx + fx * (eD - TD / 2), tz = cz + fz * (eD - TD / 2);
+  SG.add(rectPts(tx, tz, TW, TD, ax, az, fx, fz), TH, POD, '#eef6fa', 'curtain');
+
+  /* 3) yon peshtoqlar (oq tosh) — rasmda minora chetlari */
+  for (const sgn of [-1, 1]) {
+    const px = tx + ax * sgn * (TW / 2 - 2.2), pz = tz + az * sgn * (TW / 2 - 2.2);
+    SG.add(rectPts(px, pz, 4.4, TD + 0.6, ax, az, fx, fz), TH, POD, '#ded3c0', 'stone');
+  }
+
+  /* 4) yuqori karniz (eni kattaroq, 2.6 m) */
+  SG.add(rectPts(tx, tz, TW + 3.2, TD + 3.2, ax, az, fx, fz), 2.6, POD + TH, '#e8dfcd', 'stone');
+  /* tom ustidagi texnika bloki */
+  SG.add(rectPts(tx, tz, TW * 0.42, TD * 0.5, ax, az, fx, fz), 3.2, POD + TH + 2.6, '#c9c2b4', 'stone');
+
+  /* 5) granit portal (qizil tosh) + soyabon + zinapoya */
+  const pz0 = TD / 2;                                 // minora fasad tekisligi (markazdan)
+  for (const sgn of [-1, 1]) {
+    const px = tx + ax * sgn * 7.4 + fx * (pz0 + 0.9);
+    const pz = tz + az * sgn * 7.4 + fz * (pz0 + 0.9);
+    SG.add(rectPts(px, pz, 2.6, 2.4, ax, az, fx, fz), 11.4, 0, '#8d4b3a', 'stone');
+  }
+  /* lintel (eshik ustidagi to'sin) */
+  SG.add(rectPts(tx + fx * (pz0 + 0.9), tz + fz * (pz0 + 0.9), 17.4, 2.4, ax, az, fx, fz),
+    2.0, 9.4, '#8d4b3a', 'stone');
+  /* qorong'i shisha eshik */
+  const door = new THREE.Mesh(
+    new THREE.PlaneGeometry(13.6, 9.2),
+    new THREE.MeshPhongMaterial({ color: 0x123040, emissive: 0x0a1c26, shininess: 90, specular: 0x9fd8ee }));
+  door.position.set(tx + fx * (pz0 + 0.35), 4.6, tz + fz * (pz0 + 0.35));
+  door.rotation.y = Math.atan2(fx, fz);
+  g.add(door);
+
+  /* soyabon: yassi koziryok + yoysimon fasad tasmasi (rasmdagi) */
+  const cang = new THREE.Group();
+  const canopy = new THREE.Mesh(new THREE.BoxGeometry(17.2, 0.55, 5.6),
+    new THREE.MeshPhongMaterial({ color: 0xf2ece0, emissive: 0x2a2620, shininess: 40 }));
+  canopy.position.y = 0;
+  cang.add(canopy);
+  const fascia = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.85, 17.2, 16, 1, false),
+    new THREE.MeshPhongMaterial({ color: 0xe8dfcd, emissive: 0x241f18, shininess: 50 }));
+  fascia.rotation.z = Math.PI / 2;
+  fascia.position.set(0, -0.2, 2.8);
+  cang.add(fascia);
+  cang.rotation.y = Math.atan2(fx, fz);
+  cang.position.set(tx + fx * (pz0 + 3.2), 9.0, tz + fz * (pz0 + 3.2));
+  g.add(cang);
+
+  /* yozuv: TOSHKENT DAVLAT IQTISODIYOT UNIVERSITETI */
+  const rotY = Math.atan2(fx, fz);
+  const plate = v7TextPlane('TOSHKENT DAVLAT IQTISODIYOT UNIVERSITETI', 15.0, 1.7, 'rgba(246,241,231,1)', '#5d4630', rotY);
+  plate.position.set(tx + fx * (pz0 + 6.15), 8.95, tz + fz * (pz0 + 6.15));
+  g.add(plate);
+
+  /* zinapoya: 7 pog'ona, eni 22 m */
+  for (let i = 0; i < 7; i++) {
+    const off = pz0 + 4.2 + i * 0.85;
+    SG.add(rectPts(tx + fx * off, tz + fz * off, 22 - i * 0.5, 0.9, ax, az, fx, fz),
+      0.19, 0, '#9d6a52', 'stone');
+  }
+  /* kirish maydoni (granit plita) */
+  SG.add(rectPts(tx + fx * (pz0 + 11.5), tz + fz * (pz0 + 11.5), 30, 9, ax, az, fx, fz),
+    0.12, 0, '#a97a62', 'stone');
+
+  SG.finish(g);
+  b.v7anchor = { x: tx, z: tz, h: POD + TH };
+  return g;
+}
+
+/* ---------------------------------------------------------------- 1-o'quv korpusi */
+function v7_tdiuFaculty(b, ctx) {
+  const g = new THREE.Group();
+  const [fx, fz] = pickFront(b, ctx);
+  const [ax, az] = [-fz, fx];
+  const cx = b.px, cz = b.pz;
+  const SG = solidGroup();
+  const H = 17.2;                        // 5 qavat x 3.44
+
+  /* 1) asosiy korpus — shaftoli suvoq, kemerli derazalar */
+  SG.add(b.pts, H, 0, '#faf3e6', 'soviet');
+  /* tom chetidagi oq parapet */
+  SG.add(b.pts, 0.85, H, '#f7f4ec', 'stone');
+
+  const eD = frontEdge(b, fx, fz, ax, az);
+
+  /* 2) markazdagi shisha zinapoya minorasi (rasmda yoysimon) */
+  const R = 5.6, TH2 = H + 1.6;
+  const rotCyl = Math.atan2(-fz, fx);          // yarim silindr qavariq tomoni fasadga
+  const twr = new THREE.Mesh(
+    new THREE.CylinderGeometry(R, R, TH2, 20, 1, true, 0, Math.PI),
+    new THREE.MeshPhongMaterial({ map: TEX.curtain, color: 0xdfeef6, emissive: 0x0d2530, specular: 0xcfeaff, shininess: 70, side: THREE.DoubleSide }));
+  twr.position.set(cx + fx * (eD + R * 0.45), TH2 / 2, cz + fz * (eD + R * 0.45));
+  twr.rotation.y = rotCyl;
+  g.add(twr);
+  /* mis rangli karniz (rasmda to'q sariq qoplama) */
+  const cap = new THREE.Mesh(new THREE.CylinderGeometry(R + 0.3, R + 0.3, 1.15, 20, 1, false, 0, Math.PI),
+    new THREE.MeshPhongMaterial({ color: 0xc8763f, emissive: 0x3a1a08, shininess: 60, side: THREE.DoubleSide }));
+  cap.position.set(cx + fx * (eD + R * 0.45), TH2 + 0.5, cz + fz * (eD + R * 0.45));
+  cap.rotation.y = rotCyl;
+  g.add(cap);
+
+  /* 3) oq soyabon-lenta (yozuvli) */
+  const cw = 27, ch = 3.15, cd = 3.6;
+  const off = eD + cd / 2;
+  SG.add(rectPts(cx + fx * off, cz + fz * off, cw, cd, ax, az, fx, fz), ch, 4.1, '#f7f4ec', 'stone');
+  const rotY = Math.atan2(fx, fz);
+  const plate = v7TextPlane('KUCH — BILIM VA TAFAKKURDA', 16, 1.5, 'rgba(247,244,236,1)', '#8a6b45', rotY);
+  plate.position.set(cx + fx * (off + cd / 2 + 0.06), 5.75, cz + fz * (off + cd / 2 + 0.06));
+  g.add(plate);
+
+  /* 4) kirish zinapoyasi */
+  for (let i = 0; i < 4; i++) {
+    const o = eD + cd + 0.5 + i * 0.9;
+    SG.add(rectPts(cx + fx * o, cz + fz * o, 18 - i * 0.6, 0.95, ax, az, fx, fz), 0.2, 0, '#cfc8bb', 'stone');
+  }
+  SG.finish(g);
+  b.v7anchor = { x: cx + fx * (eD + R * 0.45), z: cz + fz * (eD + R * 0.45), h: TH2 };
+  return g;
+}
+
+
+/* ---------------------------------------------------------------- institutsional bino (barcha rol binolari) */
+/**
+ * Litsey, korpuslar, gimnaziya, innovatsiya markazi — hammasi shu quruvchidan o'tadi.
+ * Foto asosidagi qolip: shaftoli fasad, markaziy risalit, karniz, parapet,
+ * kirish portali + yozuvli soyabon + zinapoya.
+ */
+function v7_inst(b, ctx) {
+  const g = new THREE.Group();
+  const [fx, fz] = pickFront(b, ctx);
+  const [ax, az] = [-fz, fx];
+  const cx = b.px, cz = b.pz;
+  const SG = solidGroup();
+
+  const floors = Math.max(2, b.levels || Math.round(b.h / 3.4));
+  const H = floors * 3.4;
+  const eD = frontEdge(b, fx, fz, ax, az, 16);
+
+  /* material rangi: rolga qarab (foto: shaftoli suvoq / sut rang tosh) */
+  const wall = b.role === 'innovation' ? '#f2eee4' : b.role === 'energy' ? '#efe2cf' : '#fbf4e7';
+
+  /* 1) korpus + parapet */
+  SG.add(b.pts, H, 0, wall, 'soviet');
+  SG.add(b.pts, 0.9, H, '#f8f5ee', 'stone');
+
+  /* 2) yuqori karniz tasmasi (konturdan 0.6 m chiqadi) */
+  const mid = b.pts.map(p => [cx + (p[0] - cx) * 1.03, cz + (p[1] - cz) * 1.03]);
+  SG.add(mid, 0.75, H - 0.75, '#f1ebdd', 'stone');
+
+  /* 3) markaziy risalit — kirish qanoti (fotodagi chiqib turgan qism) */
+  const RW = Math.min(19, 13 + floors * 0.6), RD = 5.4;
+  const rOff = eD - RD / 2;
+  SG.add(rectPts(cx + fx * rOff, cz + fz * rOff, RW, RD, ax, az, fx, fz),
+    H + 2.4, 0, wall, 'soviet');
+  /* risalit usti — kichik pediment/karniz */
+  SG.add(rectPts(cx + fx * rOff, cz + fz * rOff, RW + 1.4, RD + 1.4, ax, az, fx, fz),
+    0.9, H + 2.4, '#f6f1e6', 'stone');
+
+  /* 4) kirish: shisha eshik + soyabon + yozuv */
+  const pz0 = eD + 0.2;
+  const door = new THREE.Mesh(new THREE.PlaneGeometry(7.2, 3.6),
+    new THREE.MeshPhongMaterial({ color: 0x1d3d4e, emissive: 0x0c1e27, shininess: 80, specular: 0x9fd8ee }));
+  door.position.set(cx + fx * (pz0 + 0.05), 1.9, cz + fz * (pz0 + 0.05));
+  door.rotation.y = Math.atan2(fx, fz);
+  g.add(door);
+
+  const rotY = Math.atan2(fx, fz);
+  const can = new THREE.Mesh(new THREE.BoxGeometry(RW * 0.72, 0.45, 3.2),
+    new THREE.MeshPhongMaterial({ color: 0xf7f4ec, emissive: 0x2a2620, shininess: 30 }));
+  can.rotation.y = rotY;
+  can.position.set(cx + fx * (eD + 1.7), 4.2, cz + fz * (eD + 1.7));
+  g.add(can);
+
+  const nm = (ROLE_NAME[b.campus] || {})[b.role] || (b.roleData && b.roleData.name) || 'TDIU';
+  const plate = v7TextPlane(nm.toUpperCase(), Math.min(14, RW * 0.66), 1.15,
+    'rgba(247,244,236,1)', '#8a6b45', rotY);
+  plate.position.set(cx + fx * (eD + 3.32), 4.2, cz + fz * (eD + 3.32));
+  g.add(plate);
+
+  /* 5) zinapoya (3 pog'ona) + kirish maydoni */
+  for (let i = 0; i < 3; i++) {
+    const o = eD + 3.4 + i * 0.85;
+    SG.add(rectPts(cx + fx * o, cz + fz * o, 15 - i * 0.7, 0.95, ax, az, fx, fz), 0.19, 0, '#cfc7b9', 'stone');
+  }
+  SG.add(rectPts(cx + fx * (eD + 7.5), cz + fz * (eD + 7.5), 20, 6.5, ax, az, fx, fz), 0.1, 0, '#b9b2a6', 'stone');
+
+  SG.finish(g);
+  b.v7anchor = { x: cx + fx * (eD + 2), z: cz + fz * (eD + 2), h: H };
+  return g;
+}
+
+/* OSM id -> maxsus quruvchi */
+
+const V7_CUSTOM = {
+  149530194: v7_tdiuMain,
+  149530198: v7_tdiuFaculty,
+};
+
 /* binoning toʻliq geometriyasi (devor + tom) */
-function buildingMeshes(b) {
+
+function buildingMeshes(b, ctx) {
+  const custom = V7_CUSTOM[b.id];
+  if (custom) {
+    const grp = custom(b, ctx);
+    if (grp) return { group: grp, style: 'own' };
+  }
+  if (b.role && ctx) {                       // boshqa barcha rol binolari — qolip bo'yicha
+    const grp = v7_inst(b, ctx);
+    if (grp) return { group: grp, style: 'own' };
+  }
   const sb = new Builder(), rb = new Builder();
   const color = new THREE.Color(b.color);
+  if (b.campus && !b.role && b.style !== 'glass') {
+    b.style = 'soviet';
+    /* kampus palitrasi: shaftoli / krem / och sariq (fotosuratdagi kabi) */
+    const PAL = ['#f7e7d1', '#f3e0c6', '#efe6d8', '#f5ecdd', '#f8e9d3'];
+    const k = Math.abs(Math.round(b.px * 7 + b.pz * 13)) % PAL.length;
+    color.set(PAL[k]);
+  }
   if (b.landmark && b.landmark.tower) {
     const lm = b.landmark;
     const podH = (lm.podiumFloors || 3) * 3.4;
@@ -348,7 +751,7 @@ const roofMaterial = new THREE.MeshLambertMaterial({ map: TEX.roof, vertexColors
 const cityRoofMat = new THREE.MeshLambertMaterial({ vertexColors: true });
 
 /* ---------------------------------------------------------------- yer */
-const groundGeo = new THREE.PlaneGeometry(26000, 26000, 1, 1);
+const groundGeo = new THREE.PlaneGeometry(120000, 120000, 1, 1);
 groundGeo.rotateX(-Math.PI / 2);
 const ground = new THREE.Mesh(groundGeo, new THREE.MeshLambertMaterial({ map: TEX.grass, color: 0x9aa687 }));
 ground.position.y = -0.8;
@@ -484,25 +887,35 @@ for (const cp of CPS) {
   /* rolli binolar */
   for (const b of cp.buildings) {
     if (!b.role) continue;
-    const { walls, roof, style } = buildingMeshes(b);
+    const built = buildingMeshes(b, cp);
     const grp = new THREE.Group();
-    const wm = new THREE.Mesh(walls, matForStyle(style));
-    wm.material = matForStyle(style);
-    const rm = new THREE.Mesh(roof, roofMaterial);
-    grp.add(wm, rm);
-    b.wallsMesh = wm; b.roofMesh = rm;
+    let wm = null, rm = null, walls = null;
+    if (built.group) {
+      grp.add(built.group);
+      built.group.traverse(o => { if (o.isMesh) pickables.push(o); });
+      b.wallsMesh = built.group;
+      b.roofMesh = null;
+    } else {
+      walls = built.walls;
+      wm = new THREE.Mesh(walls, matForStyle(built.style));
+      rm = new THREE.Mesh(built.roof, roofMaterial);
+      grp.add(wm, rm);
+      b.wallsMesh = wm; b.roofMesh = rm;
+      pickables.push(wm, rm);
+    }
     grp.userData.b = b;
     g.add(grp);
-    pickables.push(wm, rm);
     roleMeshes.set(b.id, grp);
 
-    // kontur chizigʻi
-    const edges = new THREE.LineSegments(
-      new THREE.EdgesGeometry(walls, 25),
-      new THREE.LineBasicMaterial({ color: 0x7fd7ff, transparent: true, opacity: 0.18 })
-    );
-    b.edgesMesh = edges;
-    grp.add(edges);
+    // kontur chizigʻi (maxsus modellarda — tashqi quti boʻyicha)
+    if (!built.group) {
+      const edges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(walls, 25),
+        new THREE.LineBasicMaterial({ color: 0x7fd7ff, transparent: true, opacity: 0.18 })
+      );
+      b.edgesMesh = edges;
+      grp.add(edges);
+    }
 
     // yorliq
     const mat = new THREE.SpriteMaterial({ map: labelTexture(b, G.lvl[b.id]), transparent: true, depthTest: false, depthWrite: false });
@@ -628,11 +1041,8 @@ let farCityMesh = null;
 let farTallMesh = null;
 const DIST_LABELS = [];
 
-function decodeDistrict(b64) {
-  const bin = atob(b64);
-  const u8 = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
-  const dv = new DataView(u8.buffer);
+function decodeDistrictBuf(buf) {
+  const dv = new DataView(buf);
   let off = 0;
   const n = dv.getUint32(off, true); off += 4;
   const out = [];
@@ -653,177 +1063,235 @@ function decodeDistrict(b64) {
   return out;
 }
 
-function buildDistricts() {
-  if (!window.DISTRICTS) return;
-  for (const key of Object.keys(window.DISTRICTS.districts)) {
-    const d = window.DISTRICTS.districts[key];
-    const blds = decodeDistrict(d.b64);
-    DISTRICTS.push({ key, name: d.name, buildings: blds, count: blds.length, ring: d.ring || [] });
+/* ================================================================ TUMANLAR (lazy-load)
+   Har tuman alohida data/d_<key>.bin faylida. Kamera yaqinlashganda yuklanadi:
+   birinchi ochilish ~1 MB, butun shahar ko'rinishi uchun qolganlari fonda keladi. */
+const DIST_META = (window.DISTRICTS && window.DISTRICTS.districts) || {};
+const districtGroups = new Map();          // key -> { meshes:[], far:[] }
+const districtLoading = new Set();
+const districtLoaded = new Set();
 
-    /* tuman yuzasi (shahar zamini) */
-    if (d.ring && d.ring.length > 2) {
-      const shp = new THREE.Shape();
-      shp.moveTo(d.ring[0][0], -d.ring[0][1]);
-      for (let i = 1; i < d.ring.length; i++) shp.lineTo(d.ring[i][0], -d.ring[i][1]);
-      const gGeom = new THREE.ShapeGeometry(shp);
-      gGeom.rotateX(-Math.PI / 2);
-      const gm = new THREE.Mesh(gGeom, new THREE.MeshLambertMaterial({ color: 0x67706e }));
-      gm.position.y = -0.25;
-      world.add(gm);
-      // chegara chizigʻi
-      const pts = d.ring.map(([x, z]) => new THREE.Vector3(x, 0.15, z));
-      const lg = new THREE.BufferGeometry().setFromPoints(pts);
-      const line = new THREE.LineLoop(lg, new THREE.LineBasicMaterial({ color: 0x5ea8c9, transparent: true, opacity: 0.5 }));
-      world.add(line);
+function buildOneDistrict(key) {
+  const d = DIST_META[key];
+  if (!d) return;
+  const blds = d.__blds || [];
+  DISTRICTS.push({ key, name: d.name, buildings: blds, count: blds.length, ring: d.ring || [] });
+  const group = { meshes: [], far: [] };
+  districtGroups.set(key, group);
 
-      /* tuman nomi (uzoqdan koʻrinadi) */
-      const cv = document.createElement('canvas'); cv.width = 512; cv.height = 128;
-      const c2 = cv.getContext('2d');
-      c2.font = '800 64px system-ui, sans-serif';
-      c2.textAlign = 'center'; c2.textBaseline = 'middle';
-      c2.fillStyle = 'rgba(8,16,26,0.78)';
-      if (c2.roundRect) { c2.beginPath(); c2.roundRect(4, 24, 504, 80, 22); c2.fill(); }
-      else c2.fillRect(4, 24, 504, 80);
-      c2.strokeStyle = 'rgba(120,200,235,0.85)'; c2.lineWidth = 4;
-      c2.stroke();
-      c2.fillStyle = '#ffffff';
-      c2.fillText(d.name.toUpperCase(), 256, 66);
-      const tx2 = new THREE.CanvasTexture(cv);
-      tx2.colorSpace = THREE.SRGBColorSpace;
-      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tx2, transparent: true, depthTest: false, depthWrite: false, opacity: 0.85 }));
-      sp.position.set(d.ring.reduce((a, p) => a + p[0], 0) / d.ring.length, 30,
-                      d.ring.reduce((a, p) => a + p[1], 0) / d.ring.length);
-      sp.scale.set(420, 105, 1);
-      sp.renderOrder = 5;
-      world.add(sp);
-      DIST_LABELS.push(sp);
-      }
+  /* tuman yuzasi (shahar zamini) */
+  if (d.ring && d.ring.length > 2) {
+    const shp = new THREE.Shape();
+    shp.moveTo(d.ring[0][0], -d.ring[0][1]);
+    for (let i = 1; i < d.ring.length; i++) shp.lineTo(d.ring[i][0], -d.ring[i][1]);
+    const gGeom = new THREE.ShapeGeometry(shp);
+    gGeom.rotateX(-Math.PI / 2);
+    const gm = new THREE.Mesh(gGeom, new THREE.MeshLambertMaterial({ color: 0x67706e }));
+    gm.position.y = -0.25;
+    world.add(gm); group.meshes.push(gm);
 
+    const pts = d.ring.map(([x, z]) => new THREE.Vector3(x, 0.15, z));
+    const line = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts),
+      new THREE.LineBasicMaterial({ color: 0x6fbcd8, transparent: true, opacity: 0.22 }));
+    world.add(line); group.meshes.push(line); group.border = line;
 
-    /* uchastkalar: 950 m toʻr — stil boʻyicha 3 chelak, yuz -> bino xaritasi bilan */
-    const CHUNK = 950;
-    const cells = new Map();
-    const campCenters = [[0, 0], [2857, -1668]];
-    const STYLES = ['panel', 'classic', 'glass'];
-    for (const b of blds) {
-      let skip = false;
-      for (const cc of campCenters) if (Math.hypot(b.cx - cc[0], b.cz - cc[1]) < 430) skip = true;
-      if (skip) continue;
-      const DS = DIST_STYLE[key] || DIST_STYLE._default;
-      const hsh = fract(Math.sin(b.cx * 12.9898 + b.cz * 78.233) * 43758.5453);
-      const hsh2 = fract(Math.sin(b.cx * 39.3468 + b.cz * 11.135) * 24634.6345);
-      const t = Math.min(1, Math.max(0, (b.h - 3) / 46));
-      const col = new THREE.Color().setHSL(
-        DS.h + (hsh - 0.5) * 0.035,
-        DS.s + (hsh - 0.5) * 0.05,
-        Math.min(0.82, Math.max(0.34, DS.l + (hsh - 0.5) * 0.075 - t * 0.05))
-      );
-      const style = (b.h >= 20 && hsh > 0.88) ? 'glass' : (hsh > 0.87 ? 'classic' : 'panel');
-      const k = Math.floor(b.cx / CHUNK) + ':' + Math.floor(b.cz / CHUNK);
-      let cell = cells.get(k);
-      if (!cell) {
-        cell = { blds: [], panel: null, classic: null, glass: null };
-        for (const s of STYLES) cell[s] = { sb: new Builder(), rb: new Builder(), infos: [] };
-        cells.set(k, cell);
-      }
-      const c = cell[style];
-      const w0 = c.sb.idx.length / 3, r0 = c.rb.idx.length / 3;
-      const bIdx = cell.blds.length;
-      cell.blds.push({ cx: b.cx, cz: b.cz, h: b.h, key, hsh, style });
-      extrudeInto(c.sb, c.rb, b.pts, b.h, 0, col, style);
-      /* tom ustidagi texnika bloki (lift/ventilyatsiya shoxobchasi) */
-      if (b.h >= 11 && hsh2 > 0.52) {
-        const bw = 2.6 + hsh2 * 3.2;
-        const bx = b.cx + (hsh - 0.5) * 5.5, bz = b.cz + (hsh2 - 0.5) * 5.5;
-        const grey = new THREE.Color(0x7d838b);
-        extrudeInto(c.sb, c.rb,
-          [[bx - bw, bz - bw * 0.7], [bx + bw, bz - bw * 0.7], [bx + bw, bz + bw * 0.7], [bx - bw, bz + bw * 0.7]],
-          1.8, b.h, grey, 'panel');
-      }
-      c.infos.push({ w0, w1: c.sb.idx.length / 3, r0, r1: c.rb.idx.length / 3, b: bIdx });
-      if (b.h >= 14) {
-        if (!window.__farTall) window.__farTall = new Builder();
-        extrudeInto(window.__farTall, window.__farTall, b.pts, b.h, 0, col, 'panel');
-      }
+    /* tuman nomi */
+    const cv = document.createElement('canvas'); cv.width = 512; cv.height = 128;
+    const c2 = cv.getContext('2d');
+    c2.font = '800 64px system-ui, sans-serif';
+    c2.textAlign = 'center'; c2.textBaseline = 'middle';
+    c2.fillStyle = 'rgba(8,16,26,0.78)';
+    if (c2.roundRect) { c2.beginPath(); c2.roundRect(4, 24, 504, 80, 22); c2.fill(); }
+    else c2.fillRect(4, 24, 504, 80);
+    c2.strokeStyle = 'rgba(120,200,235,0.85)'; c2.lineWidth = 4; c2.stroke();
+    c2.fillStyle = '#ffffff';
+    c2.fillText(d.name.toUpperCase(), 256, 66);
+    const tx2 = new THREE.CanvasTexture(cv);
+    tx2.colorSpace = THREE.SRGBColorSpace;
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tx2, transparent: true, depthTest: false, depthWrite: false, opacity: 0.85 }));
+    sp.position.set(d.ring.reduce((a, p) => a + p[0], 0) / d.ring.length, 30,
+                    d.ring.reduce((a, p) => a + p[1], 0) / d.ring.length);
+    sp.scale.set(420, 105, 1);
+    sp.renderOrder = 5;
+    world.add(sp); DIST_LABELS.push(sp);
+  }
+
+  /* uchastkalar: 950 m to'r — stil bo'yicha chelaklar, yuz -> bino xaritasi */
+  const CHUNK = 950;
+  const cells = new Map();
+  const campCenters = [[0, 0], [2857, -1668]];
+  const STYLES = ['panel', 'classic', 'glass'];
+  const farRoof = new Builder(), farTall = new Builder();
+  for (const b of blds) {
+    let skip = false;
+    for (const cc of campCenters) if (Math.hypot(b.cx - cc[0], b.cz - cc[1]) < 430) skip = true;
+    if (skip) continue;
+    const DS = DIST_STYLE[key] || DIST_STYLE._default;
+    const hsh = fract(Math.sin(b.cx * 12.9898 + b.cz * 78.233) * 43758.5453);
+    const hsh2 = fract(Math.sin(b.cx * 39.3468 + b.cz * 11.135) * 24634.6345);
+    const t = Math.min(1, Math.max(0, (b.h - 3) / 46));
+    const col = new THREE.Color().setHSL(
+      DS.h + (hsh - 0.5) * 0.035,
+      DS.s + (hsh - 0.5) * 0.05,
+      Math.min(0.82, Math.max(0.34, DS.l + (hsh - 0.5) * 0.075 - t * 0.05))
+    );
+    const style = (b.h >= 20 && hsh > 0.88) ? 'glass' : (hsh > 0.87 ? 'classic' : 'panel');
+    const k = Math.floor(b.cx / CHUNK) + ':' + Math.floor(b.cz / CHUNK);
+    let cell = cells.get(k);
+    if (!cell) {
+      cell = { blds: [], panel: null, classic: null, glass: null };
+      for (const st of STYLES) cell[st] = { sb: new Builder(), rb: new Builder(), infos: [] };
+      cells.set(k, cell);
     }
-    for (const cell of cells.values()) {
-      if (!window.__farRoof) window.__farRoof = new Builder();
-      for (const style of STYLES) {
-        const c = cell[style];
-        if (!c.sb.idx.length && !c.rb.idx.length) continue;
-        const fr = window.__farRoof;
-        const off = fr.pos.length / 3;
-        for (let i = 0; i < c.rb.pos.length; i++) fr.pos.push(c.rb.pos[i]);
-        for (let i = 0; i < c.rb.nor.length; i++) fr.nor.push(c.rb.nor[i]);
-        for (let i = 0; i < c.rb.uv.length; i++) fr.uv.push(c.rb.uv[i]);
-        for (let i = 0; i < c.rb.col.length; i++) fr.col.push(c.rb.col[i]);
-        for (let i = 0; i < c.rb.idx.length; i++) fr.idx.push(c.rb.idx[i] + off);
+    const c = cell[style];
+    const w0 = c.sb.idx.length / 3, r0 = c.rb.idx.length / 3;
+    const bIdx = cell.blds.length;
+    cell.blds.push({ cx: b.cx, cz: b.cz, h: b.h, key, hsh, style });
+    extrudeInto(c.sb, c.rb, b.pts, b.h, 0, col, style);
+    if (b.h >= 11 && hsh2 > 0.52) {
+      const bw = 2.6 + hsh2 * 3.2;
+      const bx = b.cx + (hsh - 0.5) * 5.5, bz = b.cz + (hsh2 - 0.5) * 5.5;
+      const grey = new THREE.Color(0x7d838b);
+      extrudeInto(c.sb, c.rb,
+        [[bx - bw, bz - bw * 0.7], [bx + bw, bz - bw * 0.7], [bx + bw, bz + bw * 0.7], [bx - bw, bz + bw * 0.7]],
+        1.8, b.h, grey, 'panel');
+    }
+    c.infos.push({ w0, w1: c.sb.idx.length / 3, r0, r1: c.rb.idx.length / 3, b: bIdx });
+    if (b.h >= 14) extrudeInto(farTall, farTall, b.pts, b.h, 0, col, 'panel');
+  }
 
-        if (c.sb.idx.length) {
-          const wg = builderToGeometry({ pos: c.sb.pos, nor: c.sb.nor, uv: c.sb.uv, col: c.sb.col, idx: c.sb.idx });
-          const wm = new THREE.Mesh(wg, matForStyle(style));
-          wm.userData.kind = 'walls';
-          wm.userData.blds = cell.blds;
-          wm.userData.faceMap = c.infos.filter(r => r.w1 > r.w0).map(r => ({ a: r.w0, b: r.w1, bIdx: r.b }));
-          world.add(wm); districtMeshes.push(wm);
-        }
-        if (c.rb.idx.length) {
-          const rg = builderToGeometry({ pos: c.rb.pos, nor: c.rb.nor, uv: c.rb.uv, col: c.rb.col, idx: c.rb.idx });
-          const rm = new THREE.Mesh(rg, cityRoofMat);
-          rm.userData.kind = 'roof';
-          rm.userData.blds = cell.blds;
-          rm.userData.faceMap = c.infos.filter(r => r.r1 > r.r0).map(r => ({ a: r.r0, b: r.r1, bIdx: r.b }));
-          world.add(rm); districtMeshes.push(rm);
-        }
+  for (const cell of cells.values()) {
+    for (const st of STYLES) {
+      const c = cell[st];
+      if (!c.sb.idx.length && !c.rb.idx.length) continue;
+      /* far mesh uchun tomlarni yig'amiz */
+      const off = farRoof.pos.length / 3;
+      for (let i = 0; i < c.rb.pos.length; i++) farRoof.pos.push(c.rb.pos[i]);
+      for (let i = 0; i < c.rb.nor.length; i++) farRoof.nor.push(c.rb.nor[i]);
+      for (let i = 0; i < c.rb.uv.length; i++) farRoof.uv.push(c.rb.uv[i]);
+      for (let i = 0; i < c.rb.col.length; i++) farRoof.col.push(c.rb.col[i]);
+      for (let i = 0; i < c.rb.idx.length; i++) farRoof.idx.push(c.rb.idx[i] + off);
+
+      if (c.sb.idx.length) {
+        const wg = builderToGeometry({ pos: c.sb.pos, nor: c.sb.nor, uv: c.sb.uv, col: c.sb.col, idx: c.sb.idx });
+        const wm = new THREE.Mesh(wg, matForStyle(st));
+        wm.userData.kind = 'walls';
+        wm.userData.blds = cell.blds;
+        wm.userData.faceMap = c.infos.filter(r => r.w1 > r.w0).map(r => ({ a: r.w0, b: r.w1, bIdx: r.b }));
+        world.add(wm); districtMeshes.push(wm); group.meshes.push(wm);
+      }
+      if (c.rb.idx.length) {
+        const rg = builderToGeometry({ pos: c.rb.pos, nor: c.rb.nor, uv: c.rb.uv, col: c.rb.col, idx: c.rb.idx });
+        const rm = new THREE.Mesh(rg, cityRoofMat);
+        rm.userData.kind = 'roof';
+        rm.userData.blds = cell.blds;
+        rm.userData.faceMap = c.infos.filter(r => r.r1 > r.r0).map(r => ({ a: r.r0, b: r.r1, bIdx: r.b }));
+        world.add(rm); districtMeshes.push(rm); group.meshes.push(rm);
       }
     }
   }
-  if (window.__farRoof) {
-    const parts = [window.__farRoof];
-    if (window.__farTall && window.__farTall.idx.length) {
-      // baland binolar devorlari material talab qiladi — alohida mesh
-      const tg = builderToGeometry(window.__farTall);
-      const tm = new THREE.Mesh(tg, matForStyle('panel'));
-      tm.visible = false;
-      world.add(tm);
-      farTallMesh = tm;
-    }
-    const g = builderToGeometry(window.__farRoof);
-    farCityMesh = new THREE.Mesh(g, cityRoofMat);
-    farCityMesh.visible = false;
-    world.add(farCityMesh);
+
+  /* shu tuman uchun panorama (uzoqdan) */
+  if (farTall.idx.length) {
+    const tm = new THREE.Mesh(builderToGeometry(farTall), matForStyle('panel'));
+    tm.visible = false; world.add(tm); group.far.push(tm);
   }
-  console.log('tumanlar:', DISTRICTS.map(d => d.name + ' ' + d.count).join(', '),
-              '| chunk mesh:', districtMeshes.length);
+  if (farRoof.idx.length) {
+    const fm = new THREE.Mesh(builderToGeometry(farRoof), cityRoofMat);
+    fm.visible = false; world.add(fm); group.far.push(fm);
+  }
+  /* agar hozir "uzoq" rejim yoqilgan bo'lsa — darhol shunga moslaymiz */
+  const farNow = !!loop._farMode;
+  for (const m of group.meshes) {
+    if (m.userData.kind === 'walls' || m.userData.kind === 'roof') m.visible = !farNow;
+  }
+  for (const f of group.far) f.visible = farNow;
+  console.log('tuman yuklandi:', key, blds.length, 'bino,', group.meshes.length, 'mesh');
 }
-buildDistricts();
+
+/* bitta tumanni yuklash (inline yoki tashqi .bin) */
+async function loadDistrict(key) {
+  if (districtLoaded.has(key) || districtLoading.has(key)) return;
+  const d = DIST_META[key];
+  if (!d) return;
+  districtLoading.add(key);
+  try {
+    let buf;
+    if (d.b64) {
+      const bin = atob(d.b64);
+      const u8 = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+      buf = u8.buffer;
+    } else {
+      const r = await fetch(`data/d_${key}.bin`);
+      if (!r.ok) throw new Error(`${key}: HTTP ${r.status}`);
+      buf = await r.arrayBuffer();
+    }
+    d.__blds = decodeDistrictBuf(buf);
+    buildOneDistrict(key);
+    districtLoaded.add(key);
+  } catch (e) {
+    console.warn('tuman yuklanmadi:', key, e.message);
+  } finally {
+    districtLoading.delete(key);
+  }
+}
+
+/* kamera yaqinidagi tumanlarni yuklash */
+function scheduleDistricts(force) {
+  const now = performance.now();
+  if (!force && now - (scheduleDistricts._t || 0) < 900) return;
+  scheduleDistricts._t = now;
+  const reach = Math.max(2600, cam.r * 1.25);
+  for (const key of Object.keys(DIST_META)) {
+    if (districtLoaded.has(key) || districtLoading.has(key)) continue;
+    const bb = DIST_META[key].bbox;
+    const dx = Math.max(bb[0] - cam.tx, 0, cam.tx - bb[2]);
+    const dz = Math.max(bb[1] - cam.tz, 0, cam.tz - bb[3]);
+    if (Math.hypot(dx, dz) < reach) loadDistrict(key);
+  }
+}
+
 
 /* butun shahar boʻyicha avtomatik "umumiy koʻrinish" ramkasi */
 const OVERVIEW = (() => {
   let minX = 1e9, maxX = -1e9, minZ = 1e9, maxZ = -1e9;
-  for (const d of DISTRICTS) for (const b of d.buildings) {
-    if (b.cx < minX) minX = b.cx; if (b.cx > maxX) maxX = b.cx;
-    if (b.cz < minZ) minZ = b.cz; if (b.cz > maxZ) maxZ = b.cz;
+  for (const key of Object.keys(DIST_META)) {
+    const bb = DIST_META[key].bbox;
+    if (!bb) continue;
+    minX = Math.min(minX, bb[0]); maxX = Math.max(maxX, bb[2]);
+    minZ = Math.min(minZ, bb[1]); maxZ = Math.max(maxZ, bb[3]);
   }
   if (minX > maxX) { minX = -900; maxX = 3800; minZ = -2600; maxZ = 900; }
   return {
     tx: (minX + maxX) / 2, tz: (minZ + maxZ) / 2,
-    r: Math.max(maxX - minX, maxZ - minZ) * 1.0,
+    r: Math.max(maxX - minX, maxZ - minZ) * 0.95,
   };
 })();
 
 
 /* ---------------------------------------------------------------- tuman koʻchalari */
-function buildDistrictRoads() {
-  if (!window.DISTRICT_ROADS) return;
-  const bin = atob(window.DISTRICT_ROADS.b64);
-  const u8 = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
-  const dv = new DataView(u8.buffer);
+async function buildDistrictRoads() {
+  const R = window.DISTRICT_ROADS;
+  if (!R) return;
+  let buf;
+  if (R.b64) {
+    const bin = atob(R.b64);
+    const u8 = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+    buf = u8.buffer;
+  } else {
+    try {
+      const r = await fetch(R.file);
+      buf = await r.arrayBuffer();
+    } catch (e) { console.warn('yo\'llar yuklanmadi', e.message); return; }
+  }
+  const dv = new DataView(buf);
   const WIDTH = { 1: 26, 2: 20, 3: 15, 4: 11, 5: 8 };
   const groups = {};
   let off = 0;
-  while (off < u8.length) {
+  const total = buf.byteLength;
+  while (off < total) {
     const cls = dv.getUint8(off), n = dv.getUint8(off + 1);
     let px = dv.getInt16(off + 2, true), pz = dv.getInt16(off + 4, true);
     off += 6;
@@ -1479,6 +1947,7 @@ const POI_BUILDERS = {
   },
 };
 
+const POI_MODELS = [];
 for (const poi of POIS) {
   const st = POI_STYLE[poi.cat] || POI_STYLE.spot;
   const hit = new THREE.Mesh(new THREE.CylinderGeometry(12, 12, 56, 8), new THREE.MeshBasicMaterial({ visible: false }));
@@ -1495,7 +1964,89 @@ for (const poi of POIS) {
   sp.scale.set(64, 16.5, 1); sp.renderOrder = 8;
   world.add(sp);
   POI_LABELS.push(sp);
+  POI_MODELS.push({ g: model, hit, x: poi.x, z: poi.z });
 }
+
+
+/* ---------------------------------------------------------------- POI'larni global merge
+   64 ta maskan modeli ~960 alohida mesh'dan iborat. Hammasini bitta material
+   bo'yicha yagona mesh'ga birlashtiramiz: draw call ~960 -> ~8. */
+function mergeAttrGeos(geoms) {
+  let total = 0;
+  const parts = [];
+  for (const g0 of geoms) {
+    const g = g0.index ? g0.toNonIndexed() : g0;
+    parts.push(g);
+    total += g.attributes.position.count;
+  }
+  const pos = new Float32Array(total * 3);
+  const nor = new Float32Array(total * 3);
+  const uv = new Float32Array(total * 2);
+  const col = new Float32Array(total * 3);
+  let o = 0;
+  for (const g of parts) {
+    const p = g.attributes.position.array, n = g.attributes.normal ? g.attributes.normal.array : null;
+    const u = g.attributes.uv ? g.attributes.uv.array : null;
+    const c = g.attributes.color ? g.attributes.color.array : null;
+    pos.set(p, o * 3);
+    if (n) nor.set(n, o * 3);
+    if (u) uv.set(u, o * 2);
+    if (c) col.set(c, o * 3);
+    o += g.attributes.position.count;
+  }
+  const out = new THREE.BufferGeometry();
+  out.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  out.setAttribute('normal', new THREE.BufferAttribute(nor, 3));
+  out.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+  out.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  out.computeBoundingSphere();
+  return out;
+}
+
+function mergePoiModels() {
+  /* Har bir maskan modeli: barcha bo'laklar vertex-rangga o'girilib, BITTA mesh bo'ladi.
+     Shu bilan 64 maskan ~960 mesh o'rniga 64-128 mesh, va masofa filtri ishlaydi. */
+  const OPAQUE = new THREE.MeshLambertMaterial({ vertexColors: true });
+  const GLASS = new THREE.MeshLambertMaterial({ vertexColors: true, transparent: true, opacity: 0.62 });
+  let meshN = 0, triN = 0;
+
+  for (const rec of POI_MODELS) {
+    const root = rec.g;
+    root.updateMatrixWorld(true);
+    const opaque = [], glass = [];
+    root.traverse(o => {
+      if (!o.isMesh || o.isInstancedMesh || !o.geometry) return;
+      const mat = Array.isArray(o.material) ? o.material[0] : o.material;
+      const g0 = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
+      g0.applyMatrix4(o.matrixWorld);
+      const cnt = g0.attributes.position.count;
+      const col = new Float32Array(cnt * 3);
+      const c = (mat && mat.color) ? mat.color : new THREE.Color(0xcccccc);
+      // oddiy yorug'lik: tom yorug', yon tomonlar biroz to'q
+      for (let i = 0; i < cnt; i++) { col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b; }
+      g0.setAttribute('color', new THREE.BufferAttribute(col, 3));
+      const isGlass = !!(mat && mat.transparent && mat.opacity < 0.95);
+      (isGlass ? glass : opaque).push(g0);
+    });
+
+    const made = [];
+    for (const [list, mat] of [[opaque, OPAQUE], [glass, GLASS]]) {
+      if (!list.length) continue;
+      const merged = mergeAttrGeos(list);
+      triN += merged.attributes.position.count / 3;
+      const m = new THREE.Mesh(merged, mat);
+      m.userData.kind = 'poi';
+      m.position.set(0, 0, 0);
+      world.add(m);
+      made.push(m);
+      meshN++;
+    }
+    rec.g = made;               // endi massiv
+    world.remove(root);
+  }
+  console.log('POI merge:', meshN, 'mesh,', Math.round(triN), 'uchburchak');
+}
+mergePoiModels();
 
 /* daraxtlar (instanced) */
 (function trees() {
@@ -1663,7 +2214,7 @@ function buildingInfoAt(mesh, faceIndex) {
 }
 const DIST_NAME = {};
 for (const d of DISTRICTS) DIST_NAME[d.key] = d.name;
-const REAL_DATA = { chilonzor: true, yunusobod: true, olmazor: true, uchtepa: true, mirzo_ulugbek: true, mirobod: true, shayxontohur: true, sergeli: true, bektemir: true, yashnobod: true, yakkasaroy: true, yangihayot: true };  // 2026-11-28: 12 tuman hammasi real OSM
+const REAL_DATA = { chilonzor: true, yunusobod: true };
 
 function pick(cx, cy) {
   ndc.set((cx / window.innerWidth) * 2 - 1, -(cy / window.innerHeight) * 2 + 1);
@@ -1974,7 +2525,10 @@ function renderPanel() {
   if (!selected) return;
   const b = selected, r = b.roleData, lvl = G.lvl[b.id];
   const owner = G.owner[b.id];
-  const tabs = [['info', "Ma'lumot"], ['rooms', 'Xonalar'], ['inside', "Ichki ko'rinish"]];
+  /* ichki ko'rinish faqat TDIU kampusi uchun (boshqa binolar — faqat tashqi ko'rinish) */
+  const tabs = b.campus === 'main'
+    ? [['info', "Ma'lumot"], ['rooms', 'Xonalar'], ['inside', "Ichki ko'rinish"]]
+    : [['info', "Ma'lumot"], ['rooms', 'Xonalar']];
   const tabHtml = tabs.map(([k, t]) => `<button class="p-tab${panelTab === k ? ' on' : ''}" onclick="window.__tab('${k}')">${t}</button>`).join('');
   const headHtml = `
     <div class="p-head">
@@ -2037,7 +2591,7 @@ function renderPanel() {
       rows += `<div class="room-row"><b>${f}-qavat</b><span>${rooms.length} xona — ${names}${rooms.length > 4 ? ' …' : ''}</span></div>`;
     }
     body = `<div class="rooms-list">${rows}</div>
-      <button class="btn btn-ic" style="margin-top:10px" onclick="window.__tab('inside')">${ic('map', 15)} Ichki koʻrinishda ochish</button>`;
+      ${b.campus === 'main' ? `<button class="btn btn-ic" style="margin-top:10px" onclick="window.__tab('inside')">${ic('map', 15)} Ichki koʻrinishda ochish</button>` : ''}`;
   } else if (panelTab === 'inside') {
     const data = ensureInterior(b);
     let fb = '';
@@ -2461,7 +3015,11 @@ document.querySelectorAll('.campus-card').forEach(el => {
 /* ---------------------------------------------------------------- loop */
 let t = 0;
 function loop(now) {
-  requestAnimationFrame(loop);
+  /* dastlabki yuklash: kampus tumani darhol, qolganlari kamera bo'yicha */
+scheduleDistricts(true);
+loadDistrict('chilonzor');
+loadDistrict('yunusobod');
+requestAnimationFrame(loop);
   tick(now);
   t += 0.016;
   applyCam();
@@ -2539,14 +3097,24 @@ function loop(now) {
       b.ring.material.opacity = 0.35 + 0.2 * Math.sin(t * 2 + b.px);
     }
   }
-  /* uzoqdan: barcha chunkʻlar oʻrniga bitta birlashtirilgan tom toʻplami (10x tez) */
+  /* POI modellari (64 ta, har biri 10-25 mesh) faqat yaqin masofada chiziladi */
+  if ((loop._poiTick = (loop._poiTick || 0) + 1) % 6 === 0) {
+    const cut = cam.r > 4200 ? 0 : Math.max(900, cam.r * 0.75);
+    for (const rec of POI_MODELS) {
+      const vis = Math.hypot(rec.x - cam.tx, rec.z - cam.tz) < cut;
+      if (rec.hit.visible !== vis) rec.hit.visible = vis;
+      for (const m of rec.g) if (m.visible !== vis) m.visible = vis;
+    }
+  }
+
+  /* uzoqdan: barcha chunklar o'rniga bitta birlashtirilgan tom to'plami (10x tez) */
   const farMode = cam.r > 5200;
   if (farMode !== loop._farMode) {
     loop._farMode = farMode;
     for (const m of districtMeshes) m.visible = !farMode;
-    if (farCityMesh) farCityMesh.visible = farMode;
-    if (farTallMesh) farTallMesh.visible = farMode;
+    for (const grp of districtGroups.values()) for (const f of grp.far) f.visible = farMode;
   }
+  scheduleDistricts(false);
   drawHud();
   renderer.render(scene, camera);
 }

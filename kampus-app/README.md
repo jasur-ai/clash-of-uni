@@ -1,16 +1,19 @@
-# KAMPUS: TDIU — deploy + bot qo'llanmasi (v0.3)
+# KAMPUS: TDIU — deploy + bot qo'llanmasi (v0.7)
 
-Bu papkada **tayyor Mini App** bor: `index.html` (≈2.0 MB, hamma narsa — three.js, 3D kampus,
-**Chilonzor + Yunusobod tumanlarining 42 065 ta haqiqiy binosi**, o'yin mantiqi — ichida).
+Bu papkada **tayyor Mini App** bor: `index.html` (≈1.0 MB — three.js + 3D kampus +
+o'yin mantiqi ichida) + **`data/` — 12 tuman geometriyasi lazy-load qilinadi**
+(`d_<tuman>.bin` × 12, 5.1 MB; `roads.bin` 124 KB — 8 844 ta haqiqiy ko'cha).
+Jami **253 328 ta haqiqiy OSM binosi** (12 tumanning hammasi haqiqiy relation chegaralari).
 Server shart emas; bot uchun `api/` papkasidagi 2 ta serverless funksiya bor.
 
-> **v0.3 da nima yangi:** butun Chilonzor va Yunusobod — **42 065 ta haqiqiy bino** (OSM konturlari:
-> L, U, hovilli, minora+stilobat shakllari, to'rtburchak "karton" yo'q) + **4 234 ta ko'cha**;
-> kampus hududi firuza rang bilan ajratilgan; draw call 592 → 104; bot ulandi.
+> **v0.7 da nima yangi:** lazy-loading arxitektura (`index.html` 7.1 MB → 1.0 MB;
+> tumanlar kamera yaqinlashganda yuklanadi) + **253 328 haqiqiy bino** (12 tuman
+> haqiqiy OSM relation chegaralari, 40–123 nuqtali zich halqalar) + `soviet` facade
+> (foto-mos TDIU iqtisodiyot fakulteti minorasi) va IELTS markazi / Mustaqillik shoh maydoni yorliqlari.
 
 ---
 
-## 0. ⚠️ Bot tokeni haqida — birinchi navbatda
+## 0. DIQQAT: Bot tokeni — birinchi navbatda
 
 Token chatda yozilgan bo'lsa, uni **darhol yangilang**:
 
@@ -26,7 +29,7 @@ bo'limiga kiriting (`TELEGRAM_BOT_TOKEN`). Repo'ga tushsa, bot o'g'irlanadi.
 ## 1. Vercelga chiqarish — 3 xil yo'l
 
 ### Yo'l A — Drag & Drop (eng tez)
-1. `kampus-app` papkasini yuklab oling (`index.html`, `vercel.json`, `package.json`, `api/`).
+1. `kampus-app` papkasini yuklab oling (`index.html`, `data/`, `vercel.json`, `package.json`, `api/`).
 2. https://vercel.com/new → **Deploy → Browse** → papkani tashlang.
 3. Framework: **Other**. Build command: bo'sh. Output directory: bo'sh.
 4. **Deploy** → `https://<loyiha>.vercel.app`.
@@ -97,7 +100,7 @@ https://<loyiha>.vercel.app/api/setup?key=<SETUP_KEY>&url=https://<loyiha>.verce
 - [ ] Havola **HTTPS** (Vercel beradi) — Telegram HTTP qabul qilmaydi.
 - [ ] Telefonda to'liq ekran (`expand()` kodda).
 - [ ] iPhone'da pastki safe-area (nav tugmalari) ko'rinadi.
-- [ ] Birinchi yuklanish: 2 MB fayl, CDN gzip bilan ≈1.2 MB → 4G'da ~2–3 s.
+- [ ] Birinchi yuklanish: ≈1 MB `index.html` + Chilonzor/Yunusobod (~0.8 MB); boshqa tumanlar kamera yaqinlashganda lazy (har biri 0.2–0.7 MB).
 - [ ] `getWebhookInfo` da `last_error_message` yo'q.
 - [ ] Ochilganda tepada "KAMPUS · TDIU" va xarita ustida TDIU/MOLIYA yorliqlari ko'rinadi.
 
@@ -107,13 +110,13 @@ https://<loyiha>.vercel.app/api/setup?key=<SETUP_KEY>&url=https://<loyiha>.verce
 
 Manba kod: `../tsue3d/`
 ```bash
-cd tsue3d
-python3 fetch_districts.py     # OSM tile'lar (kesh: data/tiles/)
-python3 build_districts.py     # -> build/districts.json (42 065 bino, 1.05 MB)
-python3 fetch_roads.py         # ko'chalar (kesh: data/tiles_road/)
-python3 build_roads.py         # -> build/roads.json (73 KB)
-python3 build_v2.py            # -> tsue-campus-v3.html + ../kampus-app/index.html
+cd ../tsue3d
+python3 build_v2.py           # -> ../kampus-app/index.html + ../kampus-app/data/*.bin (+ tsue-campus-v3.html)
+python3 smoke.py              # 79 ta tekshiruv (bin walk, HTTP, CSP, /data immutable)
 ```
+OSM tile'lar bilan to'liq qayta yig'ish faqat internetli mashinada: `fetch_districts.py`
+(binolar), `fetch_roads.py` (yo'llar), keyin `rebuild_real.py` — 12 tuman endi
+point-in-poly (relation ringlar); Voronoi faqat zaxira variant.
 
 ---
 
@@ -125,7 +128,6 @@ python3 build_v2.py            # -> tsue-campus-v3.html + ../kampus-app/index.ht
 | Postgres + lazy tick | Reytinni hamma o'yinchi uchun umumiy qilish |
 | Real savol banki (5 000) | Hozir 16 ta demo savol |
 | Telegram Stars to'lovlari | Mavsum pass / kosmetika |
-| Boshqa tumanlar (Yakkasaroy, Mirzo Ulug'bek) | Xarita kengayishi — skript tayyor, faqat ro'yxatga qo'shish |
 
 Batafsil: `../tsue3d/KAMPUS-TDIU-tahlil.md` (7-bo'lim: yo'l xaritasi va byudjet).
 Ma'lumot manbasi: **© OpenStreetMap contributors (ODbL)** — atributsiya o'yin ichida ko'rsatilgan.
