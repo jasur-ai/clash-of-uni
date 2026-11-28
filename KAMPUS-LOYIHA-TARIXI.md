@@ -8,7 +8,7 @@
 > Vercel'ga deploy qilish uchun. Fayl o'z-o'zini to'liq ta'minlaydi — boshqa hech qanday
 > hujjat o'qish shart emas.
 >
-> **Sana:** 2026-11-28 (v0.7.2 gacha yangilandi) · **Til:** o'zbek · **Loyiha papkasi:** `tsue3d/` (manba) + `kampus-app/` (deploy)
+> **Sana:** 2026-11-28 (v0.8 gacha yangilandi) · **Til:** o'zbek · **Loyiha papkasi:** `tsue3d/` (manba) + `kampus-app/` (deploy)
 
 ---
 
@@ -560,7 +560,7 @@ keyingi sprintning 1-raqamli vazifasi (`initData` HMAC).
 
 ---
 
-### v0.7.2 — FOTO-ASOSLI LANDMARKLAR ← **joriy** (Drive: `kampus-v0.7.2-landmark-2026-11-28.zip`)
+### v0.7.2 — FOTO-ASOSLI LANDMARKLAR (Drive: `kampus-v0.7.2-landmark-2026-11-28.zip`)
 - **Yangi batafsil modellar** (Wikimedia foto + qo'lda o'lchov, `tsue3d/KAMPUS-v0.7-yangilanish.md`):
   **Chorsu bozori** (ko'k gumbaz r=38, 16 qirrali baraban, g'isht galereya, (41.32656, 69.23611)),
   **Toshkent teleminorasi** (375 m: pastki pavilion, 205 m panjara — LineSegments 1 draw call, 3 qavat kuzatuv zali, (41.34797, 69.28464)),
@@ -576,7 +576,24 @@ keyingi sprintning 1-raqamli vazifasi (`initData` HMAC).
 - `Hotel Uzbekistan` — checklistda, lekin modeli hali YO'Q (foto topilmadi; faqat xarita nuqtasi + rx 55) — v0.8 ish.
 - Smoke: **89 tekshiruv PASS** (yangi: landmark soni=7, rx radiuslari, `buildChorsu`/`buildTVTower`/`AKADEMIK LITSEYI`/`LMARR`/`hasInterior` inline game'da, Finance-interior gate regresiya cheki).
 - Brand «DIGITAL TWIN v0.7.2»; `index.html` **1 023 KB**; draw call ~284 (author o'lchovi).
-- PR #8 → main; deploy: `create_deployment` (main) → clash-of-uni.vercel.app
+- PR #8 → main (`9d31250`); deploy: push→main avtomatik (Vercel git integration) → clash-of-uni.vercel.app (`dpl_Hg32jcXDsGCmmhpT4V7pxwpnX7UW`, READY/PROMOTED)
+
+---
+
+### v0.8 — SAYR: personaj, mashina, mototsikl va yurib kiriladigan interyer ← **joriy** (Drive: `kampus-v0.8-sayr-2026-11-28.zip`)
+- **GTA-uslubidagi sayr rejimi** (author zip'dan porte qilindi, `tsue3d/KAMPUS-v0.7-yangilanish.md` 8-bo'lim):
+  - **Personaj**: ≈1.8 m, 15 primitiv, qo'l-oyoq tebranadi; 3.6 m/s (`Shift` — 7.4); joystik (chap past) yoki `WASD`/strelkalar; kamera yelka ortida, `fov 58`;
+  - **Mashina** (qizil sedan, 4.35 m, yon oyna/ko'zgular/panjara/fara/stop, max **27 m/s**, E — o'tirish/tushish) va **mototsikl** (2.4 m karkas, max **33 m/s**); mashina/mototsikl tugmalarida sayr UI'da SVG ikonkalar (emoji yo'q — repo konvensiyasi);
+  - **Interyer**: eng yaqin binoga (≤26 m) **E** — ichiga kiriladi; 38×30 m, 4.4 m foye: marmar pol, 5 yorug'lik paneli + 5 nuqtali yoritish, +Z devorda 4.2 m eshik teshigi, 8 ustun (kollayderli), qabul peshtaxtasi (monitor+stul), 2 lift eshigi, 4 ramka, 4 skameyka, fikuslar, gilam, devorda bino nomi; shahardan 46 000 m uzoqda alohida guruh (`ROOM_ORIGIN`) — 49 draw call.
+- **Yangi UI**: yuqori nav'da **"Sayr"** tugmasi (walk ikonka); sayr UI o'zini-o'zi quradi (joystik DOM+`<style>` JS orqali, tashqi CSS o'zgarmagan); `window.TREES` reestr — daraxt kolliziyasi va spawn halqa qidiruvi uchun.
+- **Portda tuzatishlar (author xato ro'yxatidan)**: kamera near 3→0.3 m, transport `yaw −π/2`, FPS-squash (`dt` cap 0.2, 25 m uzoqda full-snap), xona kollayderi jahon koordinatasida, «mototsikl» tugmasi chaqirilgan transportga ustuvor.
+- **Saqlangan ataylab**: Finance-interior gate (`hasInterior = main || finance`) — v0.8 author'dagi «faqat TDIU main» qoidasi bizning build'da OLINMADI; v0.8 author index.html'idagi stale «protsedural model» hint'i ham olinmadi (12 tuman real OSM).
+- `.bin` ×12 / `roads.bin` / `api/*` / `vercel.json` / `DISTRICTS` (7 landmark, rx) — IDENTIK (253 328 bino saqlandi). `LM_FLY` ga chorsu/tv_tower qo'shildi.
+- Brand «DIGITAL TWIN v0.8»; `index.html` **1 053 KB**; `package.json` 0.8.0; draw call ~150 (shahar sayri) / 49 (interyer) — author o'lchovi.
+- `KAMPUS-v0.7-yangilanish.md` ga **8-bo'lim** qo'shildi (author), hujjat repoda.
+- Build deterministik: `render(ours, v08-game)` diff faqat ataylab olingan 3 farq (Finance gate ×2, header).
+- Smoke: **98 tekshiruv PASS** (yangi: `SAYR`/`sayrStart`/`sayrUpdate`/`sayrInteract`/`window.TREES` inline game'da, `data-v="sayr"` nav, `sayrJoy` DOM, LM_FLY chorsu/tv_tower).
+- PR #9 → main; deploy: push→main avtomatik (Vercel git integration) yoki connector `create_deployment` (repoId 1474049287)
 
 ---
 

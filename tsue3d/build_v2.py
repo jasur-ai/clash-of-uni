@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""KAMPUS v0.7 — build: lazy-loading deploy + standalone debug fayl.
+"""KAMPUS v0.8 — build: lazy-loading deploy + standalone debug fayl.
 
 Ikkita natija:
 
