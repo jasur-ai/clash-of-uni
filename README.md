@@ -2,15 +2,18 @@
 
 **Telegram Mini App** — TDIU (Toshkent Davlat Iqtisodiyot Universiteti) kampusining
 interaktiv 3D "digital twin" o'yini: Clash of Clans uslubida hudud egallash, upgrade,
-QR check-in, duel, mavsum va fakultet urushlari. Butun Chilonzor va Yunusobod
-tumanlari — **42 065 ta real bino** (OpenStreetMap) + 4 234 ta ko'cha, hammasi bitta
-self-contained `three.js` HTML faylda.
+QR check-in, duel, mavsum va fakultet urushlari. **Butun Toshkent** — 12 tuman
+(Chilonzor 15 660 + Yunusobod 26 405 — **real OpenStreetMap**; qolgan 10 tuman
+protsedural model) + 64 ta maskanning 3D modellari (universitetlar, litseylar,
+maktablar, bog'chalar, ovqatlanish, xiyobonlar), TDIU binolarining ichki ko'rinishi
+(xonalar), hammasi bitta self-contained `three.js` HTML faylda. v0.5 — jonli:
+https://clash-of-uni.vercel.app/
 
 ## Repo tuzilishi
 
 | Yo'l | Nima |
 |---|---|
-| `kampus-app/` | **Deploy qilinadigan tayyor app** — `index.html` (≈2 MB, hamma narsa ichida), `api/` (Vercel serverless: Telegram bot webhook), `vercel.json` |
+| `kampus-app/` | **Deploy qilinadigan tayyor app** — `index.html` (≈2.9 MB, hamma narsa ichida), `api/` (Vercel serverless: Telegram bot webhook), `vercel.json` |
 | `tsue3d/` | Manba kod va hujjatlar — OSM fetch/build skriptlari (Python), `src/`, `vendor/`, oldingi versiyalar (v2, v3, game) |
 | `image-search/` | Kampus foto-referenslar |
 | `KAMPUS-LOYIHA-TARIXI.md` | To'liq loyiha tarixi va texnik hujjat (o'zbek tilida) |
@@ -32,7 +35,8 @@ Brauzerda: <http://localhost:5173>
 
 Loyiha statik `index.html` + `api/*.js` serverless funksiyalardan iborat.
 Vercel'da Project Root Directory = `kampus-app` qilib deploy qiling (framework: **Other**,
-build/output bo'sh). Har bir push'da avtomatik qayta deploy.
+build/output bo'sh). Push avtomatik deploy qilmaydi — Vercel connector orqali
+`create_deployment` (git_source, main) chaqiriladi; keyin `get_deployment` bilan READY tekshiring.
 
 Bot uchun Vercel → Settings → Environment Variables ga `TELEGRAM_BOT_TOKEN`
 qo'shing (README: `kampus-app/README.md` — tokenni hech qachon repo'ga yozmang).
