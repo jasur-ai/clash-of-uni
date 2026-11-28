@@ -8,7 +8,7 @@
 > Vercel'ga deploy qilish uchun. Fayl o'z-o'zini to'liq ta'minlaydi — boshqa hech qanday
 > hujjat o'qish shart emas.
 >
-> **Sana:** 2026-11-27 · **Til:** o'zbek · **Loyiha papkasi:** `tsue3d/` (manba) + `kampus-app/` (deploy)
+> **Sana:** 2026-11-28 (v0.5 gacha yangilandi) · **Til:** o'zbek · **Loyiha papkasi:** `tsue3d/` (manba) + `kampus-app/` (deploy)
 
 ---
 
@@ -507,7 +507,8 @@ keyingi sprintning 1-raqamli vazifasi (`initData` HMAC).
   ism bilan salomlashish toast'i
 - 346 draw call, desktop skrinshot tasdiqlandi
 
-### v0.3 — `tsue-campus-v3.html` (1.99 MB) ← **joriy**
+### v0.3 — `tsue-campus-v3.html` (1.99 MB)
+*(batafsil: 8.1 bo'lim v0.4/v0.5)*
 - **42 065 haqiqiy bino** (Chilonzor 15 660 + Yunusobod 26 405)
 - **4 234 ko'cha** (6 toifa, kenglik bo'yicha)
 - Protsedural "karton shahar" **butunlay o'chirildi** → real konturlar
@@ -515,6 +516,22 @@ keyingi sprintning 1-raqamli vazifasi (`initData` HMAC).
 - Chunk merge + far mesh: **592 → 104 draw call**
 - Bot: `api/telegram.js`, `api/setup.js`, `bot-setup.sh`
 - Kampus atrofidagi 430 m radiusdagi OSM binolari chiqarildi (model bilan z-fighting bo'lmasin)
+
+---
+
+### v0.4 — `tsue-campus-v3.html` (2 816 KB)
+- **Butun Toshkent: 12 tuman** — Chilonzor 15 660 + Yunusobod 26 405 (real OSM), qolgan 10 tasi Voronoi-clip protsedural (jami 74 469 bino)
+- 20 park, 1 879 daraxt (InstancedMesh), 4 code-built landmark (Tashkent City 266 m, Humo Arena, aylanuvchi Magic City charchpalagi, Ice City)
+- Kunduzgi osmon, tuman-bo'yicha fasad palitralari (DIST_STYLE), emoji → inline SVG ikonlar
+- farMode → 5 200 m, zoom max 26 000, landmark yorliqlari ≤14 km, LM_FLY fly-to
+- PR #3 → main `0377938` · deploy `dpl_C27UTxRazNnvDD7KFMKBbJHQpujm` → clash-of-uni.vercel.app
+
+### v0.5 — `tsue-campus-v3.html` (2 889 KB) ← **joriy**
+- **Har bir tuman binosi tanlanadi** — merged-chunk yuz → bino xaritasi (faceMap + ikkilik qidiruv): balandlik/qavat, tuman, material, OSM/protsedural belgisi
+- **TDIU binolari ichida** — 3 tab (Ma'lumot/Xonalar/Ichki ko'rinish): dollhouse kesma, qavat tanlash, rolga qarab generatsiya qilingan xonalar (nom, o'lcham, ~m²), bosilganda halqa + ma'lumot
+- **64 ta maskan, har biri o'z 3D modeli** — 11 universitet (portik+gumbaz+fronton), 6 litsey, 6 maktab, 6 bog'cha, 6 ovqatlanish, 4 o'quv markazi, 3 spot (TV minorasi/Oloy bozori/Mustaqillik maydoni), 22 xiyobon (fontan)
+- Shahar hayoti: 10 avenyu, 1 529 ko'cha chirog'i, 26 harakatlanuvchi mashina, HQ'larda O'zbekiston bayrog'i, bosh kampus fontani, Universitetlar quick-fly grid
+- PR #4 → main `18dc519` · deploy `dpl_Di5ah5fEQ6DcUXr3VqB3HaTg1Avd` (READY/PROMOTED) → clash-of-uni.vercel.app
 
 ---
 
@@ -748,6 +765,57 @@ build/roads.json                 74 487 B   (4 234 ko'cha)
 build/campuses.json             109 811 B   (202 bino, 356 yo'l, 64 maydon)
 ```
 
+
 ---
+
+## 16. v0.4–v0.5 — butun shahar, har bino tanlanadi, ichki koʻrinish (2026-11-27…28)
+
+> Bu boʻlim yangi sessiyalar uchun yozilgan: **nima qilingani** va **qanday qilinganligi**.
+> Avval 7, 8, 12 boʻlimlarni oʻqing, keyin shu boʻlim.
+
+### 16.1 Nima qilingani
+
+**v0.4 (PR #3, main `0377938`):**
+- Butun Toshkent — 12 tuman. Chilonzor (15 660) va Yunusobod (26 405) real OSM 2026-11 geometriyasi; qolgan 10 tuman `tsue3d/gen_city.py` bilan Voronoi-clip protsedural modeldan qurilgan (Olmazor 3 912, Uchtepa 5 564, Mirzo Ulugʻbek 1 950, Mirobod 2 169, Shayxontohur 5 565, Sergeli 3 060, Bektemir 2 296, Yashnobod 2 884, Yakkasaroy 2 765, Yangihayot 2 239). Jami **74 469 bino**.
+- 20 park (tuman markazlarida), 1 879 daraxt — `InstancedMesh` (trunk+crown), 956…12 ta joy/tuman boʻyicha.
+- 4 ta code-built landmark: **Tashkent City / Nest One** (41.3122, 69.2519, 266 m), **Humo Arena** (12 500 oʻrinlik, gumbaz), **Magic City** (41.3039, 69.2452 — aylanuvchi Ferris charchpalagi, `landmarkAnims`), **Ice City** (Yakkasaroy, Bobur 6).
+- Kunduzgi osmon (gradient), tuman-boʻyicha fasad palitralari (`DIST_STYLE`), roof desaturatsiyasi, emoji butunlay olib tashlandi → inline SVG ikonlar.
+- Kameralar: farMode chegarasi 5 200 m ga koʻtarildi, zoom max 26 000, landmark spritelari 14 km dan uzoqlashmasa koʻrinadi.
+
+**v0.5 (PR #4, main `18dc519`):**
+- **Har bir tuman binosi tanlanadi va maʼlumot beradi.** `pick()` endi: (1) aktiv ichki xonalarni tekshiradi, (2) pickables (POI hit-silindrlar + TDIU binolori), (3) `districtMeshes` boʻyicha faceMap (tri-range → bino indeksi) ikkilik qidiruv → `buildingInfoAt()` → `genericBuildingPanel()` — balandlik (m va ~qavat 3.4 m ga), tuman nomi (`DIST_NAME`), material (panel/shisha/classic), OSM 2026-11 yoki protsedural belgisi (`REAL_DATA`).
+- **TDIU binolarida ichki koʻrinish (dollhouse).** Pannel tablari: `Maʼlumot | Xonalar | Ichki koʻrinish`. «Ichki koʻrinish» tanlansa: `wallsMesh/roofMesh/edgesMesh` yashiriladi, `ensureInterior(b)` qavatma-qavat guruh quradi — plita (slab), perimetr devor, xonalar va boʻluvchi devorlar. Xonalar rolga qarab generatsiya qilinadi (`ROOM_POOLS` hq/edu/money/flow/energy/innovation), `mulberry32(b.id*7919+101)` bilan deterministik. Xona nomi `Auditoriya 105` kabi, bosilganda `roomRing` + nom/oʻlcham/m². Maksimal 24 qavat.
+- **Panel tablari oʻyinni buzmaydi:** yangilash/check-in/egallash faqat TDIU tabida, lekin doim `panelTab='info'` boshlanadi; `closePanel()` interiorni yopadi, `select()` interiorni chiqadi.
+- **64 ta POI — har biri kategoriyasi boʻyicha 3D model** (`tsue3d/gen_pois.py` + `POI_BUILDERS`): 11 universitet (oq portik, ustunlar, fronton (`_triPrism`), koʻk gumbaz, bayroq), 6 akademik litsey (belgi paneli), 6 maktab (sport zal bilan), 6 bogʻcha (rangli tom, panjara, qumdon, sharlar), 6 ovqatlanish (chiziqli soyabon canvas tekstura, stollar+soyabonlar), 4 oʻquv markazi (shisha minora, neon chiziqlar), 3 spot (Toshkent TV minorasi nusxasi, Oloy bozori gumbazi, Mustaqillik maydoni — bayroq + abadiy olov), 22 xiyobon (fontan+skameyka+daraxtlar). POI — bosiladigan panel, «Yanada yaqinlashtirish» fly-to, yorliq masofaga qarab koʻrinadi (≤2 600 m).
+- **Shahar hayoti:** 10 avenyu lentasi (`build/districts.json → avenues`), 1 529 koʻcha chirogʻi (42 m qadam, ikki tomonlama, instanced), 26 harakatlanuvchi mashina (InstancedMesh + `updateCars()`, `t += speed`), HQ binolarida Oʻzbekiston bayrogʻi (`flagMeshes`, shamolda tebranganish), bosh kampusda fontan.
+- **Universitetlar quick-fly grid** — kampus overlayʼda 11 universitet tugmasi (`uni-grid`), bosishda kamera universitetga uchadi. «Digital Twin v0.5» yorligʻi.
+
+### 16.2 Qanday qilinganligi (arxitektura va formatlar)
+
+**Data pipeline (oʻzgarmagan zanjir):**
+`fetch_*.py` (Overpass, faqat internet-mashina) → `tsue3d/build/*.json` (b64 binar) → `tsue3d/build_v2.py` (src/index.v2.template.html + style.v2.css + game.v2.js + three.min.js inline) → `kampus-app/index.html` (deploy) va `tsue3d/tsue-campus-v3.html`.
+
+**Binary bino formati (`districts.json → districts.<tuman>.b64`):** uint32 count, keyin har bino: int16 x0,z0 (abs), uint8 cnt, uint8 h, undan keyin (cnt-1) marta int16 delta-px/pz. Dekoder — `decodeDistrict()`. Chunk merge: 950 m toʻr, 3 uslub chelasi (panel/classic/glass), har chunk uchun `faceMap=[{a,b,bIdx}]` (tri-indeks diapazonlari) + `userData.blds=[{cx,cz,h,key,hsh,style}]`.
+
+**districts.json (v0.4+v0.5, 1.87 MB):** `{meta, districts, parks, trees, landmarks, pois[64], avenues[10], lamps[1529]}`. `gen_pois.py` POI koordinatalarini qoʻlda yozilgan lat/lon → dunyo (x,z) formulaga o’giradi: `x = (lon−69.2499)*K_LON`, `z = −(lat−41.3093)*M_LAT`, K_LON=111 320·cos(41.3093°), M_LAT=110 574. **Koordinata taxminiy** — rasman emas.
+
+**draw call byudjeti:** chunk merge (2 942 mesh), trees/lamps/cars InstancedMesh, farMode panorama 5 200 m. POI modellari ~10–25 mesh × 64 — mobil uchun esa sinov kerak, hali oʻlchanmagan.
+
+**Determinizm:** POI rotation — koordinata hash; xonalar/binolar rang jitter — `fract(sin(x*12.9898…)*43758.5453)`; TDIU xonalari — `mulberry32(b.id*7919+101)`.
+
+### 16.3 QA va deploy
+
+**Node stub smoke (`/tmp/smoke.js`, three.min.js real + WebGLRenderer stub):**
+`INTERIORS-OK` (12 TDIU binosi), `FLOOR-SWITCH-OK` (qavat almashish + panel), `POI-PANEL-OK`, `FACE-MAP-OK h=32 key=chilonzor` (faceMap ikkilik qidiruv), `GEN-PANEL-OK` → **SMOKE PASS**. Emoji-skan: `✓`/`✕` dan boshqa yoʻq (python `re`).
+
+**Deploy oqimi (oʻzgarmadi):** branch → PR → merge `main` → Vercel connector `create_deployment` (`git_source`, main, project `prj_K9ZjsgmDoICNc3hcvD4OfY1IjLTt`, team `team_66P4fjrngeXuucmcUOSpvGNe`) → `get_deployment` READY → `fetch_page https://clash-of-uni.vercel.app/`. Merge oʻzi deploy qilmaydi; Vercel git-suriluvchi deploylar o’chirilgan — har doim qoʻlda create_deployment. v0.4: `dpl_C27UTxRazNnvDD7KFMKBbJHQpujm`, v0.5: `dpl_Di5ah5fEQ6DcUXr3VqB3HaTg1Avd` (6 s build, READY/PROMOTED).
+
+### 16.4 Hali qilinmagan / keyingi qadamlar
+
+1. **10 ta tumanni real OSM’ga almashtirish** — `tsue3d/fetch_all_districts.py` ni internet-ulanadigan mashinada ishga tushiring, keyin `build_v2.py` + smoke + deploy.
+2. **POI koordinatalarini aniqlashtirish** (OSM/Google orqali) — hozirgi joylashuv taxminiy; `gen_pois.py` POI roʻyxatining yagona manbai.
+3. Mobil performance’ni o’lchash (POI modellari draw call yuki); kerak boʻlsa POI’larni chunk/far-mode’ga solish yoki LOD.
+4. TDIU interyerlarini yanada boyitish (mebellar, eshiklar, lift/zamburugʻ joyi, qavat boʻyicha Navigator).
+5. `README.md` v0.5’ga yangilandi; `KAMPUS-LOYIHA-TARIXI.md` shu boʻlim bilan toʻldi.
 
 **Hujjat tugadi.** Savol bo'lsa — shu faylni yangi chatga bering va "davom etamiz" deb yozing.
