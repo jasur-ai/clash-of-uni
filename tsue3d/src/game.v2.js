@@ -1663,7 +1663,7 @@ function buildingInfoAt(mesh, faceIndex) {
 }
 const DIST_NAME = {};
 for (const d of DISTRICTS) DIST_NAME[d.key] = d.name;
-const REAL_DATA = { chilonzor: true, yunusobod: true };
+const REAL_DATA = { chilonzor: true, yunusobod: true, olmazor: true, uchtepa: true, mirzo_ulugbek: true, mirobod: true, shayxontohur: true, sergeli: true, bektemir: true, yashnobod: true, yakkasaroy: true, yangihayot: true };  // 2026-11-28: 12 tuman hammasi real OSM
 
 function pick(cx, cy) {
   ndc.set((cx / window.innerWidth) * 2 - 1, -(cy / window.innerHeight) * 2 + 1);
