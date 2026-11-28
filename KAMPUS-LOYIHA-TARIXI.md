@@ -8,7 +8,7 @@
 > Vercel'ga deploy qilish uchun. Fayl o'z-o'zini to'liq ta'minlaydi — boshqa hech qanday
 > hujjat o'qish shart emas.
 >
-> **Sana:** 2026-11-28 (v0.5 gacha yangilandi) · **Til:** o'zbek · **Loyiha papkasi:** `tsue3d/` (manba) + `kampus-app/` (deploy)
+> **Sana:** 2026-11-28 (v0.6 gacha yangilandi) · **Til:** o'zbek · **Loyiha papkasi:** `tsue3d/` (manba) + `kampus-app/` (deploy)
 
 ---
 
@@ -526,12 +526,23 @@ keyingi sprintning 1-raqamli vazifasi (`initData` HMAC).
 - farMode → 5 200 m, zoom max 26 000, landmark yorliqlari ≤14 km, LM_FLY fly-to
 - PR #3 → main `0377938` · deploy `dpl_C27UTxRazNnvDD7KFMKBbJHQpujm` → clash-of-uni.vercel.app
 
-### v0.5 — `tsue-campus-v3.html` (2 889 KB) ← **joriy**
+### v0.5 — `tsue-campus-v3.html` (2 889 KB)
 - **Har bir tuman binosi tanlanadi** — merged-chunk yuz → bino xaritasi (faceMap + ikkilik qidiruv): balandlik/qavat, tuman, material, OSM/protsedural belgisi
 - **TDIU binolari ichida** — 3 tab (Ma'lumot/Xonalar/Ichki ko'rinish): dollhouse kesma, qavat tanlash, rolga qarab generatsiya qilingan xonalar (nom, o'lcham, ~m²), bosilganda halqa + ma'lumot
 - **64 ta maskan, har biri o'z 3D modeli** — 11 universitet (portik+gumbaz+fronton), 6 litsey, 6 maktab, 6 bog'cha, 6 ovqatlanish, 4 o'quv markazi, 3 spot (TV minorasi/Oloy bozori/Mustaqillik maydoni), 22 xiyobon (fontan)
 - Shahar hayoti: 10 avenyu, 1 529 ko'cha chirog'i, 26 harakatlanuvchi mashina, HQ'larda O'zbekiston bayrog'i, bosh kampus fontani, Universitetlar quick-fly grid
 - PR #4 → main `18dc519` · deploy `dpl_Di5ah5fEQ6DcUXr3VqB3HaTg1Avd` (READY/PROMOTED) → clash-of-uni.vercel.app
+
+---
+
+### v0.6 — `tsue-campus-v3.html` (7 138 KB) ← **joriy** — BUTUN TUMANLAR REAL
+- **12 tumanning hammasi real OpenStreetMap** (user o'z mashinasida Overpass'dan 340 tile bino + 339 tile yo'l — 2026-11-28, Drive'ga `osm-tiles-v06-2026-11-28.zip` qilib yuklangan, sandbox'ga yuklab olindi va **offline** yig'ildi (`tsue3d/rebuild_real.py`)
+- **Jami 231 042 haqiqiy bino** (Chilonzor 18 258, Yunusobod 46 018, Olmazor 27 427, Uchtepa 28 850, Mirzo Ulug'bek 3 623, Mirobod 5 501, Shayxontohur 6 666, Sergeli 19 746, Bektemir 27 467, Yashnobod 17 138, Yakkasaroy 14 341, Yangihayot 16 007) — avval 74 469 (va 10 tasi protsedural)
+- **8 844 haqiqiy ko'cha** (oldin 4 234) — `build_roads.py` offline ishlaydi, o'zgarmadi
+- 10 ta tuman taqsimoti — eng-yaqin-tuman (Voronoi) bo'yicha (Overpass'siz, offline; rasmiy chegaralar Internetli mashinada olinishi mumkin — `rebuild_real.py`)
+- REAL_DATA (OSM badge) endi 12 tuman uchun; hint "12 tumanning hammasi haqiqiy"; «Digital Twin v0.6»
+- Smoke: SMOKE PASS (231 042 total, INTERIORS/FLOOR/POI/FACE-MAP/GEN-PANEL OK)
+- Deploy: `create_deployment` (main) → clash-of-uni.vercel.app
 
 ---
 
