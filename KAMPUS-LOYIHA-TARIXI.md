@@ -8,7 +8,7 @@
 > Vercel'ga deploy qilish uchun. Fayl o'z-o'zini to'liq ta'minlaydi — boshqa hech qanday
 > hujjat o'qish shart emas.
 >
-> **Sana:** 2026-11-28 (v0.7 gacha yangilandi) · **Til:** o'zbek · **Loyiha papkasi:** `tsue3d/` (manba) + `kampus-app/` (deploy)
+> **Sana:** 2026-11-28 (v0.7.2 gacha yangilandi) · **Til:** o'zbek · **Loyiha papkasi:** `tsue3d/` (manba) + `kampus-app/` (deploy)
 
 ---
 
@@ -546,7 +546,7 @@ keyingi sprintning 1-raqamli vazifasi (`initData` HMAC).
 
 ---
 
-### v0.7 — LAZY-LOADING + 12 TUMAN REAL RELATION ← **joriy**
+### v0.7 — LAZY-LOADING + 12 TUMAN REAL RELATION
 - **Lazy-loading arxitektura** — `index.html` 7 138 KB → **1 014 KB**. Har tuman geometriyasi endi inline emas, alohida `kampus-app/data/d_<tuman>.bin` (12 fayl, 5.1 MB); `roads.bin` (124 384 B) ham alohida. Birinchi ochilish ≈1 MB + Chilonzor/Yunusobod; qolgan 10 tuman kamera yaqinlashganda `fetch` (`scheduleDistricts` + `loadDistrict`, radius = `max(2600, cam.r*1.25)`, 900 ms throttle). `window.DISTRICT_ROADS = {"count":8844,"file":"data/roads.bin","bytes":124384}` (pointer). `tsue3d/build_v2.py` ikki target yozadi: `kampus-app/` (lazy) va `tsue-campus-v3.html` (standalone, hamma b64 inline — game `d.b64` fallback'i bilan ishlaydi).
 - **253 328 ta haqiqiy bino** (Chilonzor 15 661, Yunusobod 26 405, Olmazor 24 495, Uchtepa 26 183, Mirzo Ulug'bek 18 893, Mirobod 12 692, Shayxontohur 23 927, Sergeli 28 422, Bektemir 16 171, Yashnobod 34 316, Yakkasaroy 10 040, Yangihayot 16 123) — v0.6'dagi 231 042 dan +22 286.
 - **12 tumanning hammasi HAQIQIY OSM relation chegaralari** (v0.6'da 10 tasi 5–8 nuqtali Voronoi joy-tutuvchi edi; endi 40–123 nuqtali zich halqalar — Chilonzor 81 va Yunusobod 111 nuqta v0.6 bilan bayt-bayt bir xil → manba izchil). Manba: `kampus-v0.7-foto-2026-11-28.zip` (Drive) — author'ning to'liq geometriya yuki; binaries repoga `build/districts.json` (b64) orqali kiritildi, build'da `.bin`larga dekod qilinadi (binary walk: 12/12 tuman `end == file`, jami 253 328 ✓).
@@ -556,7 +556,27 @@ keyingi sprintning 1-raqamli vazifasi (`initData` HMAC).
 - `build/districts.json` formati kengaytirildi: har tuman uchun `bbox` (ring bbox bilan teng), `bytes` (bin hajmi); `meta.source` endi "12 tuman haqiqiy relation chegaralari" deb atributsiya qiladi; `realDistricts` = 12.
 - `tsue3d/rebuild_real.py`: endi 12 ring point-in-poly (avval faqat 2tasi + Voronoi), zaxira Voronoi fallback log'ga yoziladi; `bbox`/`bytes` ham yoziladi.
 - `tsue3d/smoke.py` (yangi): HTTP server bilan 79 ta tekshiruv — bin walk, inline meta/b64 yo'qligi, HTTP 200'lar, CSP/immutable/nosniff, API token xavfsizligi. **SMOKE PASS**.
-- PR #7 → main; deploy: `create_deployment` (main) → clash-of-uni.vercel.app
+- PR #7 → main (`6360b54`); deploy: `create_deployment` (main) → clash-of-uni.vercel.app (`dpl_AmzkRn647oWrYadpXtTTdkLb3qzr`, READY/PROMOTED)
+
+---
+
+### v0.7.2 — FOTO-ASOSLI LANDMARKLAR ← **joriy** (Drive: `kampus-v0.7.2-landmark-2026-11-28.zip`)
+- **Yangi batafsil modellar** (Wikimedia foto + qo'lda o'lchov, `tsue3d/KAMPUS-v0.7-yangilanish.md`):
+  **Chorsu bozori** (ko'k gumbaz r=38, 16 qirrali baraban, g'isht galereya, (41.32656, 69.23611)),
+  **Toshkent teleminorasi** (375 m: pastki pavilion, 205 m panjara — LineSegments 1 draw call, 3 qavat kuzatuv zali, (41.34797, 69.28464)),
+  **Nest One** to'liq qayta qurildi (pog'onali 266 m + shpil, 3 slab 168/138/96 m),
+  **Akademik litsey darvozasi** (g'isht ustun + temir panjara + «TOSHKENT DAVLAT IQTISODIYOT UNIVERSITETI / AKADEMIK LITSEYI» lavha, v7TextPlane).
+- **Landmark atrofida tuman binolari chetlab o'tiladi** — `window.DISTRICTS.landmarks[].rx` (chorsu 78, tv_tower 95, hotel_uz 55);
+  inline DISTRICTS endi **7 landmark** (avval 4). `data/*.bin` O'ZGARMAGAN (253 328 bino saqlandi), `roads.bin`/`api/*`/`vercel.json` identik.
+- **v0.7.1 qoidasi YUMSHATILDI (foydalanuvchi qarori):** «Xonalar» + «Ichki ko'rinish» endi **Finance kampusida ham** bor
+  (`hasInterior = main || finance`) — v0.7.1'da faqat TDIU main edi.
+- game.v2.js +9.4 KB: `buildChorsu()`, `buildTVTower()`, Nest One qayta, `LMARR` landmark-skip, litsey lavhasi, HUD `bulb` ikonka.
+  v0.7.1'ning `v7_inst` parametrik qolipi (12 institutsional bino, 5 rangli shaftoli/krem palitra) saqlandi.
+- `KAMPUS-v0.7-yangilanish.md` — author release notes (v0.7/v0.7.1/v0.7.2) repoga `tsue3d/` ichiga qo'shildi.
+- `Hotel Uzbekistan` — checklistda, lekin modeli hali YO'Q (foto topilmadi; faqat xarita nuqtasi + rx 55) — v0.8 ish.
+- Smoke: **89 tekshiruv PASS** (yangi: landmark soni=7, rx radiuslari, `buildChorsu`/`buildTVTower`/`AKADEMIK LITSEYI`/`LMARR`/`hasInterior` inline game'da, Finance-interior gate regresiya cheki).
+- Brand «DIGITAL TWIN v0.7.2»; `index.html` **1 023 KB**; draw call ~284 (author o'lchovi).
+- PR #8 → main; deploy: `create_deployment` (main) → clash-of-uni.vercel.app
 
 ---
 

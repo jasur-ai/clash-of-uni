@@ -1,4 +1,4 @@
-# KAMPUS: TDIU — deploy + bot qo'llanmasi (v0.7)
+# KAMPUS: TDIU — deploy + bot qo'llanmasi (v0.7.2)
 
 Bu papkada **tayyor Mini App** bor: `index.html` (≈1.0 MB — three.js + 3D kampus +
 o'yin mantiqi ichida) + **`data/` — 12 tuman geometriyasi lazy-load qilinadi**
@@ -6,10 +6,11 @@ o'yin mantiqi ichida) + **`data/` — 12 tuman geometriyasi lazy-load qilinadi**
 Jami **253 328 ta haqiqiy OSM binosi** (12 tumanning hammasi haqiqiy relation chegaralari).
 Server shart emas; bot uchun `api/` papkasidagi 2 ta serverless funksiya bor.
 
-> **v0.7 da nima yangi:** lazy-loading arxitektura (`index.html` 7.1 MB → 1.0 MB;
-> tumanlar kamera yaqinlashganda yuklanadi) + **253 328 haqiqiy bino** (12 tuman
-> haqiqiy OSM relation chegaralari, 40–123 nuqtali zich halqalar) + `soviet` facade
-> (foto-mos TDIU iqtisodiyot fakulteti minorasi) va IELTS markazi / Mustaqillik shoh maydoni yorliqlari.
+> **v0.7.2 da nima yangi:** v0.7 (lazy-loading arxitektura, 253 328 haqiqiy bino — 12 tuman
+> haqiqiy OSM relation chegaralari) + **foto-asosli landmark modellar**: Chorsu bozori gumbazi,
+> Toshkent teleminorasi (375 m), Nest One (266 m), akademik litsey darvozasi; tuman binolari
+> landmark atrofida `rx` radiusi bo'yicha chetlab o'tiladi. Finance kampusida ham ichki ko'rinish
+> qaytarildi (TDIU + Finance). Batafsil: `../tsue3d/KAMPUS-v0.7-yangilanish.md`.
 
 ---
 

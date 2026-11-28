@@ -1,8 +1,7 @@
 /* =====================================================================
-   KAMPUS: TDIU — v0.7 "Digital Twin"
+   KAMPUS: TDIU — v0.2 "Digital Twin"
    • 2 kampus (Asosiy + Moliya), haqiqiy OSM geometriyasi
-   • 12 tuman — haqiqiy OSM relation chegaralari; binolar lazy-load (data/d_*.bin)
-   • protsedural + SOVIET (foto-mos) fasad teksturalari, landmark minora
+   • protsedural fasad teksturalari (deraza toʻrlari), landmark minora
    • 4 xil egallash usuli: qurilish, fakultet urushi, QR check-in, 1v1 duel
    ===================================================================== */
 'use strict';
@@ -418,6 +417,11 @@ function v7TextPlane(text, w, h, bg, fg, rotY) {
   c.fillStyle = fg;
   c.font = '700 58px system-ui, -apple-system, sans-serif';
   c.textAlign = 'center'; c.textBaseline = 'middle';
+  /* matn lavhaga sig'masa — shriftni kichraytiramiz */
+  let fs = 58;
+  while (c.measureText(text).width > 860 && fs > 18) {
+    fs -= 2; c.font = `700 ${fs}px system-ui, -apple-system, sans-serif`;
+  }
   c.fillText(text, 512, 68);
   const t = new THREE.CanvasTexture(cv);
   t.colorSpace = THREE.SRGBColorSpace;
@@ -686,6 +690,36 @@ function v7_inst(b, ctx) {
     SG.add(rectPts(cx + fx * o, cz + fz * o, 15 - i * 0.7, 0.95, ax, az, fx, fz), 0.19, 0, '#cfc7b9', 'stone');
   }
   SG.add(rectPts(cx + fx * (eD + 7.5), cz + fz * (eD + 7.5), 20, 6.5, ax, az, fx, fz), 0.1, 0, '#b9b2a6', 'stone');
+
+  /* 6) akademik litsey darvozasi (foto: brick ustun + temir panjara + lavha) */
+  if (b.role === 'flow') {
+    const gOff = eD + 16;                                    // darvoza binodan 16 m narida
+    const gx = cx + fx * gOff, gz = cz + fz * gOff;
+    for (const sgn of [-1, 1]) {
+      const px = gx + ax * sgn * 5.6, pz = gz + az * sgn * 5.6;
+      SG.add(rectPts(px, pz, 1.5, 1.5, ax, az, fx, fz), 4.6, 0, '#a8623f', 'stone');   // g'isht ustun
+      /* yon devor */
+      const wx = gx + ax * sgn * 13, wz = gz + az * sgn * 13;
+      SG.add(rectPts(wx, wz, 13, 0.6, ax, az, fx, fz), 1.5, 0, '#b07050', 'stone');
+    }
+    /* temir panjara — yupqa ustunlar */
+    const barMat = new THREE.MeshLambertMaterial({ color: 0x2b2f36 });
+    for (let i = -4; i <= 4; i++) {
+      const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 3.6, 5), barMat);
+      bar.position.set(gx + ax * i * 1.15 + fx * 0.02, 1.8, gz + az * i * 1.15 + fz * 0.02);
+      g.add(bar);
+    }
+    /* lavha: universitet + litsey */
+    const rotG = Math.atan2(fx, fz);
+    const p1 = v7TextPlane('TOSHKENT DAVLAT IQTISODIYOT UNIVERSITETI', 13.2, 0.85,
+      'rgba(246,244,239,1)', '#1a4b8c', rotG);
+    p1.position.set(gx + fx * 0.35, 5.95, gz + fz * 0.35);
+    g.add(p1);
+    const p2 = v7TextPlane('AKADEMIK LITSEYI', 12.4, 1.5,
+      'rgba(246,244,239,1)', '#1a4b8c', rotG);
+    p2.position.set(gx + fx * 0.35, 4.45, gz + fz * 0.35);
+    g.add(p2);
+  }
 
   SG.finish(g);
   b.v7anchor = { x: cx + fx * (eD + 2), z: cz + fz * (eD + 2), h: H };
@@ -1122,9 +1156,13 @@ function buildOneDistrict(key) {
   const campCenters = [[0, 0], [2857, -1668]];
   const STYLES = ['panel', 'classic', 'glass'];
   const farRoof = new Builder(), farTall = new Builder();
+  const LMARR = (window.DISTRICTS && window.DISTRICTS.landmarks) || [];
   for (const b of blds) {
     let skip = false;
     for (const cc of campCenters) if (Math.hypot(b.cx - cc[0], b.cz - cc[1]) < 430) skip = true;
+    if (!skip) for (const lm of LMARR) {
+      if (Math.hypot(b.cx - lm.x, b.cz - lm.z) < (lm.rx || 60)) { skip = true; break; }
+    }
     if (skip) continue;
     const DS = DIST_STYLE[key] || DIST_STYLE._default;
     const hsh = fract(Math.sin(b.cx * 12.9898 + b.cz * 78.233) * 43758.5453);
@@ -1382,44 +1420,192 @@ if (EXTRA && Array.isArray(EXTRA.landmarks)) {
     const g = new THREE.Group();
     g.position.set(lm.x, 0, lm.z);
     if (lm.id === 'tashkent_city') buildTashkentCity(g);
+    else if (lm.id === 'chorsu') buildChorsu(g);
+    else if (lm.id === 'tv_tower') buildTVTower(g);
     else if (lm.id === 'humo_arena') buildHumoArena(g);
     else if (lm.id === 'magic_city') buildMagicCity(g);
     else if (lm.id === 'ice_city') buildIceCity(g);
     lamGroup.add(g);
     const sp = makeLandmarkLabel(lm.name, lm.sub);
-    const ly = lm.id === 'tashkent_city' ? lm.h * 0.62 + 30 : lm.h + 24;
+    const ly = lm.id === 'tv_tower' ? lm.h * 0.62 : lm.id === 'tashkent_city' ? lm.h * 0.62 + 30 : lm.h + 24;
     sp.position.set(0, ly, 0);
     sp.userData.world = { x: lm.x, y: ly, z: lm.z };
     g.add(sp);
     labels.push({ b: null, sp, landmark: true });
   }
 }
+
+/* ---------------------------------------------------------------- Chorsu bozori (gumbaz) */
+/* Foto: Chorsu Bazaar in Tashkent (Commons) — ichki gumbaz + ustun, tashqi ko'rinish */
+function buildChorsu(g) {
+  const stone = new THREE.MeshLambertMaterial({ color: 0xe6dfd0 });
+  const brick = new THREE.MeshLambertMaterial({ color: 0xc9a887 });
+  const azure = new THREE.MeshPhongMaterial({ color: 0x7d9fb0, emissive: 0x101d24, shininess: 22, specular: 0x9fc0d0 });
+
+  /* 1) tashqi galereya halqasi (bozor rastasi) — 8 burchakli */
+  const ring = new THREE.Mesh(new THREE.CylinderGeometry(56, 56, 10, 16, 1, true), brick);
+  ring.position.y = 5; g.add(ring);
+  const ringRoof = new THREE.Mesh(new THREE.CylinderGeometry(58, 58, 1.2, 16), stone);
+  ringRoof.position.y = 10.6; g.add(ringRoof);
+
+  /* 2) baraban (drum) — 16 qirrali, kemerli ochiq galereya */
+  const drum = new THREE.Mesh(new THREE.CylinderGeometry(34, 34, 12, 16),
+    new THREE.MeshLambertMaterial({ color: 0xd9c4a8 }));
+  drum.position.y = 6; g.add(drum);
+  /* kemerli galereya: 16 ta tokcha */
+  for (let i = 0; i < 16; i++) {
+    const a = i / 16 * Math.PI * 2;
+    const op = new THREE.Mesh(new THREE.BoxGeometry(4.2, 7, 0.8),
+      new THREE.MeshLambertMaterial({ color: 0x5c5348 }));
+    op.position.set(Math.sin(a) * 34.2, 6, Math.cos(a) * 34.2);
+    op.rotation.y = a; g.add(op);
+  }
+  const band = new THREE.Mesh(new THREE.CylinderGeometry(34.6, 34.6, 1.4, 16), new THREE.MeshPhongMaterial({ color: 0x2f6f9f, emissive: 0x0e2a3c }));
+  band.position.y = 12.6; g.add(band);
+
+  /* 3) gumbaz — yassi, ko'k-kulrang */
+  const dome = new THREE.Mesh(new THREE.SphereGeometry(38, 28, 14, 0, Math.PI * 2, 0, Math.PI / 2), azure);
+  dome.scale.y = 0.34; dome.position.y = 13.2; g.add(dome);
+
+  /* 4) tepa chiroq (lantern) */
+  const lan = new THREE.Mesh(new THREE.CylinderGeometry(5.2, 6.2, 5, 12), stone);
+  lan.position.y = 34; g.add(lan);
+  const lanDome = new THREE.Mesh(new THREE.SphereGeometry(5.4, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2), azure);
+  lanDome.scale.y = 0.7; lanDome.position.y = 36.4; g.add(lanDome);
+
+  /* 5) markaziy ustun + favvora (ichki ko'rinishdan) */
+  const col = new THREE.Mesh(new THREE.CylinderGeometry(2.6, 3.2, 14, 12), stone);
+  col.position.y = 7; g.add(col);
+  const colBand = new THREE.Mesh(new THREE.CylinderGeometry(2.75, 2.75, 2.2, 12), new THREE.MeshPhongMaterial({ color: 0x2a6fa8, emissive: 0x0d2740 }));
+  colBand.position.y = 4.5; g.add(colBand);
+  const fountain = new THREE.Mesh(new THREE.CylinderGeometry(9, 9.6, 1.1, 20),
+    new THREE.MeshPhongMaterial({ color: 0x9fd4e8, emissive: 0x14323f, shininess: 90 }));
+  fountain.position.y = 0.55; g.add(fountain);
+}
+
+/* ---------------------------------------------------------------- Toshkent teleminorasi */
+function buildTVTower(g) {
+  /* 1) pastki pavilion (foto: ko'k shisha + oq tosh tasmalar) */
+  const white = new THREE.MeshLambertMaterial({ color: 0xeef1f2 });
+  const glass = new THREE.MeshPhongMaterial({ color: 0x2f7fa8, emissive: 0x0e2c3c, shininess: 90, specular: 0xcfeaff });
+  for (const [w, d, h, ox, oz] of [[58, 16, 13, 0, 0], [40, 14, 11, 44, -6]]) {
+    const p = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), glass);
+    p.position.set(ox, h / 2, oz); g.add(p);
+    const cap = new THREE.Mesh(new THREE.BoxGeometry(w + 1, 1.6, d + 1), white);
+    cap.position.set(ox, h + 0.6, oz); g.add(cap);
+    for (let i = -1; i <= 1; i++) {
+      const band = new THREE.Mesh(new THREE.BoxGeometry(1.8, h, d + 0.6), white);
+      band.position.set(ox + i * w * 0.33, h / 2, oz); g.add(band);
+    }
+  }
+
+  /* 2) panjara konstruksiya (lattice) — LineSegments, 1 draw call */
+  const seg = [];
+  const R0 = 13, R1 = 3.2, Y0 = 14, Y1 = 205, LVL = 16;
+  const radius = t => R0 + (R1 - R0) * t;
+  for (let i = 0; i <= LVL; i++) {
+    const t = i / LVL, y = Y0 + (Y1 - Y0) * t, r = radius(t);
+    const c = [[-r, -r], [r, -r], [r, r], [-r, r]];
+    for (let k = 0; k < 4; k++) {
+      const a = c[k], b = c[(k + 1) % 4];
+      seg.push(a[0], y, a[1], b[0], y, b[1]);                       // halqa
+      if (i < LVL) {                                                // diagonal
+        const t2 = (i + 1) / LVL, y2 = Y0 + (Y1 - Y0) * t2, r2 = radius(t2);
+        const c2 = [[-r2, -r2], [r2, -r2], [r2, r2], [-r2, r2]];
+        const a2 = c2[k], b2 = c2[(k + 1) % 4];
+        seg.push(a[0], y, a[1], b2[0], y2, b2[1]);
+        seg.push(b[0], y, b[1], a2[0], y2, a2[1]);
+        seg.push(a[0], y, a[1], a2[0], y2, a2[1]);                  // oyoq
+      }
+    }
+  }
+  const lg = new THREE.BufferGeometry();
+  lg.setAttribute('position', new THREE.Float32BufferAttribute(seg, 3));
+  const lattice = new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ color: 0xb8c2c8 }));
+  g.add(lattice);
+
+  /* 3) kuzatuv zallari (3 qavat halqa) */
+  const deckMat = new THREE.MeshPhongMaterial({ color: 0xd7dee2, emissive: 0x1b2a30, shininess: 60 });
+  const deckGlass = new THREE.MeshPhongMaterial({ color: 0x3d7f9e, emissive: 0x102c38, shininess: 90, specular: 0xcfeaff });
+  [[96, 22, 3.4], [104, 18.5, 3.2], [112, 15.5, 3.0]].forEach(([y, r, h]) => {
+    const d1 = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 16), deckGlass);
+    d1.position.y = y; g.add(d1);
+    const d2 = new THREE.Mesh(new THREE.CylinderGeometry(r + 1.2, r + 1.2, 0.7, 16), deckMat);
+    d2.position.y = y + h / 2; g.add(d2);
+  });
+
+  /* 4) yuqori qism va antenna */
+  const upper = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 3.0, 150, 10), white);
+  upper.position.y = 205 + 75; g.add(upper);
+  const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.9, 90, 8), new THREE.MeshLambertMaterial({ color: 0xd94a3a }));
+  mast.position.y = 355 + 20; g.add(mast);
+  const tip = new THREE.Mesh(new THREE.SphereGeometry(1.1, 8, 6), new THREE.MeshPhongMaterial({ color: 0xff5a44, emissive: 0x6b1408 }));
+  tip.position.y = 375; g.add(tip);
+}
+
 function glassMat(color, emissive) {
   return new THREE.MeshPhongMaterial({ color, emissive: emissive || 0x11303e, specular: 0xbfe8ff, shininess: 64 });
 }
 function buildTashkentCity(g) {
-  // Nest One — 266 m, pogʻonali art-deco minora
-  const glass = glassMat(0x89b4c9, 0x16303c);
-  const podium = new THREE.Mesh(new THREE.BoxGeometry(96, 13, 78), new THREE.MeshLambertMaterial({ color: 0xc9cfd6 }));
-  podium.position.y = 6.5; g.add(podium);
-  const podiumGlass = new THREE.Mesh(new THREE.BoxGeometry(97, 4.5, 79), glassMat(0x5d8398, 0x0e222c));
-  podiumGlass.position.y = 9.2; g.add(podiumGlass);
-  const t1 = new THREE.Mesh(new THREE.BoxGeometry(46, 132, 34), glass);
-  t1.position.y = 13 + 66; g.add(t1);
-  const t2 = new THREE.Mesh(new THREE.BoxGeometry(34, 74, 27), glass);
-  t2.position.y = 13 + 132 + 37; g.add(t2);
-  const t3 = new THREE.Mesh(new THREE.BoxGeometry(23, 26, 19), glass);
-  t3.position.y = 13 + 132 + 74 + 13; g.add(t3);
-  const crown = new THREE.Mesh(new THREE.CylinderGeometry(5, 11, 14, 4), new THREE.MeshPhongMaterial({ color: 0xd8c98a, emissive: 0x6b5a1e, shininess: 90 }));
-  crown.rotation.y = Math.PI / 4;
-  crown.position.y = 13 + 132 + 74 + 26 + 6; g.add(crown);
-  const spire = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 26, 6), new THREE.MeshLambertMaterial({ color: 0xe8edf2 }));
-  spire.position.y = crown.position.y + 18; g.add(spire);
-  // atrofdagi ikki minora (Tashkent City kompleksi)
-  const side1 = new THREE.Mesh(new THREE.BoxGeometry(30, 96, 24), glassMat(0xa8c4d4, 0x142a34));
-  side1.position.set(64, 48 + 6, -34); g.add(side1);
-  const side2 = new THREE.Mesh(new THREE.BoxGeometry(26, 74, 22), glassMat(0x9db8c8, 0x122630));
-  side2.position.set(-58, 37 + 6, 42); g.add(side2);
+  /* Foto: Tashkent city 8 (Commons) — to'q shisha slablar, vertikal mullion to'ri,
+     tekis tom + mexanik qavat, bitta konsol plita. */
+  const glassTex = new THREE.MeshPhongMaterial({
+    map: TEX.curtain, color: 0x8ea2b0, emissive: 0x0c1a22, specular: 0xbfe4f5, shininess: 70 });
+  const stoneBase = new THREE.MeshLambertMaterial({ color: 0xcbd1d7 });
+  const trim = new THREE.MeshPhongMaterial({ color: 0xaeb8c0, emissive: 0x161c20, shininess: 50 });
+
+  /* 1) podiym */
+  const pod = new THREE.Mesh(new THREE.BoxGeometry(104, 14, 82), stoneBase);
+  pod.position.y = 7; g.add(pod);
+  const podGlass = new THREE.Mesh(new THREE.BoxGeometry(105, 4.2, 83), new THREE.MeshPhongMaterial({
+    map: TEX.curtain, color: 0x6f8797, emissive: 0x0d2028, shininess: 80 }));
+  podGlass.position.y = 11; g.add(podGlass);
+
+  /* 2) minoralar: [w, h, d, ox, oz] — fotodagi nisbatlar */
+  const towers = [
+    [38, 168, 30, -26, 6],      // baland minora
+    [34, 138, 28, 30, -12],     // ikkinchi minora
+    [26, 96, 24, 8, 40],        // past blok
+  ];
+  for (const [w, h, d, ox, oz] of towers) {
+    const t = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), glassTex);
+    t.position.set(ox, 14 + h / 2, oz); g.add(t);
+    /* vertikal qirralar (fotodagi yorug' chiziqlar) */
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      const fin = new THREE.Mesh(new THREE.BoxGeometry(1.5, h, 1.5), trim);
+      fin.position.set(ox + sx * (w / 2 - 0.4), 14 + h / 2, oz + sz * (d / 2 - 0.4));
+      g.add(fin);
+    }
+    /* tom + mexanik qavat */
+    const cap = new THREE.Mesh(new THREE.BoxGeometry(w + 2.4, 2.6, d + 2.4), trim);
+    cap.position.set(ox, 14 + h + 1.3, oz); g.add(cap);
+    const mech = new THREE.Mesh(new THREE.BoxGeometry(w * 0.5, 4.5, d * 0.5),
+      new THREE.MeshLambertMaterial({ color: 0x9aa4ac }));
+    mech.position.set(ox, 14 + h + 4.8, oz); g.add(mech);
+    /* antenna */
+    const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.7, 14, 6),
+      new THREE.MeshLambertMaterial({ color: 0xc23b2c }));
+    ant.position.set(ox, 14 + h + 13, oz); g.add(ant);
+  }
+
+  /* 3) konsol plita (fotoda baland minorada) */
+  const cant = new THREE.Mesh(new THREE.BoxGeometry(30, 1.8, 16), trim);
+  cant.position.set(-26 + 24, 14 + 118, 6); g.add(cant);
+
+  /* 4) Nest One — 266 m, pog'onali, tepasida toj (shahar siluetining cho'qqisi) */
+  const nestMat = new THREE.MeshPhongMaterial({
+    map: TEX.curtain, color: 0xa9bcc8, emissive: 0x102630, specular: 0xd6f0ff, shininess: 85 });
+  const steps = [[46, 120, 34, 13], [36, 80, 28, 133], [26, 44, 21, 213], [15, 22, 13, 257]];
+  for (const [w, h, d, y] of steps) {
+    const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), nestMat);
+    b.position.set(66, y + h / 2, -34); g.add(b);
+    const edge = new THREE.Mesh(new THREE.BoxGeometry(w + 1.8, 1.6, d + 1.8),
+      new THREE.MeshPhongMaterial({ color: 0xc8d4dc, emissive: 0x1d2a32, shininess: 60 }));
+    edge.position.set(66, y + h + 0.8, -34); g.add(edge);
+  }
+  const spire = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 2.2, 18, 8),
+    new THREE.MeshPhongMaterial({ color: 0xd8e2e8, emissive: 0x223038 }));
+  spire.position.set(66, 279 + 9, -34); g.add(spire);
 }
 function buildHumoArena(g) {
   // Muz saroyi: elliptik gumbazli ovoz, oq marmar + koʻk halqa
@@ -2525,8 +2711,9 @@ function renderPanel() {
   if (!selected) return;
   const b = selected, r = b.roleData, lvl = G.lvl[b.id];
   const owner = G.owner[b.id];
-  /* ichki ko'rinish faqat TDIU kampusi uchun (boshqa binolar — faqat tashqi ko'rinish) */
-  const tabs = b.campus === 'main'
+  /* ichki ko'rinish: TDIU (main) + Moliya kampusi — foydalanuvchi qarori (v0.7.2 porta) */
+  const hasInterior = b.campus === 'main' || b.campus === 'finance';
+  const tabs = hasInterior
     ? [['info', "Ma'lumot"], ['rooms', 'Xonalar'], ['inside', "Ichki ko'rinish"]]
     : [['info', "Ma'lumot"], ['rooms', 'Xonalar']];
   const tabHtml = tabs.map(([k, t]) => `<button class="p-tab${panelTab === k ? ' on' : ''}" onclick="window.__tab('${k}')">${t}</button>`).join('');
@@ -2591,7 +2778,7 @@ function renderPanel() {
       rows += `<div class="room-row"><b>${f}-qavat</b><span>${rooms.length} xona — ${names}${rooms.length > 4 ? ' …' : ''}</span></div>`;
     }
     body = `<div class="rooms-list">${rows}</div>
-      ${b.campus === 'main' ? `<button class="btn btn-ic" style="margin-top:10px" onclick="window.__tab('inside')">${ic('map', 15)} Ichki koʻrinishda ochish</button>` : ''}`;
+      ${(b.campus === 'main' || b.campus === 'finance') ? `<button class="btn btn-ic" style="margin-top:10px" onclick="window.__tab('inside')">${ic('map', 15)} Ichki koʻrinishda ochish</button>` : ''}`;
   } else if (panelTab === 'inside') {
     const data = ensureInterior(b);
     let fb = '';

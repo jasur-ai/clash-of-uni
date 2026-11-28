@@ -1,6 +1,6 @@
 {
   "name": "kampus-tdiu",
-  "version": "0.7.0",
+  "version": "0.7.2",
   "private": true,
   "description": "KAMPUS: TDIU — Telegram Mini App (3D digital twin: butun Toshkent, 12 tuman, haqiqiy OSM).",
   "scripts": {
