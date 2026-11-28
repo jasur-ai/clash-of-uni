@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""KAMPUS v0.7 smoke test — kampus-app/ statik to'plami to'g'riligini tekshiradi.
+"""KAMPUS v0.7.2 smoke test — kampus-app/ statik to'plami to'g'riligini tekshiradi.
 
 Ishlatish:  python3 tsue3d/smoke.py
 Chiqish kodi: 0 = SMOKE PASS, 1 = xato.
@@ -40,9 +40,9 @@ if not html:
     sys.exit(1)
 
 print('== 1) index.html asosiy ==')
-check('DIGITAL TWIN v0.7' in html, 'brand «DIGITAL TWIN v0.7»')
+check('DIGITAL TWIN v0.7.2' in html, 'brand «DIGITAL TWIN v0.7.2»')
 check('<title>KAMPUS · TDIU — Toshkent 3D digital twin</title>' in html, 'title')
-check('DIGITAL TWIN v0.6' not in html and 'DIGITAL TWIN v0.3' not in html, 'eski brand yoʻq')
+check('DIGITAL TWIN v0.6' not in html and 'DIGITAL TWIN v0.7</span>' not in html, 'eski brand yoʻq')
 
 EMOJI = re.compile('['
     '\U0001F300-\U0001FAFF'   # symbols & pictographs, emoticons, etc.
@@ -70,6 +70,12 @@ def inline_json(marker, html_text=html):
     j = html_text.find(';</script>', i)
     return json.loads(html_text[i + len(marker):j])
 
+print('== 1b) game (inline) mazmuni ==')
+for frag in ['buildChorsu', 'buildTVTower', 'AKADEMIK LITSEYI', 'LMARR', 'hasInterior']:
+    check(frag in html, f'game: {frag}')
+check("b.campus === 'main'\n    ?" not in html, 'Finance-interior gate olib tashlangan (qaror)')
+check(html.count("b.campus === 'main'") >= 2, 'ichki koʻrinish gate main+finance')
+
 print('== 2) inline JSON bloklari ==')
 campus = inline_json('window.CAMPUS = ')
 check('campuses' in json.dumps(campus) or 'main' in json.dumps(campus), 'CAMPUS parse + mazmun')
@@ -83,9 +89,14 @@ total = sum(v['count'] for v in dist['districts'].values())
 check(total == EXPECTED_TOTAL, f'jami bino = {total} (kutilgan {EXPECTED_TOTAL})')
 meta_ok = 'ODbL' in dist['meta'].get('source', '')
 check(meta_ok, 'meta source ODbL atributsiyasi bilan')
-check(len(dist['parks']) == 20 and len(dist['trees']) == 1879 and len(dist['landmarks']) == 4
+check(len(dist['landmarks']) == 7, '7 landmark (4 eski + chorsu, tv_tower, hotel_uz)')
+lm = {x['id']: x for x in dist['landmarks']}
+check(lm['chorsu'].get('rx') == 78 and lm['tv_tower'].get('rx') == 95 and lm['hotel_uz'].get('rx') == 55,
+      'chorsu/tv_tower/hotel_uz rx radius (bin-skip)')
+check(all(lm[k]['x'] is not None and lm[k]['z'] is not None for k in lm), 'barcha landmark koordinatalari')
+check(len(dist['parks']) == 20 and len(dist['trees']) == 1879
       and len(dist['pois']) == 64 and len(dist['avenues']) == 10 and len(dist['lamps']) == 1529,
-      'parks/trees/landmarks/pois/avenues/lamps sonlari')
+      'parks/trees/pois/avenues/lamps sonlari')
 for k, v in dist['districts'].items():
     xs = [p[0] for p in v['ring']]; zs = [p[1] for p in v['ring']]
     rb = [min(xs), min(zs), max(xs), max(zs)]
@@ -142,7 +153,7 @@ with socketserver.TCPServer(('127.0.0.1', 0), handler) as httpd:
         with urllib.request.urlopen(f'http://127.0.0.1:{port}/{path}', timeout=10) as r:
             return r.status, r.read()
     st, body = get('index.html')
-    check(st == 200 and b'DIGITAL TWIN v0.7' in body, 'index.html 200 + brand')
+    check(st == 200 and b'DIGITAL TWIN v0.7.2' in body, 'index.html 200 + brand')
     st, _ = get('data/roads.bin')
     check(st == 200, 'data/roads.bin 200')
     for k in dist['districts']:

@@ -5,8 +5,10 @@ interaktiv 3D "digital twin" o'yini: Clash of Clans uslubida hudud egallash, upg
 QR check-in, duel, mavsum va fakultet urushlari. **Butun Toshkent** — 12 tuman, hammasi **real OpenStreetMap**
 (12 tumanning hammasi haqiqiy OSM relation chegaralari) — jami **253 328 ta haqiqiy bino** + 8 844 ta haqiqiy ko'cha + 64 ta maskanning 3D modellari (universitetlar, litseylar,
 maktablar, bog'chalar, ovqatlanish, xiyobonlar), TDIU binolarining ichki ko'rinishi
-(xonalar). v0.7 — **lazy-loading**: `index.html` ≈1.0 MB (three.js + o'yin mantiqi ichida),
-tuman geometriyalari `kampus-app/data/*.bin` (13 fayl, 5.2 MB) — kamera yaqinlashganda yuklanadi. v0.7 — jonli:
+(xonalar). v0.7.2 — **lazy-loading** + foto-asosli landmarklar: `index.html` ≈1.02 MB
+(three.js + o'yin mantiqi ichida), tuman geometriyalari `kampus-app/data/*.bin` (13 fayl, 5.1 MB) —
+kamera yaqinlashganda yuklanadi. Yangi modellar: **Chorsu bozori gumbazi, Toshkent teleminorasi (375 m),
+Nest One (266 m), akademik litsey darvozasi** (fotolar `tsue3d/KAMPUS-v0.7-yangilanish.md` da). **v0.7.2 — jonli:**
 https://clash-of-uni.vercel.app/
 
 ## Repo tuzilishi
